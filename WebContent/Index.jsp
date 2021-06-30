@@ -7,540 +7,457 @@
 <meta charset="UTF-8">
 <title>Wagle Wagle</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
-<!------ Include the above in your HEAD tag ---------->
-
-<link
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
 <script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	crossorigin="anonymous">
 <style>
-@import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+body {
+	display: flex;
+	height: 100vh;
+	min-height: 35rem;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+.card {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.card-wrap {
+	position: relative;
+	margin: 0 auto;
+}
+
+@media ( min-width : 769px) {
+	.card-wrap {
+		max-width: 450px
+	}
+}
+
+.card-body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.card-body p {
+	font-size: 1.1rem;
+}
+
+.card-title {
+	font-weight: bold;
+	font-size: 1.8rem;
+}
+
+.badge-wrap {
+	display: flex;
+	justify-content: center;
+}
+
+.badge-wrap a.badge {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	margin: 0 .2rem;
+	padding: 0;
+	opacity: .7;
+	border-radius: 50%;
+	transition: opacity .3s ease-in;
+	font-size: 1rem;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.badge-wrap a.badge:hover {
+	opacity: 1;
+	color: #fff;
+}
+
+.btn {
+	color: #fff !important;
+	width: 10em;
+	transition: all .4s;
+	border-radius: 20px;
+	border: 2px solid transparent;
+}
+
+.btn.btn-back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-radius: 0;
+	width: 3rem;
+	height: 3rem;
+	font-size: 1.5rem;
+	border: 0;
+}
+
+.btn.btn-back:hover {
+	border: 0 !important;
+}
+
+.form-control {
+	font-family: 'Handle', cursive;
+}
+
+.form-control::-webkit-input-placeholder {
+	font-family: 'Josefin Sans', sans-serif;
+	letter-spacing: .1em;
+	font-size: .9rem;
+}
+
+.form-control:-ms-input-placeholder {
+	font-family: 'Josefin Sans', sans-serif;
+	letter-spacing: .1em;
+	font-size: .9rem;
+}
+
+.form-control::-ms-input-placeholder {
+	font-family: 'Josefin Sans', sans-serif;
+	letter-spacing: .1em;
+	font-size: .9rem;
+}
+
+.form-control::placeholder {
+	font-family: 'Josefin Sans', sans-serif;
+	letter-spacing: .1em;
+	font-size: .9rem;
+}
+
+.card--welcome {
+	z-index: 3;
+}
+
+.card--welcome .card-title {
+	color: #ee9ca7;
+}
+
+.card--welcome .btn-wrap {
+	display: flex;
+	flex-direction: column;
+}
+
+.card--welcome .btn {
+	color: #fff;
+	transition: all .3s;
+}
+
+.card--welcome .btn:hover {
+	background-color: rgba(238, 156, 167, .25);
+	font-weight: bold;
+}
+
+.card--welcome .btn-register {
+	margin-bottom: .8em;
+	background-color: #ee9ca7;
+}
+
+.card--welcome .btn-register:hover {
+	color: #ee9ca7;
+}
+
+.card--welcome .btn-login {
+	background-color: #a7bfe8;
+}
+
+.card--register .card-title {
+	color: #ee9ca7;
+}
+
+.card--register .badge {
+	background-color: #ee9ca7;
+}
+
+.card--register .btn {
+	background-color: #ee9ca7;
+}
+
+.card--register .btn:hover {
+	background-color: #fff;
+	color: #ee9ca7 !important;
+	font-weight: bold;
+	border: 2px solid rgba(238, 156, 167, .25);
+}
+
+.card--register .btn:focus {
+	box-shadow: 0 0 0 0.2rem rgba(238, 156, 167, .25);
+}
+
+.card--register .form-control {
+	color: #ee9ca7;
+	border-color: rgba(238, 156, 167, .25);
+}
+
+.card--register .form-control:focus {
+	box-shadow: 0 0 0 0.2rem rgba(238, 156, 167, .25);
+}
+
+.card--login .card-title {
+	color: #a7bfe8;
+}
+
+.card--login .badge {
+	background-color: #a7bfe8;
+}
+
+.card--login .btn {
+	background-color: #a7bfe8;
+}
+
+.card--login .btn:hover {
+	background-color: #fff;
+	color: #a7bfe8 !important;
+	font-weight: bold;
+	border: 2px solid rgba(167, 191, 232, .25);
+}
+
+.card--login .btn:focus {
+	box-shadow: 0 0 0 0.2rem rgba(167, 191, 232, .25);
+}
+
+.card--login .form-control {
+	color: #a7bfe8;
+	border-color: rgba(167, 191, 232, .25);
+}
+
+.card--login .form-control:focus {
+	box-shadow: 0 0 0 0.2rem rgba(167, 191, 232, .25);
+}
 
 body {
-	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
-	margin: auto;
-	text-align: center;
-	padding-top: 400px;
+	background: linear-gradient(to right, #ffdde1, #ee9ca7, #a7bfe8, #6190e8);
+	background-size: 500% 500%;
+	transition: background 3s ease;
+	background-position: 50% 50%;
 }
 
-.container {
-	width: 800px;
-	height: 800px;
-	display: inline-block;
-	animation: fadein 3s;
-	-webkit-animation: fadein 3s; /* Safari and Chrome */
+body.is-register {
+	background-position: 0% 50%;
 }
 
-@
--webkit-keyframes fadein { /* Safari and Chrome */ from { opacity:0;
-	
+body.is-login {
+	background-position: 100% 50%;
 }
 
-to {
-	opacity: 2;
+.card {
+	transition: all .3s .1s ease-out;
 }
 
-}
-
-/* ------------------------------------ Click on login and Sign Up to  changue and view the effect
----------------------------------------
-*/
-* {
-	margin: 0px auto;
-	padding: 0px;
-	text-align: center;
-	font-family: 'Open Sans', sans-serif;
-}
-
-.cotn_principal {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cfd8dc+0,607d8b+100,b0bec5+100 */
-	background: #cfd8dc; /* Old browsers */
-	background: -moz-linear-gradient(-45deg, #cfd8dc 0%, #607d8b 100%, #b0bec5 100%);
-	/* FF3.6-15 */
-	background: -webkit-linear-gradient(-45deg, #cfd8dc 0%, #607d8b 100%, #b0bec5 100%);
-	/* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(135deg, #cfd8dc 0%, #607d8b 100%, #b0bec5 100%);
-	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfd8dc',
-		endColorstr='#b0bec5', GradientType=1);
-	/* IE6-9 fallback on horizontal gradient */
-}
-
-.cont_centrar {
-	position: relative;
-	float: left;
-	width: 100%;
-}
-
-.cont_login {
-	position: relative;
-	width: 640px;
-	left: 50%;
-	margin-left: -320px;
-}
-
-.cont_back_info {
-	position: relative;
-	float: left;
-	width: 640px;
-	height: 280px;
-	overflow: hidden;
-	background-color: #fff;
-	margin-top: 100px;
-	box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-}
-
-.cont_forms {
-	position: absolute;
-	overflow: hidden;
-	top: 100px;
-	left: 0px;
-	width: 320px;
-	height: 280px;
-	background-color: #eee;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
-}
-
-.cont_forms_active_login {
-	box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-	height: 420px;
-	top: 20px;
-	left: 0px;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
-}
-
-.cont_forms_active_sign_up {
-	box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-	height: 420px;
-	top: 20px;
-	left: 320px;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
-}
-
-.cont_img_back_grey {
-	position: absolute;
-	width: 950px;
-	top: -80px;
-	left: -116px;
-}
-
-.cont_img_back_grey>img {
-	width: 100%;
-	-webkit-filter: grayscale(100%);
-	filter: grayscale(100%);
-	opacity: 0.2;
-	animation-name: animar_fondo;
-	animation-duration: 20s;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-direction: alternate;
-}
-
-.cont_img_back_ {
-	position: absolute;
-	width: 950px;
-	top: -80px;
-	left: -116px;
-}
-
-.cont_img_back_>img {
-	width: 100%;
-	opacity: 0.3;
-	animation-name: animar_fondo;
-	animation-duration: 20s;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-direction: alternate;
-}
-
-.cont_forms_active_login>.cont_img_back_ {
-	top: 0px;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
-}
-
-.cont_forms_active_sign_up>.cont_img_back_ {
-	top: 0px;
-	left: -435px;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
-}
-
-.cont_info_log_sign_up {
-	position: absolute;
-	width: 640px;
-	height: 280px;
-	top: 100px;
-	z-index: 1;
-}
-
-.col_md_login {
-	position: relative;
-	float: left;
-	width: 50%;
-}
-
-.col_md_login>h2 {
-	font-weight: 400;
-	margin-top: 70px;
-	color: #757575;
-}
-
-.col_md_login>p {
-	font-weight: 400;
-	margin-top: 15px;
-	width: 80%;
-	color: #37474F;
-}
-
-.btn_login {
-	background-color: #26C6DA;
-	border: none;
-	padding: 10px;
-	width: 200px;
-	border-radius: 3px;
-	box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
-	color: #fff;
-	margin-top: 10px;
-	cursor: pointer;
-}
-
-.col_md_sign_up {
-	position: relative;
-	float: left;
-	width: 50%;
-}
-
-.cont_ba_opcitiy>h2 {
-	font-weight: 400;
-	color: #fff;
-}
-
-.cont_ba_opcitiy>p {
-	font-weight: 400;
-	margin-top: 15px;
-	color: #fff;
-}
-/* ----------------------------------
-background text    
-------------------------------------
- */
-.cont_ba_opcitiy {
-	position: relative;
-	background-color: rgba(120, 144, 156, 0.55);
-	width: 80%;
-	border-radius: 3px;
-	margin-top: 60px;
-	padding: 15px 0px;
-}
-
-.btn_sign_up {
-	background-color: #ef5350;
-	border: none;
-	padding: 10px;
-	width: 200px;
-	border-radius: 3px;
-	box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
-	color: #fff;
-	margin-top: 10px;
-	cursor: pointer;
-}
-
-.cont_forms_active_sign_up {
-	z-index: 2;
-}
-
-@
--webkit-keyframes animar_fondo {from { -webkit-transform:scale(1)translate(0px);
-	-moz-transform: scale(1) translate(0px);
-	-ms-transform: scale(1) translate(0px);
-	-o-transform: scale(1) translate(0px);
-	transform: scale(1) translate(0px);
-}
-
-to {
-	-webkit-transform: scale(1.5) translate(50px);
-	-moz-transform: scale(1.5) translate(50px);
-	-ms-transform: scale(1.5) translate(50px);
-	-o-transform: scale(1.5) translate(50px);
-	transform: scale(1.5) translate(50px);
-}
-
-}
-@
--o-keyframes identifier {from { -webkit-transform:scale(1);
-	-moz-transform: scale(1);
-	-ms-transform: scale(1);
-	-o-transform: scale(1);
-	transform: scale(1);
-}
-
-to {
-	-webkit-transform: scale(1.5);
-	-moz-transform: scale(1.5);
-	-ms-transform: scale(1.5);
-	-o-transform: scale(1.5);
-	transform: scale(1.5);
-}
-
-}
-@
--moz-keyframes identifier {from { -webkit-transform:scale(1);
-	-moz-transform: scale(1);
-	-ms-transform: scale(1);
-	-o-transform: scale(1);
-	transform: scale(1);
-}
-
-to {
-	-webkit-transform: scale(1.5);
-	-moz-transform: scale(1.5);
-	-ms-transform: scale(1.5);
-	-o-transform: scale(1.5);
-	transform: scale(1.5);
-}
-
-}
-@
-keyframes identifier {from { -webkit-transform:scale(1);
-	-moz-transform: scale(1);
-	-ms-transform: scale(1);
-	-o-transform: scale(1);
-	transform: scale(1);
-}
-
-to {
-	-webkit-transform: scale(1.5);
-	-moz-transform: scale(1.5);
-	-ms-transform: scale(1.5);
-	-o-transform: scale(1.5);
-	transform: scale(1.5);
-}
-
-}
-.cont_form_login {
-	position: absolute;
+.card:not(.is-show) {
 	opacity: 0;
-	display: none;
-	width: 320px;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
+	-webkit-transform: translate(-50%, -50%) rotateX(95deg);
+	transform: translate(-50%, -50%) rotateX(95deg);
 }
 
-.cont_forms_active_login {
-	z-index: 2;
+.card.is-show {
+	opacity: 1;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	z-index: 5;
 }
 
-.cont_forms_active_login>.cont_form_login {
-	
-}
+.idset{overflow:hidden; margin-bottom:0;}
+#id{float: left;}
+#duplCheck{width:50px; padding:0; float: left;}
+#id_check{margin-bottom:10px; font-size: 13px;}
+.find{margin-bottom:10px; font-size: 13px;}
 
-.cont_form_sign_up {
-	position: absolute;
-	width: 320px;
-	float: left;
-	opacity: 0;
-	display: none;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
-}
-
-.cont_form_sign_up>input {
-	text-align: left;
-	padding: 15px 5px;
-	margin-left: 10px;
-	margin-top: 20px;
-	width: 260px;
-	border: none;
-	color: #757575;
-}
-
-.cont_form_sign_up>h2 {
-	margin-top: 50px;
-	font-weight: 400;
-	color: #757575;
-}
-
-.cont_form_login>input {
-	padding: 15px 5px;
-	margin-left: 10px;
-	margin-top: 20px;
-	width: 260px;
-	border: none;
-	text-align: left;
-	color: #757575;
-}
-
-.cont_form_login>h2 {
-	margin-top: 110px;
-	font-weight: 400;
-	color: #757575;
-}
-
-.cont_form_login>a, .cont_form_sign_up>a {
-	color: #757575;
-	position: relative;
-	float: left;
-	margin: 10px;
-	margin-left: 30px;
-}
 </style>
+<script>
+	$(function(){
+		
+		const cards = document.querySelectorAll('.card');
+
+		/* View Controller
+		-----------------------------------------*/
+		const btns = document.querySelectorAll('.js-btn');
+		btns.forEach((btn) => {
+		  btn.addEventListener('click', on_btn_click, true);
+		  btn.addEventListener('touch', on_btn_click, true);
+		});
+
+		function on_btn_click (e) {
+		  const nextID = e.currentTarget.getAttribute('data-target');
+		  const next = document.getElementById(nextID);
+		  if(!next) return;
+		  bg_change(nextID);
+		  view_change(next);
+		  return false;
+		}
+
+		/* Add class to the body */
+		function bg_change(next) {
+		  document.body.className = '';
+		  document.body.classList.add('is-'+next);
+		}
+
+		/* Add class to a card */
+		function view_change(next) {
+		  cards.forEach((card) => { card.classList.remove('is-show'); });
+		  next.classList.add('is-show');
+		}
+		
+		document.getElementById("repw").oninput = function () {
+	        let pw = document.getElementById("pw").value;
+	        let repw = document.getElementById("repw").value;
+	  
+	        if (pw == repw) {
+	          let style = document.getElementById("pwBox").getAttribute("style");
+	          document.getElementById("pwBox").setAttribute("style", "color: dodgerblue;");
+	          document.getElementById("pwBox").innerHTML = "패스워드가 일치합니다."
+	        } else {
+	          let style = document.getElementById("pwBox").getAttribute("style");
+	          document.getElementById("pwBox").setAttribute("style", "color:orangered;");
+	          document.getElementById("pwBox").innerHTML = "패스워드가 일치하지 않습니다."
+	        }
+	      }
+		
+		$("#duplCheck").on("click", function() {
+			if ($("#id").val() == "") {
+				alert("아이디를 입력해주세요.");
+				return false;
+			}
+			$.ajax({
+				url : "${pageContext.request.contextPath}/idCheck.mem", data : {"id" : $('#id').val()}
+			}).done(function(resp) {
+				if (resp == "true") {
+					$("#id_check").text("이미 사용중인 ID 입니다.");
+					$("#id_check").css("color", "orangered");
+				} else if (resp == "false") {
+					$("#id_check").text("사용 가능한 ID 입니다.");
+					$("#id_check").css("color", "dodgerblue");
+				}
+			});
+		})
+		
+		let idRegex = /^[a-z]{5,16}$/;
+		let pwRegex = /^[a-z\d]{8,16}$/;
+		let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{3}$/;
+		
+		$("#signupForm").on("click",function(){
+			let idResult = idRegex.test($("#id").val());
+			let pwResult = pwRegex.test($("#repw").val());
+			let emailResult = emailRegex.test(document.getElementById("email").value);
+			
+			if (idResult) {
+				if (pwResult) {
+					if (emailResult) {
+						$("#signupForm").submit();
+					} else {
+						alert("이메일 형식을 다시 확인해주세요.")
+						return false;
+					}
+				} else {
+					alert("비밀번호 형식을 다시 확인해주세요.\n8~16자의 영문 소문자, 숫자만 사용 가능합니다.")
+					return false;
+				}
+			} else {
+				alert("아이디 형식을 다시 확인해주세요.\n5~16자의 영문 소문자만 사용 가능합니다.")
+				return false;
+			}
+		})
+		
+	})
+</script>
 </head>
 <body>
-	<div class="cotn_principal">
-		<div class="cont_centrar">
 
-			<div class="cont_login">
-				<div class="cont_info_log_sign_up">
-					<div class="col_md_login">
-						<div class="cont_ba_opcitiy">
-
-							<h2>LOGIN</h2>
-							<p></p>
-							<button class="btn_login" onclick="cambiar_login()">LOGIN</button>
-						</div>
-					</div>
-					<div class="col_md_sign_up">
-						<div class="cont_ba_opcitiy">
-							<h2>SIGN UP</h2>
-
-
-							<p></p>
-
-							<button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN
-								UP</button>
-						</div>
+	<div class="container">
+		<div class="card-wrap">
+		
+			<!-- 인덱스 -->
+			<div class="card border-0 shadow card--welcome is-show" id="welcome">
+				<div class="card-body">
+					<h2 class="card-title">WELCOME TO</h2>
+					<p></p>
+					<div><img src="logo.png" width="400px"></div>
+					<br>
+					<div class="btn-wrap">
+						<a class="btn btn-lg btn-register js-btn" data-target="register">SIGN UP</a>
+						<a class="btn btn-lg btn-login js-btn" data-target="login">LOGIN</a>
 					</div>
 				</div>
-
-
-				<div class="cont_back_info">
-					<div class="cont_img_back_grey">
-						<img
-							src="https://www.gtagangwars.de/suite/images/styleLogo-6bd77433ddf78bd8477ea7306e804f677bc925d0.png"
-							alt="" />
-					</div>
-
-				</div>
-				<div class="cont_forms">
-					<div class="cont_img_back_">
-						<img
-							src="https://www.gtagangwars.de/suite/images/styleLogo-6bd77433ddf78bd8477ea7306e804f677bc925d0.png"
-							alt="" />
-					</div>
-					<div class="cont_form_login">
-						<a href="#" onclick="ocultar_login_sign_up()"><i
-							class="material-icons"></i></a>
-						<h2>LOGIN</h2>
-						<input type="text" placeholder="Username" /> <input
-							type="password" placeholder="Password" />
-						<button class="btn_login" onclick="cambiar_login()">LOGIN</button>
-					</div>
-
-					<div class="cont_form_sign_up">
-						<a href="#" onclick="ocultar_login_sign_up()"><i
-							class="material-icons"></i></a>
-						<h2>SIGN UP</h2>
-						<input type="text" placeholder="Username" /> <input
-							type="password" placeholder="Password" /> <input type="password"
-							placeholder="Confirm Password" />
-						<button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN
-							UP</button>
-
-					</div>
-
-				</div>
-
 			</div>
+			
+			<!-- 회원가입 -->
+			<div class="card border-0 shadow card--register" id="register">
+				<div class="card-body">
+					<h2 class="card-title">Create Account</h2><br>
+					<form action="${pageContext.request.contextPath}/insert.mem" method="post" id="signupForm">
+						<div class="form-group idset">
+							<input class="form-control" type="text" placeholder="아이디" id="id"
+								name="id" required />
+							<button class="btn btn-lg-sm" id="duplCheck">확인</button>
+						</div>
+						<div id="id_check"></div>
+						<div class="form-group">
+							<input class="form-control" type="email" placeholder="이메일" id="email"
+								required />
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="password" id="pw"
+								placeholder="비밀번호" required />
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="password" id="repw"
+								placeholder="비밀번호 확인" required />
+						</div>
+						<div id="pwBox"></div><br>
+						<button type="submit" class="btn btn-lg">회원가입</button>
+					</form>
+				</div>
+				<button class="btn btn-back js-btn" data-target="welcome"> <!-- 뒤로가기 버튼 -->
+					<i class="fas fa-angle-left"></i>
+				</button>
+			</div>
+			
+			<!-- 로그인 -->
+			<div class="card border-0 shadow card--login" id="login">
+				<div class="card-body">
+					<h2 class="card-title">Welcome Back!</h2><br>
+					<form>
+						<div class="form-group">
+							<input class="form-control" type="email" placeholder="아이디"
+								required="required" />
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="password"
+								placeholder="비밀번호" required="required" />
+						</div>
+						<div class="find">
+							<a href="#">아이디 찾기</a>&emsp;
+							<a href="#">비밀번호 찾기</a>
+						</div>
+						<button class="btn btn-lg">로그인</button>
+					</form>
+				</div>
+				<button class="btn btn-back js-btn" data-target="welcome"> <!-- 뒤로가기 버튼 -->
+					<i class="fas fa-angle-left"></i>
+				</button>
+			</div>
+			
 		</div>
 	</div>
-	<script>
-		/* ------------------------------------ Click on login and Sign Up to  changue and view the effect
-		---------------------------------------
-		 */
-
-		function cambiar_login() {
-			document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_login";
-			document.querySelector('.cont_form_login').style.display = "block";
-			document.querySelector('.cont_form_sign_up').style.opacity = "0";
-
-			setTimeout(function() {
-				document.querySelector('.cont_form_login').style.opacity = "1";
-			}, 400);
-
-			setTimeout(
-					function() {
-						document.querySelector('.cont_form_sign_up').style.display = "none";
-					}, 200);
-		}
-
-		function cambiar_sign_up(at) {
-			document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_sign_up";
-			document.querySelector('.cont_form_sign_up').style.display = "block";
-			document.querySelector('.cont_form_login').style.opacity = "0";
-
-			setTimeout(
-					function() {
-						document.querySelector('.cont_form_sign_up').style.opacity = "1";
-					}, 100);
-
-			setTimeout(
-					function() {
-						document.querySelector('.cont_form_login').style.display = "none";
-					}, 400);
-
-		}
-
-		function ocultar_login_sign_up() {
-
-			document.querySelector('.cont_forms').className = "cont_forms";
-			document.querySelector('.cont_form_sign_up').style.opacity = "0";
-			document.querySelector('.cont_form_login').style.opacity = "0";
-
-			setTimeout(
-					function() {
-						document.querySelector('.cont_form_sign_up').style.display = "none";
-						document.querySelector('.cont_form_login').style.display = "none";
-					}, 500);
-
-		}
-	</script>
-
 </body>
 </html>
