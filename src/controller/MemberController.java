@@ -58,7 +58,19 @@ public class MemberController extends HttpServlet {
 					request.getSession().setAttribute("login", dto); // session key 발급 후
 				}
 				response.sendRedirect("Board/BoardList.jsp"); // 게시판으로 이동
+				
+			}else if(cmd.contentEquals("/findid.mem")) { // 아이디 찾기
+				String email = request.getParameter("email");
+				
+				
+				
+				
+			}else if(cmd.contentEquals("/findpw.mem")) { // 비밀번호 찾기
+				String id = request.getParameter("id");
+				String email = request.getParameter("email");
+				
 			}
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();
