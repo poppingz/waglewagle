@@ -11,7 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.BoardDAO;
 import DTO.BoardDTO;
+import DTO.MemberDTO;
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 4f641b2901b8eae0c776b7bc7138a921475199eb
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
 	
