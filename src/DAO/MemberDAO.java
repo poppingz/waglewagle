@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import DTO.MemberDTO;
 
 public class MemberDAO {
 	
@@ -41,6 +43,25 @@ public class MemberDAO {
 				return result;
 			}
 		}
+	}
+
+	
+	public int insert(MemberDTO dto) throws Exception { // 회원가입
+		String sql = "insert into member values(?, ?, ?, sysdate, id_num_seq.nextval)";
+		try(
+			Connection con = this.getConnection();		
+			PreparedStatement pstat = con.prepareStatement(sql);		
+		)
+		{
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getPw());
+			pstat.setString(3, dto.getEmail());
+
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;	
+		}
+		
 	}
 
 }
