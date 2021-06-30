@@ -1,16 +1,12 @@
 package DAO;
 
 import java.sql.Connection;
-<<<<<<< HEAD
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-=======
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> 2f5ec019abcbe2faf776756d18a0f8280c72dccc
+
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -37,7 +33,7 @@ public class BoardDAO {
 		return ds.getConnection();
 	}
 	
-<<<<<<< HEAD
+
 	
 	public int insert(String id, int category , String title, String contents, String nickname) throws Exception {
 		String sql = "insert into pboard values(board_num.nextval, ?, ?, ?, ?, ?, sysdate, 0, 0)";
@@ -70,7 +66,9 @@ public class BoardDAO {
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
-=======
+			}
+		}
+
 	public List<BoardDTO> sellectAll() throws Exception {
 		String sql = "select * from pboard";
 		try(
@@ -94,7 +92,7 @@ public class BoardDAO {
 				list.add(dto);
 			}
 			return list;
->>>>>>> 2f5ec019abcbe2faf776756d18a0f8280c72dccc
+
 		}
 	}
 
