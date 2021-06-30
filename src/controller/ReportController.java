@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.ReportDAO;
+import DTO.MemberDTO;
 import DTO.ReportDTO;
 
 
@@ -28,15 +29,25 @@ public class ReportController extends HttpServlet {
 		try {
 			ReportDAO dao = ReportDAO.getInstance();
 			
-			// 신고내역 목록 출력
+			// 신고내역 받기
 			if(cmd.contentEquals(".rep")) {
+				String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
+				int board_num = Integer.parseInt(request.getParameter(""));
+				String title = request.getParameter("");
+				String reason = request.getParameter("");
+				
+				dao.insert(new ReportDTO(id,board_num,title,reason));
+				response.sendRedirect(""); // 신고가 완료되었습니다 페이지로 가기				
+				
+			// 신고내역 출력
+			}else if(cmd.contentEquals(".rep")) {
 				List<ReportDTO> list = dao.getAllList();
 				
 				request.setAttribute("", list);
 				request.getRequestDispatcher("manager/reportList.jsp").forward(request, response);
 				
 			// 검색 기능
-			}else if(cmd.contentEquals("")) {
+			}else if(cmd.contentEquals(".rep")) {
 				
 			}
 		}catch(Exception e) {
