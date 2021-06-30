@@ -9,13 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
 import DAO.BoardDAO;
 import DTO.BoardDTO;
 
-=======
-import dao.BoardDAO;
->>>>>>> 13ff777147779759d70d91546a4855bb69140cb7
 
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
@@ -28,7 +24,6 @@ public class BoardController extends HttpServlet {
 		String ctxPath = request.getContextPath();
 		String url = requestURI.substring(ctxPath.length());
 
-<<<<<<< HEAD
 		try {
 			BoardDAO dao = BoardDAO.getInstance();
 			
@@ -54,10 +49,7 @@ public class BoardController extends HttpServlet {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-=======
-		BoardDAO dao = BoardDAO.getInstance();
-	
->>>>>>> 13ff777147779759d70d91546a4855bb69140cb7
+
 	}
 
 	
