@@ -1,4 +1,4 @@
-package dto;
+package DTO;
 
 import java.sql.Date;
 
@@ -13,6 +13,7 @@ public class BoardDTO {
 	private Date write_date;
 	private int view_count;
 	private int report;
+	
 	public BoardDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -29,6 +30,11 @@ public class BoardDTO {
 		this.write_date = write_date;
 		this.view_count = view_count;
 		this.report = report;
+	}
+	public BoardDTO(int board_num, String title, String contents) {
+		this.board_num = board_num;
+		this.title = title;
+		this.contents = contents;
 	}
 	public int getBoard_num() {
 		return board_num;
