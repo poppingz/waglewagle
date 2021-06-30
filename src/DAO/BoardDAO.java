@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,10 +11,13 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+<<<<<<< HEAD
 import DTO.BoardDTO;
 
 
 
+=======
+>>>>>>> 13ff777147779759d70d91546a4855bb69140cb7
 public class BoardDAO {
 
 	private static BoardDAO instance;
