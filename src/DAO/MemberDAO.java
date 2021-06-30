@@ -46,16 +46,16 @@ public class MemberDAO {
 	}
 
 	
-	public int insert(MemberDTO dto) throws Exception { // 회원가입
-		String sql = "insert into member values(?, ?, ?, sysdate, id_num_seq.nextval)";
+	public int insert(String id, String pw, String email) throws Exception { // 회원가입
+		String sql = "insert into pmember values(?, ?, ?, sysdate, id_num_seq.nextval)";
 		try(
 			Connection con = this.getConnection();		
 			PreparedStatement pstat = con.prepareStatement(sql);		
 		)
 		{
-			pstat.setString(1, dto.getId());
-			pstat.setString(2, dto.getPw());
-			pstat.setString(3, dto.getEmail());
+			pstat.setString(1, id);
+			pstat.setString(2, pw);
+			pstat.setString(3, email);
 
 			int result = pstat.executeUpdate();
 			con.commit();
@@ -64,7 +64,7 @@ public class MemberDAO {
 		
 	}
 	
-	public MemberDTO login(String id, String pw) throws Exception { // 로그인
+	public MemberDTO login(String id, String pw) throws Exception{ // 로그인
 		String sql="select * from pmember where id= ? and pw= ?";
 		MemberDTO dto = new MemberDTO();
 		try(
@@ -78,6 +78,7 @@ public class MemberDAO {
 			{
 				if(rs.next()) {
 					String tmpId = rs.getString("id");
+					System.out.println("임시아이디" + tmpId);
 					dto.setId(tmpId);
 				}
 				return dto;

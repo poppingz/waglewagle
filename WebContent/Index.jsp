@@ -277,10 +277,8 @@ body.is-login {
 	z-index: 5;
 }
 
-.idset{overflow:hidden; margin-bottom:0;}
-#id{float: left;}
-#duplCheck{width:50px; padding:0; float: left;}
 #id_check{margin-bottom:10px; font-size: 13px;}
+#pwBox{font-size: 13px;}
 .find{margin-bottom:10px; font-size: 13px;}
 
 </style>
@@ -333,11 +331,7 @@ body.is-login {
 	        }
 	      }
 		
-		$("#duplCheck").on("click", function() {
-			if ($("#id").val() == "") {
-				alert("아이디를 입력해주세요.");
-				return false;
-			}
+		$("#id").focusout(function(){
 			$.ajax({
 				url : "${pageContext.request.contextPath}/idCheck.mem", data : {"id" : $('#id').val()}
 			}).done(function(resp) {
@@ -354,6 +348,29 @@ body.is-login {
 		let idRegex = /^[a-z]{5,16}$/;
 		let pwRegex = /^[a-z\d]{8,16}$/;
 		let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{3}$/;
+		
+		$("#signup").on("click",function(){
+			let idResult = idRegex.test($("#id").val());
+			let pwResult = pwRegex.test($("#repw").val());
+			let emailResult = emailRegex.test($("#email").val());
+			
+			if (idResult) {
+				if (pwResult) {
+					if (emailResult) {
+						document.getElementById("signupForm").submit();
+					} else {
+						alert("이메일 형식을 다시 확인해주세요.")
+						return false;
+					}
+				} else {
+					alert("비밀번호 형식을 다시 확인해주세요.\n8~16자의 영문 소문자, 숫자만 사용 가능합니다.")
+					return false;
+				}
+			} else {
+				alert("아이디 형식을 다시 확인해주세요.\n5~16자의 영문 소문자만 사용 가능합니다.")
+				return false;
+			}
+		})
 		
 		
 		
@@ -384,15 +401,14 @@ body.is-login {
 				<div class="card-body">
 					<h2 class="card-title">Create Account</h2><br>
 					<form action="${pageContext.request.contextPath}/insert.mem" method="post" id="signupForm">
-						<div class="form-group idset">
+						<div class="form-group">
 							<input class="form-control" type="text" placeholder="아이디" id="id"
 								name="id" required />
-							<button class="btn btn-lg-sm" id="duplCheck">확인</button>
 						</div>
 						<div id="id_check"></div>
 						<div class="form-group">
 							<input class="form-control" type="email" placeholder="이메일" id="email"
-								required />
+								name="email" required />
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="password" id="pw"
@@ -400,10 +416,10 @@ body.is-login {
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="password" id="repw"
-								placeholder="비밀번호 확인" required />
+								name="pw" placeholder="비밀번호 확인" required />
 						</div>
 						<div id="pwBox"></div><br>
-						<button type="submit" class="btn btn-lg">회원가입</button>
+						<button class="btn btn-lg" id="signup">회원가입</button>
 					</form>
 				</div>
 				<button class="btn btn-back js-btn" data-target="welcome"> <!-- 뒤로가기 버튼 -->
@@ -417,16 +433,16 @@ body.is-login {
 					<h2 class="card-title">Welcome Back!</h2><br>
 					<form action="${pageContext.request.contextPath}/login.mem" method="post">
 						<div class="form-group">
-							<input class="form-control" type="email" placeholder="아이디" name="id"
-								required="required" />
+							<input class="form-control" type="text" placeholder="아이디" name="id"
+								required />
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="password" name="pw"
-								placeholder="비밀번호" required="required" />
+								placeholder="비밀번호" required />
 						</div>
 						<div class="find">
-							<a href="#">아이디 찾기</a>&emsp;
-							<a href="#">비밀번호 찾기</a>
+							<a href="member/find.jsp">아이디 찾기</a>&emsp;
+							<a href="member/find.jsp">비밀번호 찾기</a>
 						</div>
 						<button class="btn btn-lg">로그인</button>
 					</form>
