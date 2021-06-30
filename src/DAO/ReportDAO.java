@@ -30,6 +30,24 @@ public class ReportDAO {
 		return ds.getConnection();
 	}
 	
+	//신고입력 받기
+	public int insert(ReportDTO dto) throws Exception{
+		String sql = "insert into preport values(?,board_num_seq.nextval,?,?)";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, dto.getId());
+			pstat.setInt(2, dto.getBoard_num());
+			pstat.setString(3, dto.getTitle());
+			pstat.setString(4, dto.getReason());
+			
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
 	// 신고내역 출력
 	public List<ReportDTO> getAllList() throws Exception{
 		String sql = "select * from preport";
