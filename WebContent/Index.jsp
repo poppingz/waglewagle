@@ -276,7 +276,12 @@ body.is-login {
 	transform: translate(-50%, -50%);
 	z-index: 5;
 }
-#duplCheck{width:80px; padding:0;}
+
+.idset{overflow:hidden; margin-bottom:0;}
+#id{float: left;}
+#duplCheck{width:50px; padding:0; float: left;}
+#id_check{margin-bottom:10px; font-size: 13px;}
+.find{margin-bottom:10px; font-size: 13px;}
 
 </style>
 <script>
@@ -328,7 +333,6 @@ body.is-login {
 	        }
 	      }
 		
-		
 		$("#duplCheck").on("click", function() {
 			if ($("#id").val() == "") {
 				alert("아이디를 입력해주세요.");
@@ -351,44 +355,28 @@ body.is-login {
 		let pwRegex = /^[a-z\d]{8,16}$/;
 		let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{3}$/;
 		
-		document.getElementById("insert").onclick = function() {
-			let idResult = idRegex.test(document.getElementById("id").value);
-			let pwResult = pwRegex.test(document.getElementById("repw").value);
-			let nameResult = nameRegex
-					.test(document.getElementById("name").value);
-			let phoneResult = phoneRegex.test(document
-					.getElementById("contact").value);
-			let emailResult = emailRegex
-					.test(document.getElementById("email").value);
-
+		$("#signupForm").on("click",function(){
+			let idResult = idRegex.test($("#id").val());
+			let pwResult = pwRegex.test($("#repw").val());
+			let emailResult = emailRegex.test(document.getElementById("email").value);
+			
 			if (idResult) {
 				if (pwResult) {
-					if (nameResult) {
-						if (phoneResult) {
-							if (emailResult) {
-								document.getElementById("checkForm").submit();
-							} else {
-								alert("이메일 형식을 다시 확인해주세요.")
-								return false;
-							}
-						} else {
-							alert("전화번호 형식을 다시 확인해주세요.\n3~4자리 숫자 - 4자리 숫자만 사용 가능합니다.")
-							return false;
-						}
+					if (emailResult) {
+						$("#signupForm").submit();
 					} else {
-						alert("이름 형식을 다시 확인해주세요.\n한글과 영문 대소문자를 사용하세요.\n(특수기호, 공백 사용 불가)")
+						alert("이메일 형식을 다시 확인해주세요.")
 						return false;
 					}
 				} else {
-					alert("비밀번호 형식을 다시 확인해주세요.\n8~16자의 영문 대소문자, 숫자, 특수문자를 사용하세요.")
+					alert("비밀번호 형식을 다시 확인해주세요.\n8~16자의 영문 소문자, 숫자만 사용 가능합니다.")
 					return false;
 				}
 			} else {
-				alert("아이디 형식을 다시 확인해주세요.\n5~20자의 영문 소문자, 숫자와 특수기호 (_), (-)만 사용 가능합니다.")
+				alert("아이디 형식을 다시 확인해주세요.\n5~16자의 영문 소문자만 사용 가능합니다.")
 				return false;
 			}
-		}
-		
+		})
 		
 	})
 </script>
@@ -416,30 +404,30 @@ body.is-login {
 			<div class="card border-0 shadow card--register" id="register">
 				<div class="card-body">
 					<h2 class="card-title">Create Account</h2><br>
-					<form>
-						<div class="form-group">
+					<form action="${pageContext.request.contextPath}/insert.mem" method="post" id="signupForm">
+						<div class="form-group idset">
 							<input class="form-control" type="text" placeholder="아이디" id="id"
-								name="id" required="required" />
-							<button class="btn btn-lg-sm" id="duplCheck">중복확인</button>
+								name="id" required />
+							<button class="btn btn-lg-sm" id="duplCheck">확인</button>
 						</div>
 						<div id="id_check"></div>
 						<div class="form-group">
-							<input class="form-control" type="email" placeholder="이메일"
-								required="required" />
+							<input class="form-control" type="email" placeholder="이메일" id="email"
+								required />
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="password" id="pw"
-								placeholder="비밀번호" required="required" />
+								placeholder="비밀번호" required />
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="password" id="repw"
-								placeholder="비밀번호 확인" required="required" />
+								placeholder="비밀번호 확인" required />
 						</div>
 						<div id="pwBox"></div><br>
-						<button class="btn btn-lg">회원가입</button>
+						<button type="submit" class="btn btn-lg">회원가입</button>
 					</form>
 				</div>
-				<button class="btn btn-back js-btn" data-target="welcome">
+				<button class="btn btn-back js-btn" data-target="welcome"> <!-- 뒤로가기 버튼 -->
 					<i class="fas fa-angle-left"></i>
 				</button>
 			</div>
@@ -457,16 +445,14 @@ body.is-login {
 							<input class="form-control" type="password"
 								placeholder="비밀번호" required="required" />
 						</div>
-						<p>
-							<a href="#">아이디 찾기</a>
-						</p>
-						<p>
+						<div class="find">
+							<a href="#">아이디 찾기</a>&emsp;
 							<a href="#">비밀번호 찾기</a>
-						</p>
+						</div>
 						<button class="btn btn-lg">로그인</button>
 					</form>
 				</div>
-				<button class="btn btn-back js-btn" data-target="welcome">
+				<button class="btn btn-back js-btn" data-target="welcome"> <!-- 뒤로가기 버튼 -->
 					<i class="fas fa-angle-left"></i>
 				</button>
 			</div>
