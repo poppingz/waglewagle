@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,9 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.BoardDAO;
+<<<<<<< HEAD
 
 
 
+=======
+import DTO.BoardDTO;
+
+
+>>>>>>> 2f5ec019abcbe2faf776756d18a0f8280c72dccc
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
 
@@ -20,14 +27,10 @@ public class BoardController extends HttpServlet {
 		response.setContentType("text/html; charset =utf-8");
 
 		String requestURI = request.getRequestURI();
-		System.out.println("requestURI : " + requestURI);
-
 		String ctxPath = request.getContextPath();
-		System.out.println("ctxPath : " + ctxPath);
-
 		String url = requestURI.substring(ctxPath.length());
-		System.out.println("url : " + url);
 
+<<<<<<< HEAD
 		BoardDAO dao = BoardDAO.getInstance();
 
 
@@ -58,6 +61,34 @@ public class BoardController extends HttpServlet {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+=======
+		try {
+			BoardDAO dao = BoardDAO.getInstance();
+			
+			if(url.contentEquals("/select.board")) {
+				List<BoardDTO> list = dao.sellectAll();
+				request.setAttribute("BoardList", list);
+				request.getRequestDispatcher("Board/BoardList").forward(request, response);
+				
+			}else if(url.contentEquals("/insert.board")) {
+				
+			}else if(url.contentEquals("/modify.board")) {
+				int board_num = (Integer.parseInt(request.getParameter("board_num")));
+				String title = request.getParameter("title");
+				String contents = request.getParameter("contents");
+				int result = dao.modify(new BoardDTO(board_num,title,contents));
+				
+				request.setAttribute("result", result);
+				response.sendRedirect("index.jsp");
+				
+			}else if(url.contentEquals("/delete.board")) {
+				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+>>>>>>> 2f5ec019abcbe2faf776756d18a0f8280c72dccc
 	}
 
 

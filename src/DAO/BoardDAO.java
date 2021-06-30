@@ -1,18 +1,28 @@
 package DAO;
 
 import java.sql.Connection;
+<<<<<<< HEAD
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+=======
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> 2f5ec019abcbe2faf776756d18a0f8280c72dccc
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import DTO.BoardDTO;
+
 public class BoardDAO {
 
 	private static BoardDAO instance;
 
-	public synchronized static BoardDAO getInstance() { // 싱글톤 패턴
+	public synchronized static BoardDAO getInstance() {
 		if(instance == null) {
 			instance = new BoardDAO();
 		}
@@ -27,6 +37,7 @@ public class BoardDAO {
 		return ds.getConnection();
 	}
 	
+<<<<<<< HEAD
 	
 	public int insert(String id, int category , String title, String contents, String nickname) throws Exception {
 		String sql = "insert into pboard values(board_num.nextval, ?, ?, ?, ?, ?, sysdate, 0, 0)";
@@ -59,9 +70,52 @@ public class BoardDAO {
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
+=======
+	public List<BoardDTO> sellectAll() throws Exception {
+		String sql = "select * from pboard";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			List<BoardDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				int board_num = rs.getInt("board_num");
+				String id = rs.getNString("id");
+				int category = rs.getInt("category");
+				String title = rs.getNString("title");
+				String contents = rs.getNString("contents");
+				String nickname = rs.getNString("nickname");
+				Date write_date = rs.getDate("write_date");
+				int view_count = rs.getInt("view_count");
+				int report = rs.getInt("report");
+				
+				BoardDTO dto = new BoardDTO(board_num, id, category, title, contents, nickname, write_date, view_count, report);
+				list.add(dto);
+			}
+			return list;
+>>>>>>> 2f5ec019abcbe2faf776756d18a0f8280c72dccc
 		}
 	}
 
+	public int modify(BoardDTO dto)throws Exception{
+		String sql = "update pboard set title=?, contents=? where board_num=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			
+			pstat.setNString(1, dto.getTitle());
+			pstat.setNString(2, dto.getContents());
+			pstat.setInt(3, dto.getBoard_num());
+			
+			int result = pstat.executeUpdate();
+			
+			con.commit();
+			return result;
+			
+		}
+	}
 	
 	public void view_countPlus(int board_num) throws Exception{ // view_count 증가
 		int view_count = this.view_count(board_num);
