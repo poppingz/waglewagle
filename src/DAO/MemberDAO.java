@@ -63,5 +63,26 @@ public class MemberDAO {
 		}
 		
 	}
+	
+	public MemberDTO login(String id, String pw) throws Exception { // 로그인
+		String sql="select * from pmember where id= ? and pw= ?";
+		MemberDTO dto = new MemberDTO();
+		try(
+			Connection con = this.getConnection();		
+			PreparedStatement pstat = con.prepareStatement(sql);
+		)
+		{
+			pstat.setString(1, id);
+			pstat.setString(2, pw);
+			try(ResultSet rs = pstat.executeQuery();)
+			{
+				if(rs.next()) {
+					String tmpId = rs.getString("id");
+					dto.setId(tmpId);
+				}
+				return dto;
+			}
+		}
+	}
 
 }

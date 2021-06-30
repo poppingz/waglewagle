@@ -355,28 +355,7 @@ body.is-login {
 		let pwRegex = /^[a-z\d]{8,16}$/;
 		let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{3}$/;
 		
-		$("#signupForm").on("click",function(){
-			let idResult = idRegex.test($("#id").val());
-			let pwResult = pwRegex.test($("#repw").val());
-			let emailResult = emailRegex.test(document.getElementById("email").value);
-			
-			if (idResult) {
-				if (pwResult) {
-					if (emailResult) {
-						$("#signupForm").submit();
-					} else {
-						alert("이메일 형식을 다시 확인해주세요.")
-						return false;
-					}
-				} else {
-					alert("비밀번호 형식을 다시 확인해주세요.\n8~16자의 영문 소문자, 숫자만 사용 가능합니다.")
-					return false;
-				}
-			} else {
-				alert("아이디 형식을 다시 확인해주세요.\n5~16자의 영문 소문자만 사용 가능합니다.")
-				return false;
-			}
-		})
+		
 		
 	})
 </script>
@@ -436,13 +415,13 @@ body.is-login {
 			<div class="card border-0 shadow card--login" id="login">
 				<div class="card-body">
 					<h2 class="card-title">Welcome Back!</h2><br>
-					<form>
+					<form action="${pageContext.request.contextPath}/login.mem" method="post">
 						<div class="form-group">
-							<input class="form-control" type="email" placeholder="아이디"
+							<input class="form-control" type="email" placeholder="아이디" name="id"
 								required="required" />
 						</div>
 						<div class="form-group">
-							<input class="form-control" type="password"
+							<input class="form-control" type="password" name="pw"
 								placeholder="비밀번호" required="required" />
 						</div>
 						<div class="find">
