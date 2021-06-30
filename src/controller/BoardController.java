@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.BoardDAO;
 import DTO.BoardDTO;
+import DTO.MemberDTO;
 
 
 
@@ -34,17 +35,17 @@ public class BoardController extends HttpServlet {
 
 			// 글 쓰기
 			if(url.contentEquals("/boardWrite.board")) {
-				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("login");
+//				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("login");
 				int category = Integer.parseInt(request.getParameter("category"));
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
 				String nickname = request.getParameter("nickname");
 
-				int result = dao.insert(dto.getId(), category, title, contents, nickname);
+				int result = dao.insert( category, title, contents, nickname);
 
 				request.setAttribute("result", result);
 
-				response.sendRedirect(ctxPath +"/boardList.board");
+				response.sendRedirect("index.jsp");
 
 				// 글 삭제
 			}else if(url.contentEquals("/boardDelete.board")) {

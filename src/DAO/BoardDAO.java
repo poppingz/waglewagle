@@ -35,13 +35,13 @@ public class BoardDAO {
 	
 
 	
-	public int insert(String id, int category , String title, String contents, String nickname) throws Exception {
-		String sql = "insert into pboard values(board_num.nextval, ?, ?, ?, ?, ?, sysdate, 0, 0)";
+	public int insert( int category , String title, String contents, String nickname) throws Exception {
+		String sql = "insert into pboard values(board_num_seq.nextval, ?, ?, ?, ?, ?, sysdate, 0, 0)";
 		try (
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
-			pstat.setString(1, id);
+			pstat.setString(1, "text01");
 			pstat.setInt(2, category);
 			pstat.setString(3, title);
 			pstat.setString(4, contents);
