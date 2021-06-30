@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.MemberDAO;
 import DTO.MemberDTO;
-<<<<<<< HEAD
-=======
-
->>>>>>> 4f641b2901b8eae0c776b7bc7138a921475199eb
 import util.MemberUtil;
 
 

@@ -78,7 +78,6 @@ public class MemberDAO {
 			{
 				if(rs.next()) {
 					String tmpId = rs.getString("id");
-					System.out.println("임시아이디" + tmpId);
 					dto.setId(tmpId);
 				}
 				return dto;
