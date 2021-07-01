@@ -122,6 +122,23 @@ public class MemberDAO {
 		}
 	}
 	
+	public int updatePw(String pw, String id) throws Exception{ // 비밀번호 변경
+		String sql = "update pmember set pw=? where id=?";
+		try(
+			Connection con = this.getConnection();		
+			PreparedStatement pstat = con.prepareStatement(sql);		
+		){
+			pstat.setString(1, pw);
+			pstat.setString(2, id);
+			
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;	
+		}
+	}
+	
+	
+
 	
 	
 
