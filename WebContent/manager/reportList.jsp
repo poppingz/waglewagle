@@ -73,10 +73,8 @@
 
                 <div class="col-12 navi">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href>회원관리</a></li> <!-- 나중에 시간될때 만들기 -->
                         <li class="list-group-item"><a href>신고내역</a></li>
-                        <li class="list-group-item"><a href>블랙리스트</a></li> <!-- 나중에 시간될때 만들기-->
-                        <li class="list-group-item"><a href>홈으로</a></li> <!-- index 다 만들어지면 index로 링크걸기 -->
+                        <li class="list-group-item"><a href>홈으로</a></li> <!-- index 다 만들어지면 메인으로 링크걸기 -->
                     </ul>
                 </div>
             </div>
