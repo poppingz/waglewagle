@@ -12,11 +12,11 @@
 <script>
 	$(function(){
 		$("#write").on("click", function(){
-			location.href = "write.jsp"
+			location.href = "board/boardWrite.jsp"
 		})
 		
 		$("#back").on("click", function(){
-			location.href = "index.jsp;"
+			location.href = "main.jsp;"
 		})
 		
 	})
