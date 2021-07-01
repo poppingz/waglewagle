@@ -38,6 +38,7 @@ public class BoardController extends HttpServlet {
 
 				List<BoardDTO> list = dao.sellectAll(category);
 				request.setAttribute("list", list);
+		
 				request.getRequestDispatcher("board/boardList.jsp").forward(request, response);
 
 			}else if(url.contentEquals("/insert.board")) {

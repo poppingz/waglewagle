@@ -59,13 +59,13 @@
         <p>Try to scroll this section and look at the navigation list while scrolling!</p>
         <input type="button"  id="board1" class="btn btn-primary" value="GO">               
       </div>        
-      <div id="section3" class="bg-secondary">         
-        <h1>Section 3</h1>
+      <div id="section2" class="bg-secondary">         
+        <h1>Section 2</h1>
         <p>Try to scroll this section and look at the navigation list while scrolling!</p>
        <input type="button"  id="board2" class="btn btn-primary" value="GO"> 
       </div>
-      <div id="section4" class="bg-danger">         
-        <h1>Section 4</h1>
+      <div id="section3" class="bg-danger">         
+        <h1>Section 3</h1>
         <p>Try to scroll this section and look at the navigation list while scrolling!</p>
       <input type="button"  id="board3" class="btn btn-primary" value="GO"> 
       </div>      
