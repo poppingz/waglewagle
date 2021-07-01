@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import DAO.MemberDAO;
 import DTO.MemberDTO;
 import util.MemberUtil;
@@ -49,7 +51,9 @@ public class MemberController extends HttpServlet {
 				
 			}else if(cmd.contentEquals("/login.mem")) { // 로그인	
 				String id = request.getParameter("id");
+				System.out.println(id);
 				String pw = util.getSHA512(request.getParameter("pw"));
+				System.out.println(pw);
 				
 				MemberDTO dto = dao.login(id, pw);
 				System.out.println("로그인 결과 : " + dto);
@@ -85,10 +89,38 @@ public class MemberController extends HttpServlet {
 				
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("member/updateView.jsp").forward(request, response);
+			}else if(cmd.contentEquals("/myPage.mem")) {
+				response.sendRedirect("member/myPage.jsp");
+				
+			}else if(cmd.contentEquals("/memberOut.mem")) {
+				MemberDTO sessionDTO = (MemberDTO)request.getSession().getAttribute("login");
+				int result = dao.memberOut(sessionDTO.getId());
+				request.getSession().invalidate();
+				response.sendRedirect("Index.jsp");
+				
+			}else if(cmd.contentEquals("/modifyInfo.mem")) {
+				MemberDTO sessionDTO = (MemberDTO)request.getSession().getAttribute("login");
+				System.out.println("sessionDTO값 : "+sessionDTO.getId());
+				String id = sessionDTO.getId();
+				String email = request.getParameter("email");
+
+				int result = dao.modify(new MemberDTO(id,email));
+				request.setAttribute("result", result);
+				request.getRequestDispatcher("main2.jsp").forward(request, response);
 				
 				
+			}else if(cmd.contentEquals("/page.mem")) {
+				String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
+				System.out.println("page.mem의 ID값" + id);
+	            MemberDTO dto = dao.getMyInfo(id);
+	            
+	            Gson g = new Gson();
+	            String result = g.toJson(dto);
+	            
+	            response.setContentType("text/html; charset=utf-8;");
+	            response.getWriter().append(result);
+	            System.out.println("내정보불러오기 : " + result);
 			}
-			
 			
 		}catch(Exception e) {
 			e.printStackTrace();

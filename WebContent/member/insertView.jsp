@@ -13,11 +13,11 @@
 	<c:choose>
 		<c:when test="${result > 0}">
 			alert("회원가입이 완료되었습니다.")
-			location.href="${pageContext.request.contextPath}/index.jsp";
+			location.href="${pageContext.request.contextPath}/Index.jsp";
 		</c:when>
 		<c:otherwise>
 			alert("회원가입에 실패했습니다.")
-			location.href="${pageContext.request.contextPath}/index.jsp";
+			location.href="${pageContext.request.contextPath}/Index.jsp";
 	</c:otherwise>
 	</c:choose>
 	</script>	

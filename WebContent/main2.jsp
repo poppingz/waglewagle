@@ -83,6 +83,13 @@ ul, ol {
 	font-size: 40px;
 	font-weight: bold;
 }
+.content .cnt01 form{
+	position: absolute;
+	top: 65%;
+	left: 50%;
+	margin-top: -40px;
+	text-align: center;
+}
 
 .content .cnt02 {
 	background-color: #ffffff;
@@ -248,9 +255,33 @@ ul, ol {
 	      $("#board3").on("click", function(){
 	         location.href = "${pageContext.request.contextPath}/select.board?category=3"
 	      })
-		
-		
-		
+	      $("#modifyPw").on("click", function() {
+			$("#tdPw").attr("contenteditable", "true")
+			$("#tdPw").focus();
+		  })
+	      $("#modifyEmail").on("click", function() {
+			$("#tdEmail").attr("contenteditable", "true")
+			$("#tdEmail").focus();
+		  })
+		  $("#frm").on("submit", function() {
+			  $("#pw").val($("#tdPw").text());
+			  $("#email").val($("#tdEmail").text());
+          })
+          $("#memberOut").on("click",function(){
+        	  let result = confirm("정말 탈퇴하시겠습니까?");
+        	  if(result){location.href="memberOut.mem";}
+          })
+	      $.ajax({
+		         url:"${pageContext.request.contextPath}/page.mem", type:"get", dataType:"json"
+		      }).done(function(resp){
+		         console.log(resp);
+		         console.log(resp.id);
+		         console.log(resp.pw);
+		         $("#id").text(resp.id);
+		         $("#tdPw").text(resp.pw);
+		         $("#tdEmail").text(resp.email);
+		         $("#tdSignUp").text(resp.reg_date);
+		         });
 	})
 </script>
 </head>
@@ -268,6 +299,40 @@ ul, ol {
 
 		<div class="cnt01">
 			<p>${login.id}님환영합니다.</p>
+			<form action="${pageContext.request.contextPath}/modifyInfo.mem" method="get" id=frm>
+		<table border=1 align=center>
+			<tr align=center>
+				<th colspan=3>MyInfo
+			</tr>
+			<tr>
+				<td>ID
+				<td id="id" name="id">
+			</tr>
+			<tr>
+				<td>PW
+				<td id="tdPw" name="pw">
+				<td><button id="modifyPw" type=button>수정</button>
+			</tr>
+			<tr>
+				<td>EMAIL
+				<td id="tdEmail" name="email">
+				<td><button id="modifyEmail" type=button>수정</button>
+			</tr>
+
+			<tr>
+				<td>SignUp date
+				<td id="tdSignUp" name="signUp">
+				<td>
+			</tr>
+			<tr>
+				<td colspan=3>
+					<input type="submit" id="apply" value="적용">
+					<button id="memberOut" type=button>탈퇴하기</button>
+			</tr>
+		</table>
+		<input type=hidden id="pw" name="pw" value="${myInfo.pw }">
+		<input type=hidden id="email" name="email" value="${myInfo.email }">
+	</form>
 
 			<div id=side-menu style="border-radius: 15px">
 				<ul id=menu-list>
@@ -300,5 +365,6 @@ ul, ol {
 
 		<div class="cnt04"></div>
 	</div>
+
 </body>
 </html>
