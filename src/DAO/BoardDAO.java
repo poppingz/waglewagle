@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import DTO.BoardDTO;
+import config.BoardConfig;
 
 public class BoardDAO {
 
@@ -32,11 +34,11 @@ public class BoardDAO {
 		DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/oracle");
 		return ds.getConnection();
 	}
-	
 
-	
+
+
 	public int insert(String id, int category , String title, String contents, String nickname) throws Exception {
-		String sql = "insert into pboard values(board_num.nextval, ?, ?, ?, ?, ?, sysdate, 0, 0)";
+		String sql = "insert into pboard values(board_num_seq.nextval, ?, ?, ?, ?, ?, sysdate, 0, 0)";
 		try (
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -52,9 +54,71 @@ public class BoardDAO {
 		}
 	}
 
-	
+	/* Board List */
+	public List<BoardDTO> sellectAll(int category) throws Exception {
+		String sql = "select * from pboard where category=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+			){
+			
+			pstat.setInt(1, category);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<BoardDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int board_num = rs.getInt("board_num");
+					String id = rs.getNString("id");
+					int category1 = rs.getInt("category");
+					String title = rs.getNString("title");
+					String contents = rs.getNString("contents");
+					String nickname = rs.getNString("nickname");
+					Date write_date = rs.getDate("write_date");
+					int view_count = rs.getInt("view_count");
+					int report = rs.getInt("report");
+					
+					BoardDTO dto = new BoardDTO(board_num, id, category1, title, contents, nickname, write_date, view_count, report);
+					list.add(dto);
+			}
+				return list;
+			}
+			
+		}
+	}
 
-	
+	/* Board Detail View */
+	public BoardDTO DetailView(int board_num)throws Exception {
+		String sql = "select * from pboard where board_num = ?";
+		try(
+			Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);
+			){
+			pstat.setInt(1, board_num);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				if(rs.next()) {
+					int board_num1 = rs.getInt("board_num");
+					String id = rs.getNString("id");
+					int category = rs.getInt("category");
+					String title = rs.getNString("title");
+					String contents = rs.getNString("contents");
+					String nickname = rs.getNString("nickname");
+					Date write_date = rs.getDate("write_date");
+					int view_count = rs.getInt("view_count");
+					int report = rs.getInt("report");
+					
+					BoardDTO dto = new BoardDTO(board_num1, id, category, title, contents,
+							nickname,write_date,view_count,report);
+					
+					return dto;
+				}
+				return null;
+			}
+		}
+	}
+
+
+	/* Board Delete */
 	public int deleteBoard(int board_num) throws Exception{
 		String sql = "delete from pboard where board_num = ?";
 		try(
@@ -66,57 +130,47 @@ public class BoardDAO {
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
-			}
-		}
-
-	public List<BoardDTO> sellectAll() throws Exception {
-		String sql = "select * from pboard";
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery();
-				){
-			List<BoardDTO> list = new ArrayList<>();
-			while(rs.next()) {
-				int board_num = rs.getInt("board_num");
-				String id = rs.getNString("id");
-				int category = rs.getInt("category");
-				String title = rs.getNString("title");
-				String contents = rs.getNString("contents");
-				String nickname = rs.getNString("nickname");
-				Date write_date = rs.getDate("write_date");
-				int view_count = rs.getInt("view_count");
-				int report = rs.getInt("report");
-				
-				BoardDTO dto = new BoardDTO(board_num, id, category, title, contents, nickname, write_date, view_count, report);
-				list.add(dto);
-			}
-			return list;
-
 		}
 	}
 
+	/* Board Modify */
 	public int modify(BoardDTO dto)throws Exception{
 		String sql = "update pboard set title=?, contents=? where board_num=?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
-				){
-			
+				)
+		{	
 			pstat.setNString(1, dto.getTitle());
 			pstat.setNString(2, dto.getContents());
 			pstat.setInt(3, dto.getBoard_num());
-			
+
 			int result = pstat.executeUpdate();
-			
+
 			con.commit();
-			return result;
-			
+			return result;	
 		}
 	}
-	
-	public void view_countPlus(int board_num) throws Exception{ // view_count 증가
-		int view_count = this.view_count(board_num);
+
+	/* Report Count */
+	public int getReportCount (int board_num, int report) throws Exception {
+		String sql="update pboard set report = ? where board_num = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				)
+		{
+			pstat.setInt(1, report+1);
+			pstat.setInt(2, board_num);
+
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+
+	/* View Count */
+	public void view_countPlus(int board_num,int view_count) throws Exception{ // view_count 증가
 		String sql = "update pboard set view_count = ? where board_num = ?";
 		try(
 				Connection con = this.getConnection();
@@ -130,25 +184,83 @@ public class BoardDAO {
 		}
 	}
 
-	public int view_count(int board_num) throws Exception { // view_count 증가를 위한 view_count
-		String sql = "select view_count from pboard where board_num = ?";
-		try(
-				Connection con = this.getConnection();		
-				PreparedStatement pstat = con.prepareStatement(sql);		
-				)
-		{
-			pstat.setInt(1, board_num);
-			try(
-					ResultSet rs = pstat.executeQuery();
-					){
-				rs.next();
-				int view_count = rs.getInt("view_count");
+	
+	private int getRecordCount()throws Exception {
+		String sql = "select count(*) from board";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();){    
 
-				return view_count;
-			}
+			rs.next();
+			return rs.getInt(1);
 		}
 	}
-	
-	
-	
-}
+
+	 public List<BoardDTO> getPageList(int startNum,int endNum) throws Exception{
+	        String sql ="select * from (select row_number() over(order by seq desc) rnum, board_num, title, id, nickname, write_date, view_count from board) where rnum between ? and ?";
+	        try(Connection con = this.getConnection();
+	            PreparedStatement pstat = con.prepareStatement(sql);){
+
+	            pstat.setInt(1, startNum);
+	            pstat.setInt(2, endNum);
+
+	            try(ResultSet rs = pstat.executeQuery();){
+	                List<BoardDTO> list = new ArrayList<>();
+	                while(rs.next()) {
+	                    BoardDTO dto = new BoardDTO();
+	                    dto.setBoard_num(rs.getInt("board_num"));
+	                    dto.setTitle(rs.getNString("title"));
+	                    dto.setId(rs.getNString("id"));
+	                    dto.setNickname(rs.getNString("nickname"));
+	                    dto.setWrite_date(rs.getDate("write_date"));
+	                    dto.setView_count(rs.getInt("view_count"));
+
+	                    list.add(dto);
+	                }
+	                return list;
+	            }
+	        }
+	    }
+
+	 public List<String> getPageNavi(int currentPage)throws Exception{
+	        int recordTotalCount = this.getRecordCount();
+	        int recordCountPerPage = BoardConfig.RECORD_COUNT_PER_PAGE;
+	        int naviCountPerPage = BoardConfig.NAVI_COUNT_PER_PAGE;
+
+	        int pageTotalCount = 0; 
+	        if(recordTotalCount % recordCountPerPage > 0) {
+	            pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+	        }else {
+	            pageTotalCount = recordTotalCount / recordCountPerPage;
+	        }
+
+	        if(currentPage > pageTotalCount) {
+	            currentPage = pageTotalCount;
+	        }else if(currentPage < 1) {
+	            currentPage = 1;
+	        }
+
+	        int startNavi = (currentPage-1) / naviCountPerPage * naviCountPerPage + 1;
+	        int endNavi = startNavi + (naviCountPerPage - 1);
+
+	        if(endNavi>pageTotalCount) {endNavi = pageTotalCount;}
+
+	        boolean needPrev = true;
+	        boolean needNext = true;
+
+	        if(startNavi == 1) {needPrev = false;}
+	        if(endNavi == pageTotalCount) {needNext = false;}
+
+	        List<String> pageNavi = new ArrayList<>();
+
+	        if(needPrev) {pageNavi.add("<");}
+
+	        for(int i = startNavi; i <= endNavi; i++) {
+	            pageNavi.add(String.valueOf(i));
+	        }
+
+	        if(needNext) {pageNavi.add(">");}
+
+	        return pageNavi;
+	    }	
+	}

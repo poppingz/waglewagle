@@ -57,7 +57,7 @@ public class MemberController extends HttpServlet {
 				if(dto.getId() != null) { // 로그인에 성공했다면
 					request.getSession().setAttribute("login", dto); // session key 발급 후
 				}
-				response.sendRedirect("Board/BoardList.jsp"); // 게시판으로 이동
+				response.sendRedirect("main.jsp"); // 메인페이지로 이동
 				
 			}else if(cmd.contentEquals("/findid.mem")) { // 아이디 찾기
 				String email = request.getParameter("email");
