@@ -32,15 +32,15 @@ public class ReportDAO {
 	
 	//신고입력 받기
 	public int insert(ReportDTO dto) throws Exception{
-		String sql = "insert into preport values(?,board_num_seq.nextval,?,?)";
+		String sql = "insert into preport values(report_num_seq.nextval,?,?,?,?)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
 			pstat.setString(1, dto.getId());
-			pstat.setInt(2, dto.getBoard_num());
-			pstat.setString(3, dto.getTitle());
-			pstat.setString(4, dto.getReason());
+			pstat.setInt(2, dto.getBoard_num());		
+			pstat.setString(2, dto.getTitle());
+			pstat.setString(3, dto.getReason());
 			
 			int result = pstat.executeUpdate();
 			con.commit();
@@ -58,16 +58,33 @@ public class ReportDAO {
 				){
 			List<ReportDTO> list = new ArrayList<>();
 			while(rs.next()) {
+				int report_num = rs.getInt("report_num");
 				String id = rs.getString("id");
 				int board_num = rs.getInt("board_num");
 				String title = rs.getString("title");
 				String reason = rs.getString("reason");
 				
-				ReportDTO dto = new ReportDTO(id,board_num,title,reason);
+				ReportDTO dto = new ReportDTO(report_num,id,board_num,title,reason);
 				list.add(dto);
 			}
 			return list;
 		}
 	}
+	
 	// 검색기능
+	
+	// 신고내역 삭제
+	public int delete(int report_num) throws Exception{
+		String sql = "delete from preport where report_num=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, report_num);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
 }

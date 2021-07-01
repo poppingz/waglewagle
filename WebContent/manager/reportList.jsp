@@ -42,7 +42,17 @@
         }
         .memberList>#titleMove>a{color: black; text-decoration: none;} /*신고게시물이동*/
         .memberList>#titleMove>a:hover{color: gray;}
+        #delBtn{height:35px; width:35px; line-height:10px; margin-top:10px}
     </style>
+    <script>
+    	$(function{
+    		$("#delBtn").on("click",function(){
+    			if(confirm("정말 삭제하시겠습니까?")){
+    				$(this).parent().parent().remove();
+    			}
+    		})
+    	})
+    </script>
 </head>
 
 <body>
@@ -57,7 +67,7 @@
                     <div class="card-body">
                         관리자 페이지<br>
                         <br>
-                        <button type="button" class="btn btn-outline-warning">Logout</button>
+                        <button type="button" class="btn btn-outline-danger">Logout</button>
                     </div>
                 </div>
 
@@ -78,21 +88,28 @@
                 <div class="margin2"></div>
                 <div class="search">
                     <input type="text" id="inputID" name="inputID" placeholder="찾고 싶은 회원의 ID를 입력하세요">
-                    <button type="button" class="btn btn-warning" id="searchBtn">search</button>
+                    <button type="button" class="btn btn-danger" id="searchBtn">search</button>
                 </div>
                 <div class="margin3"></div>
                 <div class="row memberListMain">
                     <div class="col-2">ID</div>
-                    <div class="col-2">Board</div>
+                    <div class="col-1">Board</div>
                     <div class="col-4">Title</div>
                     <div class="col-4">Reason</div>
+                    <div class="col-1">Del</div>
                 </div>
-                <div class="row memberList">       
-                    <div class="col-2">Tom_123</div>
-                    <div class="col-2">12</div>
-                    <div class="col-4" id="titleMove"><a href>여러분 이거 제가 그린 그림이예요~~~ 그림평가좀ㅋㅋㅋㅋㅋㅋ</a></div>
-                    <div class="col-4">저작권 침해, 남의 그림 도용, 사기</div>                    
-                </div>
+                <!-- 신고내역 목록 출력 -->
+                <c:forEach var="i" items="">
+                	<form action="${pageContext.request.contextPath}/delete.rep?list=${i.report_num}" method="post">
+                		<div class="row memberList">       
+                    		<div class="col-2">${i.id }</div>
+                    		<div class="col-1">${i.board_num }</div>
+                    		<div class="col-4" id="titleMove"><a href="">${i.title }</a></div>
+                    		<div class="col-4">${i.reason}</div>
+                    		<div class="col-1"><button id="delBtn">X</button></div>
+                		</div>
+                	</form>
+                </c:forEach>
             </div>
         </div>
     </div>
