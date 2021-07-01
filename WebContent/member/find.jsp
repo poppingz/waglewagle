@@ -278,7 +278,8 @@ body.is-findPW {
 }
 
 #hidden{display:none;}
-
+#idBox{font-size: 14px;}
+#pwBox{font-size: 14px;}
 
 </style>
 <script>
@@ -353,9 +354,33 @@ $(function(){
 				$("#pwBox").text("존재하지 않는 아이디/이메일 입니다.");
 				$("#pwBox").css("color", "orangered");
 			} else {
-				$('#hidden').css('display', 'block');
+				$("#pwBox").text("새로운 비밀번호를 입력해주세요.");
+				$("#pwBox").css("color", "dodgerblue");
+				$('#hidden').slideDown(500);		
 			}
 		});
+	})
+	
+	document.getElementById("repw").oninput = function () {
+		let pw = document.getElementById("pw").value;
+	    let repw = document.getElementById("repw").value;
+	  
+	    if (pw == repw) {
+	    	let style = document.getElementById("pwBox").getAttribute("style");
+	        document.getElementById("pwBox2").setAttribute("style", "color: dodgerblue;");
+	        document.getElementById("pwBox2").innerHTML = "패스워드가 일치합니다."
+	    } else {
+	        let style = document.getElementById("pwBox").getAttribute("style");
+	        document.getElementById("pwBox2").setAttribute("style", "color:orangered;");
+	        document.getElementById("pwBox2").innerHTML = "패스워드가 일치하지 않습니다."
+	    }
+	}
+	
+	$("#modify").on("click",function(){
+		if($("#pwBox2").text() == "패스워드가 일치하지 않습니다."){
+			alert("비밀번호를 다시 확인해주세요.")
+			return false;
+		}
 	})
 	
 
@@ -414,7 +439,8 @@ $(function(){
 								<input class="form-control" type="email" placeholder="이메일" id="email2"
 									required />
 							</div>
-							
+							<div id="pwBox"></div>
+							<p></p>
 							<div id="hidden">
 								<div class="form-group">
 									<input class="form-control" type="password" placeholder="비밀번호" id="pw"
@@ -424,11 +450,14 @@ $(function(){
 									<input class="form-control" type="password" placeholder="비밀번호 확인" id="repw"
 										name="repw" required />
 								</div>
+								<div id="pwBox2"></div>
+								<p></p>
 								<button class="btn btn-lg" type="submit" id="modify">비밀번호 변경</button>
+								<p></p>
 							</div>
 						</form>
-						<div id="pwBox"></div><br>
-						<button class="btn btn-lg" type="submit" id="pwBtn">비밀번호 찾기</button>
+						<p></p>
+						<button class="btn btn-lg" type="submit" id="pwBtn">확인</button>
 						<p></p>
 						<button class="btn btn-lg toIndex">메인으로 돌아가기</button>
 

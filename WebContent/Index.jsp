@@ -277,9 +277,9 @@ body.is-login {
 	z-index: 5;
 }
 
-#id_check{margin-bottom:10px; font-size: 13px;}
-#pwBox{font-size: 13px;}
-.find{margin-bottom:10px; font-size: 13px;}
+#id_check{margin-bottom:10px; font-size: 14px;}
+#pwBox{font-size: 14px;}
+.find{margin-bottom:10px; font-size: 14px;}
 
 </style>
 <script>
@@ -350,6 +350,11 @@ body.is-login {
 		let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{3}$/;
 		
 		$("#signup").on("click",function(){
+			if($("#pwBox").text() == "패스워드가 일치하지 않습니다."){
+				alert("비밀번호를 다시 확인해주세요.")
+				return false;
+			}
+			
 			let idResult = idRegex.test($("#id").val());
 			let pwResult = pwRegex.test($("#repw").val());
 			let emailResult = emailRegex.test($("#email").val());

@@ -75,6 +75,18 @@ public class MemberController extends HttpServlet {
 				System.out.println("비밀번호 찾기 결과 : " + result);
 				response.getWriter().append(String.valueOf(result));
 				
+			}else if(cmd.contentEquals("/changepw.mem")) { // 비밀번호 변경
+				String id = request.getParameter("id");
+				String pw = util.getSHA512(request.getParameter("repw"));
+				System.out.println(id + " : " + pw);
+				
+				int result = dao.updatePw(pw, id);
+				System.out.println(result);
+				
+				request.setAttribute("result", result);
+				request.getRequestDispatcher("member/updateView.jsp").forward(request, response);
+				
+				
 			}
 			
 			
