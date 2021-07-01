@@ -105,6 +105,23 @@ public class MemberDAO {
 	}
 	
 	
+	public boolean findPW(String id, String email) throws Exception { // 비밀번호 찾기
+		String sql = "select * from pmember where id=? and email=?";
+		try(
+			Connection con = this.getConnection();		
+			PreparedStatement pstat = con.prepareStatement(sql);
+		)
+		{
+			pstat.setString(1, id);
+			pstat.setString(2, email);
+			try(ResultSet rs = pstat.executeQuery();)
+			{
+				boolean result = rs.next();
+				return result;
+			}
+		}
+	}
+	
 	
 	
 

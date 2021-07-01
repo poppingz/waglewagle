@@ -441,7 +441,7 @@ body.is-login {
 								placeholder="비밀번호" required />
 						</div>
 						<div class="find">
-							<a href="member/find.jsp">아이디/비밀번호 찾기</a>
+							<a href="member/find.jsp">아이디 찾기/비밀번호 변경</a>
 						</div>
 						<button class="btn btn-lg">로그인</button>
 					</form>
