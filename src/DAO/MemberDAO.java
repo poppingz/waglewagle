@@ -84,5 +84,34 @@ public class MemberDAO {
 			}
 		}
 	}
+	
+	
+	public String findID(String email) throws Exception{ // 아이디 찾기
+		String sql = "select * from pmember where email = ?";
+		String id = null;
+		try(
+			Connection con = this.getConnection();		
+			PreparedStatement pstat = con.prepareStatement(sql);
+		){
+			pstat.setString(1, email);
+			try(ResultSet rs = pstat.executeQuery();)
+			{
+				if(rs.next()) {
+					id = rs.getString("id");
+				}
+				return id;
+			}
+		}
+	}
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
 
 }

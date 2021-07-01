@@ -62,6 +62,10 @@ public class MemberController extends HttpServlet {
 			}else if(cmd.contentEquals("/findid.mem")) { // 아이디 찾기
 				String email = request.getParameter("email");
 				
+				String id = dao.findID(email);
+				System.out.println("아이디 찾기 결과 : " + id);
+				
+				response.getWriter().append(String.valueOf(id));
 				
 				
 				

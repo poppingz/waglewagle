@@ -313,6 +313,31 @@ $(function(){
 	$("#toIndex").on("click",function(){
 		location.href="${pageContext.request.contextPath}/index.jsp";
 	})
+	
+
+	
+	
+	
+	$("#idBtn").on("click",function(){
+		if ($("#email").val() == "") {
+			alert("이메일을 입력해주세요.");
+			return false;
+		}
+		$.ajax({
+			url : "${pageContext.request.contextPath}/findid.mem", data : {"email" : $('#email').val()}
+		}).done(function(resp) {
+			if (resp == "null") {
+				$("#idBox").text("존재하지 않는 이메일입니다.");
+				$("#idBox").css("color", "orangered");
+			} else if (resp != "null") {
+				$("#idBox").text("아이디는 " + resp + " 입니다.");
+				$("#idBox").css("color", "dodgerblue");
+			}
+		});
+	})
+	
+	
+	
 })
 </script>
 </head>
@@ -340,13 +365,13 @@ $(function(){
 			<div class="card border-0 shadow card--findID" id="findID">
 				<div class="card-body">
 					<h2 class="card-title">Find ID</h2><br>
-					<form action="" method="post">
 						<div class="form-group">
 							<input class="form-control" type="email" placeholder="이메일" id="email"
 								name="email" required />
 						</div>
-						<button class="btn btn-lg">아이디 찾기</button>
-					</form>
+						<div id="idBox"></div><br>
+						<button class="btn btn-lg" type="submit" id="idBtn">아이디 찾기</button><br>
+						<button class="btn btn-lg" data-target="">로그인</button>
 				</div>
 				<button class="btn btn-back js-btn" data-target="welcome"> <!-- 뒤로가기 버튼 -->
 					<i class="fas fa-angle-left"></i>
@@ -357,7 +382,7 @@ $(function(){
 			<div class="card border-0 shadow card--findPW" id="findPW">
 				<div class="card-body">
 					<h2 class="card-title">Find PW</h2><br>
-					<form action="" method="post">
+					<form action="${pageContext.request.contextPath}/findpw.mem" method="post">
 						<div class="form-group">
 							<input class="form-control" type="text" placeholder="아이디" name="id"
 								required />
@@ -366,7 +391,7 @@ $(function(){
 							<input class="form-control" type="email" placeholder="이메일" id="email"
 								name="email" required />
 						</div>
-						<button class="btn btn-lg">비밀번호 찾기</button>
+						<button class="btn btn-lg" type="submit" id="pwBtn">비밀번호 찾기</button>
 					</form>
 				</div>
 				<button class="btn btn-back js-btn" data-target="welcome"> <!-- 뒤로가기 버튼 -->
