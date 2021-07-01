@@ -62,12 +62,18 @@ public class MemberController extends HttpServlet {
 			}else if(cmd.contentEquals("/findid.mem")) { // 아이디 찾기
 				String email = request.getParameter("email");
 				
+				String id = dao.findID(email);
+				System.out.println("아이디 찾기 결과 : " + id);
 				
-				
+				response.getWriter().append(String.valueOf(id));
 				
 			}else if(cmd.contentEquals("/findpw.mem")) { // 비밀번호 찾기
 				String id = request.getParameter("id");
-				String email = request.getParameter("email");
+				String email = request.getParameter("email2");
+				
+				boolean result = dao.findPW(id, email);
+				System.out.println("비밀번호 찾기 결과 : " + result);
+				response.getWriter().append(String.valueOf(result));
 				
 			}
 			

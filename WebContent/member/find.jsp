@@ -276,6 +276,10 @@ body.is-findPW {
 	transform: translate(-50%, -50%);
 	z-index: 5;
 }
+
+#hidden{display:none;}
+
+
 </style>
 <script>
 $(function(){
@@ -310,9 +314,52 @@ $(function(){
 	  next.classList.add('is-show');
 	}
 	
-	$("#toIndex").on("click",function(){
+	$(".toIndex").on("click",function(){
 		location.href="${pageContext.request.contextPath}/index.jsp";
 	})
+	
+
+	$("#idBtn").on("click",function(){
+		if ($("#email").val() == "") {
+			alert("이메일을 입력해주세요.");
+			return false;
+		}
+		$.ajax({
+			url : "${pageContext.request.contextPath}/findid.mem", data : {"email" : $('#email').val()}
+		}).done(function(resp) {
+			if (resp == "null") {
+				$("#idBox").text("존재하지 않는 이메일입니다.");
+				$("#idBox").css("color", "orangered");
+			} else if (resp != "null") {
+				$("#idBox").text("아이디는 " + resp + " 입니다.");
+				$("#idBox").css("color", "dodgerblue");
+			}
+		});
+	})
+	
+	$("#pwBtn").on("click",function(){
+		if ($("#id").val() == "") {
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+		if ($("#email2").val() == "") {
+			alert("이메일을 입력해주세요.");
+			return false;
+		}
+		$.ajax({
+			url : "${pageContext.request.contextPath}/findpw.mem", data : {"id" : $('#id').val(), "email2" : $('#email2').val()}
+		}).done(function(resp) {
+			if (resp == "false") {
+				$("#pwBox").text("존재하지 않는 아이디/이메일 입니다.");
+				$("#pwBox").css("color", "orangered");
+			} else {
+				$('#hidden').css('display', 'block');
+			}
+		});
+	})
+	
+
+	
 })
 </script>
 </head>
@@ -328,10 +375,10 @@ $(function(){
 					<p></p>
 					<div class="btn-wrap">
 						<a class="btn btn-lg btn-findID js-btn" data-target="findID">아이디 찾기</a>
-						<a class="btn btn-lg btn-findPW js-btn" data-target="findPW">비밀번호 찾기</a>
+						<a class="btn btn-lg btn-findPW js-btn" data-target="findPW">비밀번호 변경</a>
 					</div>
 				</div>
-				<button class="btn btn-back js-btn" id="toIndex"> <!-- 뒤로가기 버튼 -->
+				<button class="btn btn-back js-btn toIndex"> <!-- 뒤로가기 버튼 -->
 					<i class="fas fa-angle-left"></i>
 				</button>
 			</div>
@@ -340,13 +387,14 @@ $(function(){
 			<div class="card border-0 shadow card--findID" id="findID">
 				<div class="card-body">
 					<h2 class="card-title">Find ID</h2><br>
-					<form action="" method="post">
 						<div class="form-group">
 							<input class="form-control" type="email" placeholder="이메일" id="email"
-								name="email" required />
+								required />
 						</div>
-						<button class="btn btn-lg">아이디 찾기</button>
-					</form>
+						<div id="idBox"></div><br>
+						<button class="btn btn-lg" type="submit" id="idBtn">아이디 찾기</button>
+						<p></p>
+						<button class="btn btn-lg toIndex">메인으로 돌아가기</button>
 				</div>
 				<button class="btn btn-back js-btn" data-target="welcome"> <!-- 뒤로가기 버튼 -->
 					<i class="fas fa-angle-left"></i>
@@ -356,18 +404,34 @@ $(function(){
 			<!-- 비밀번호 찾기 -->
 			<div class="card border-0 shadow card--findPW" id="findPW">
 				<div class="card-body">
-					<h2 class="card-title">Find PW</h2><br>
-					<form action="" method="post">
-						<div class="form-group">
-							<input class="form-control" type="text" placeholder="아이디" name="id"
-								required />
-						</div>
-						<div class="form-group">
-							<input class="form-control" type="email" placeholder="이메일" id="email"
-								name="email" required />
-						</div>
-						<button class="btn btn-lg">비밀번호 찾기</button>
-					</form>
+					<h2 class="card-title">Change PW</h2><br>
+						<form action="${pageContext.request.contextPath}/changepw.mem" method="post">
+							<div class="form-group">
+								<input class="form-control" type="text" placeholder="아이디" id="id"
+									name="id" required />
+							</div>
+							<div class="form-group">
+								<input class="form-control" type="email" placeholder="이메일" id="email2"
+									required />
+							</div>
+							
+							<div id="hidden">
+								<div class="form-group">
+									<input class="form-control" type="password" placeholder="비밀번호" id="pw"
+										required />
+								</div>
+								<div class="form-group">
+									<input class="form-control" type="password" placeholder="비밀번호 확인" id="repw"
+										name="repw" required />
+								</div>
+								<button class="btn btn-lg" type="submit" id="modify">비밀번호 변경</button>
+							</div>
+						</form>
+						<div id="pwBox"></div><br>
+						<button class="btn btn-lg" type="submit" id="pwBtn">비밀번호 찾기</button>
+						<p></p>
+						<button class="btn btn-lg toIndex">메인으로 돌아가기</button>
+
 				</div>
 				<button class="btn btn-back js-btn" data-target="welcome"> <!-- 뒤로가기 버튼 -->
 					<i class="fas fa-angle-left"></i>
