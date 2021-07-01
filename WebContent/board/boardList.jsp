@@ -5,21 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sample Board Detail</title>
+<title>Board List</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(function(){
 		$("#write").on("click", function(){
-			location.href = "BoardWrite.jsp"
+			location.href = "write.jsp"
 		})
+		
+		$("#back").on("click", function(){
+			location.href = "index.jsp;"
+		})
+		
 	})
 </script>
 <style>
-* {
-	box-sizing: border-box;
-}
+* {box-sizing: border-box;}
 
 #boardBody {
 	border: 1px solid black;
@@ -29,63 +32,27 @@
 }
 
 /* Board Title */
-#title {
-	border: 1px solid black;
-	text-align: center;
-}
+#title {border: 1px solid black;text-align: center;}
 
 /* Search Bar */
-#search {
-	text-align: center;
-	padding-top: 5px;
-}
-
-#search>input {
-	height: 30px;
-}
+#search {text-align: center;padding-top: 5px;}
+#search>input {height: 30px;}
 
 /* Sub Title */
-#subTitle>div {
-	float: left;
-}
-
-#subTitle>#subTitle1 {
-	width: 70%;
-	text-align: center;
-}
-
-#subTitle>#subTitle2 {
-	width: 10%;
-	text-align: center;
-}
+#subTitle>div {float: left;}
+#subTitle>#subTitle1 {width: 70%;text-align: center;}
+#subTitle>#subTitle2 {width: 10%;text-align: center;}
 
 /* Board Contents */
-#boardContentsBox {
-	border: 1px solid black;
-	height: 500px;
-}
-
-#boardContents>div {
-	float: left;
-	border: 1px solid black;
-}
-
-#boardContents>#boardContents1 {
-	width: 70%;
-	text-align: center;
-}
-
-#boardContents>#boardContents2 {
-	width: 10%;
-	text-align: center;
-}
+#boardContentsBox {border: 1px solid black;	height: 500px;}
+#boardContents>div {float: left;border: 1px solid black;}
+#boardContents>#boardContents1 {width: 70%;text-align: center;}
+#boardContents>#boardContents2 {width: 10%;	text-align: center;}
 
 /* Page */
 
 /* Board Footer */
-#BoardFooter {
-	text-align: right;
-}
+#BoardFooter {text-align: right;}
 </style>
 </head>
 <body>
@@ -106,8 +73,8 @@
 		<div id="boardContentsBox">
 			<div id="boardContents">
 				<c:forEach var="i" items="${list}">
-					<div id="boardContents1">${i.title }</div>
-					<div id="boardContents2">${i.id }</div>
+					<div id="boardContents1"><a href="${pageContext.request.contextPath}/boardView.board?board_num=${i.board_num}">${i.title }</a></div>
+					<div id="boardContents2">${i.nickname }</div>
 					<div id="boardContents2">${i.view_count }</div>
 					<div id="boardContents2">${i.write_date }</div>					
 				</c:forEach>
@@ -116,6 +83,7 @@
 		<div id="page"></div>
 		<div id="BoardFooter">
 			<button id="write" class="btn btn-primary">글쓰기</button>
+			<button id="back" class="btn btn-danger">뒤로가기</button>
 		</div>
 	</div>
 </body>

@@ -33,8 +33,14 @@ public class BoardController extends HttpServlet {
 
 		try {
 
-			// 글 쓰기
-			if(url.contentEquals("/boardWrite.board")) {
+			if(url.contentEquals("/select.board")) {
+				int category = Integer.parseInt(request.getParameter("category"));
+
+				List<BoardDTO> list = dao.sellectAll(category);
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("board/boardList.jsp").forward(request, response);
+
+			}else if(url.contentEquals("/insert.board")) {
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("login");
 				int category = Integer.parseInt(request.getParameter("category"));
 				String title = request.getParameter("title");
@@ -45,29 +51,54 @@ public class BoardController extends HttpServlet {
 
 				request.setAttribute("result", result);
 
-				response.sendRedirect("Board/BoardList.jsp");
-
-				// 글 삭제
-			}else if(url.contentEquals("/boardDelete.board")) {
-				int board_num = Integer.parseInt(request.getParameter("board_num"));
-				dao.deleteBoard(board_num);
-				response.sendRedirect("/boardList.board");
-
-
-
-			}else if(url.contentEquals("/select.board")) {
-				List<BoardDTO> list = dao.sellectAll();
-				request.setAttribute("BoardList", list);
-				request.getRequestDispatcher("Board/BoardList").forward(request, response);
+				response.sendRedirect("/select.board?category="+category);
 
 			}else if(url.contentEquals("/modify.board")) {
-				int board_num = (Integer.parseInt(request.getParameter("board_num")));
+				int board_num = Integer.parseInt(request.getParameter("board_num"));
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
 				int result = dao.modify(new BoardDTO(board_num,title,contents));
 
 				request.setAttribute("result", result);
-				response.sendRedirect("index.jsp");}
+				response.sendRedirect("/boardView.board?board_num="+board_num);
+
+
+
+			}else if(url.contentEquals("/modifyView.board")) {
+				int board_num = Integer.parseInt(request.getParameter("board_num"));
+				BoardDTO result = dao.DetailView(board_num);
+				request.setAttribute("Board_Context", result);
+
+				request.getRequestDispatcher("modify.jsp").forward(request, response);
+
+			}else if(url.contentEquals("/delete.board")) {
+
+				int board_num = Integer.parseInt(request.getParameter("board_num"));
+				int category = Integer.parseInt(request.getParameter("category"));
+				dao.deleteBoard(board_num);
+				if(category==1) {
+					response.sendRedirect("/select.board?category=1");
+				}else if(category==2) {
+					response.sendRedirect("/select.board?category=2");
+				}else if(category==3) {
+					response.sendRedirect("/select.board?category=3");
+				}
+			}else if(url.contentEquals("/boardView.board")) {
+				int board_num = (Integer.parseInt(request.getParameter("board_num")));
+				BoardDTO result = dao.DetailView(board_num);
+				dao.view_countPlus(board_num, result.getView_count());
+
+				request.setAttribute("Board_Context", result);
+				request.getRequestDispatcher("indexDetail.jsp").forward(request, response);
+
+			}else if(url.contentEquals("/report.board")) {
+				int board_num = Integer.parseInt(request.getParameter("board_num"));
+				BoardDTO result = dao.DetailView(board_num);
+				dao.getReportCount(board_num, result.getReport());
+
+				request.setAttribute("Board_Context", result);
+				request.getRequestDispatcher("/boardView.board?board_num="+board_num).forward(request, response);
+			}
 
 
 		}catch(Exception e){
