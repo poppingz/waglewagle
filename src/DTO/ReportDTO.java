@@ -1,6 +1,7 @@
 package DTO;
 
 public class ReportDTO {
+	private int report_num;
 	private String id;
 	private int board_num;
 	private String title;
@@ -9,12 +10,19 @@ public class ReportDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ReportDTO(String id, int board_num, String title, String reason) {
+	public ReportDTO(int report_num, String id, int board_num, String title, String reason) {
 		super();
+		this.report_num = report_num;
 		this.id = id;
 		this.board_num = board_num;
 		this.title = title;
 		this.reason = reason;
+	}
+	public int getReport_num() {
+		return report_num;
+	}
+	public void setReport_num(int report_num) {
+		this.report_num = report_num;
 	}
 	public String getId() {
 		return id;
@@ -40,5 +48,6 @@ public class ReportDTO {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+	
 	
 }
