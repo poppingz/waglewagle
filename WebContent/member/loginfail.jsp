@@ -11,7 +11,7 @@
 <body>
 	<script>
 		alert("아이디 혹은 비밀번호를 다시 입력하세요.")
-		location.href="${pageContext.request.contextPath}/index.jsp";
+		location.href="${pageContext.request.contextPath}/Index.jsp";
 	</script>	
 </body>
 </html>

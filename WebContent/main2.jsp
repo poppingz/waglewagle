@@ -74,7 +74,7 @@ ul, ol {
 	position: relative
 }
 
-.content .cnt01 p {
+/* .content .cnt01 p {
 	position: absolute;
 	top: 50%;
 	margin-top: -40px;
@@ -82,7 +82,7 @@ ul, ol {
 	width: 100%;
 	font-size: 40px;
 	font-weight: bold;
-}
+} */
 
 #side-menu {
 	position: fixed;
@@ -277,6 +277,88 @@ ul, ol {
 	top: 300px;
 	left: 1200px;
 }
+
+ /* 메인슬라이드 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        #mainslide {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #mainslide ul {
+            width: 400%;
+            height: 100%;
+            transition: 1s;
+        }
+
+        #mainslide ul:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        #mainslide li {
+            float: left;
+            width: 25%;
+            height: 100%;
+        }
+
+        #mainslide>ul>li>img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #mainslide input {
+            display: none;
+        }
+
+        #mainslide label {
+            display: inline-block;
+            vertical-align: middle;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #666;
+            background: #fff;
+            transition: 0.3s;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #mainslide .mainpos {
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        #mainpos1:checked~ul {
+            margin-left: 0%;
+        }
+
+        #mainpos2:checked~ul {
+            margin-left: -100%;
+        }
+
+        #mainpos3:checked~ul {
+            margin-left: -200%;
+        }
+
+        #mainpos4:checked~ul {
+            margin-left: -300%;
+        }
+
 </style>
 <script>
 	$(function() {
@@ -374,7 +456,7 @@ ul, ol {
 						})
 
 		$("#mypage").on("click", function() {
-			location.href = "${pageContext.request.contextPath}/";
+			window.open("member/mypage.jsp","My Page", "width=500, height=650");
 		})
 
 		$("#changepw").on("click", function() {
@@ -411,50 +493,24 @@ ul, ol {
 	<div class="content">
 
 		<div class="cnt01">
-		<div id="carouselExampleCaptions" class="carousel slide"
-				data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#carouselExampleCaptions" data-slide-to="0"
-						class="active"></li>
-					<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-					<li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-				</ol>
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img src="..." class="d-block w-100" alt="...">
-						<div class="carousel-caption d-none d-md-block">
-							<h5>First slide label</h5>
-							<p>Some representative placeholder content for the first
-								slide.</p>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<img src="..." class="d-block w-100" alt="...">
-						<div class="carousel-caption d-none d-md-block">
-							<h5>Second slide label</h5>
-							<p>Some representative placeholder content for the second
-								slide.</p>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<img src="..." class="d-block w-100" alt="...">
-						<div class="carousel-caption d-none d-md-block">
-							<h5>Third slide label</h5>
-							<p>Some representative placeholder content for the third
-								slide.</p>
-						</div>
-					</div>
-				</div>
-				<a class="carousel-control-prev" href="#carouselExampleCaptions"
-					role="button" data-slide="prev"> <span
-					class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-					class="sr-only">Previous</span>
-				</a> <a class="carousel-control-next" href="#carouselExampleCaptions"
-					role="button" data-slide="next"> <span
-					class="carousel-control-next-icon" aria-hidden="true"></span> <span
-					class="sr-only">Next</span>
-				</a>
-			</div>
+			<div id="mainslide">
+        	    <input type="radio" name="mainpos" id="mainpos1" checked>
+                <input type="radio" name="mainpos" id="mainpos2">
+                <input type="radio" name="mainpos" id="mainpos3">
+                <input type="radio" name="mainpos" id="mainpos4">
+                <ul>
+                    <li style="background-color: #0f4c81;"></li>
+                    <li style="background-color: #0f4c8140;"></li>
+                    <li style="background-color: #0f4c8160;"></li>
+                    <li style="background-color: #0f4c8180;"></li>
+                </ul>
+                <p class="mainpos">
+                    <label for="mainpos1"></label>
+                    <label for="mainpos2"></label>
+                    <label for="mainpos3"></label>
+                    <label for="mainpos4"></label>
+                </p>
+            </div>
 
 			<div id=side-menu style="border-radius: 15px">
 				<ul id=menu-list>

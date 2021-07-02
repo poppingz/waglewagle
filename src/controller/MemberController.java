@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import DAO.MemberDAO;
 import DTO.MemberDTO;
 import util.MemberUtil;
@@ -104,8 +106,18 @@ public class MemberController extends HttpServlet {
 				request.getSession().invalidate();
 				response.sendRedirect("index.jsp");	
 				
+			}else if(cmd.contentEquals("/page.mem")) {
+				String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
+				System.out.println("page.mem의 ID값" + id);
+	            MemberDTO dto = dao.getMyInfo(id);
+	            
+	            Gson g = new Gson();
+	            String result = g.toJson(dto);
+	            
+//	            response.setContentType("text/html; charset=utf-8;");
+	            response.getWriter().append(result);
+	            System.out.println("내정보불러오기 : " + result);
 			}
-			
 			
 		}catch(Exception e) {
 			e.printStackTrace();

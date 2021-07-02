@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -153,7 +154,26 @@ public class MemberDAO {
 			return result;
 		}
 	}
-	
+//	mypage 구문 시작
+	public MemberDTO getMyInfo(String paramID) throws Exception {
+		String sql = "select * from pmember where id = ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, paramID);
+			try (ResultSet rs = pstat.executeQuery();) {
+				if (rs.next()) {
+					String id = rs.getString("id");
+					String pw = rs.getString("pw");
+					System.out.println("패스워드값 : " + pw);
+					String email = rs.getString("email");
+					Date reg_date = rs.getDate("reg_date");
+					System.out.println("reg_date값 : " + reg_date);
+					return new MemberDTO(id,pw,email,reg_date);
+				}
+			}
+		}
+		return null;
+	}
+//	mypage 구문 끝
 	
 
 	
