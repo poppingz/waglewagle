@@ -54,6 +54,7 @@ public class BoardDAO {
 		}
 	}
 
+	
 	/* Board List */
 	public List<BoardDTO> sellectAll(int category) throws Exception {
 		String sql = "select * from pboard where category=?";

@@ -41,8 +41,8 @@ public class BoardController extends HttpServlet {
 		
 				request.getRequestDispatcher("board/boardList.jsp").forward(request, response);
 
-			}else if(url.contentEquals("/insert.board")) {
-				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("login");
+			}else if(url.contentEquals("/insert.board")) {				
+				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("login");				
 				int category = Integer.parseInt(request.getParameter("category"));
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
@@ -50,9 +50,9 @@ public class BoardController extends HttpServlet {
 
 				int result = dao.insert(dto.getId(), category, title, contents, nickname);
 
-				request.setAttribute("result", result);
+				request.setAttribute("result", result);	
 
-				response.sendRedirect("/select.board?category="+category);
+				response.sendRedirect("/select.board?category="+ category);
 
 			}else if(url.contentEquals("/modify.board")) {
 				int board_num = Integer.parseInt(request.getParameter("board_num"));
@@ -90,7 +90,7 @@ public class BoardController extends HttpServlet {
 				dao.view_countPlus(board_num, result.getView_count());
 
 				request.setAttribute("Board_Context", result);
-				request.getRequestDispatcher("indexDetail.jsp").forward(request, response);
+				request.getRequestDispatcher("board/indexDetail.jsp").forward(request, response);
 
 			}else if(url.contentEquals("/report.board")) {
 				int board_num = Integer.parseInt(request.getParameter("board_num"));
