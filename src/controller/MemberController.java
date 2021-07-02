@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import DAO.MemberDAO;
 import DTO.MemberDTO;
@@ -112,9 +113,12 @@ public class MemberController extends HttpServlet {
 	            MemberDTO dto = dao.getMyInfo(id);
 	            
 	            Gson g = new Gson();
+	            g = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	            
 	            String result = g.toJson(dto);
 	            
 //	            response.setContentType("text/html; charset=utf-8;");
+	            
 	            response.getWriter().append(result);
 	            System.out.println("내정보불러오기 : " + result);
 			}
