@@ -5,180 +5,261 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board List</title>
+<title>Board</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="http://code.jquery.com/jquery-3.6.0.js"></script>
-<script>
-	$(function(){
-		$("#write").on("click", function(){
-			location.href = "board/boardWrite.jsp"
-		})
-		
-		$("#back").on("click", function(){
-			location.href = "main2.jsp;"
-		})
-		
-	})
-</script>
-
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	crossorigin="anonymous">
 <style>
-#container {
-	width: 800px;
+body {
+	display: flex;
+	min-height: 35rem;
+	align-items: center;
+	justify-content: center;
 	margin: auto;
 }
 
-#title {
-	font-weight: bold;
+.container {
+	margin: auto;
+}
+
+.card {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.card-wrap {
+	position: relative;
+	margin: 0 auto;
+}
+
+@media ( min-width : 1400px) {
+	.card-wrap {
+		max-width: 1500px;
+	}
 }
 
 .card-body {
-	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
 }
 
-.card-text {
+.card-body p {
+	font-size: 1.1rem;
+}
+
+.card-title {
+	font-weight: bold;
+	font-size: 1.8rem;
+}
+
+.shadow {
+	width: 1500px;
+}
+
+.card--welcome {
+	z-index: 3;
+}
+
+.card--welcome .card-title {
+	color: #ee9ca7;
+}
+
+body {
+	background: linear-gradient(to right, #ffdde1, #ee9ca7, #a7bfe8, #6190e8);
+	background-size: 500% 500%;
+	transition: background 3s ease;
+	background-position: 50% 50%;
+}
+
+.card {
+	transition: all .3s .1s ease-out;
+}
+
+.card:not(.is-show) {
+	opacity: 0;
+	-webkit-transform: translate(-50%, -50%) rotateX(95deg);
+	transform: translate(-50%, -50%) rotateX(95deg);
+}
+
+.card.is-show {
+	opacity: 1;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	z-index: 5;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.cnt {
+	width: 1300px;
+}
+
+/* 헤더 */
+.logo {
+	text-align: center;
+}
+
+.boardlistMain { /*게시물 컬럼*/
+	border-top: 2px solid gray;
+	border-bottom: 1px solid gray;
+	height: 70px;
+	line-height: 60px;
+}
+
+.boardlist { /*게시글 리스트*/
+	border-bottom: 1px solid gray;
+	line-height: 45px;
+}
+
+.boardlist>#titleMove>a { /* 타이틀 클릭시 효과 */
 	color: black;
+	text-decoration: none;
 }
 
-.pagination {
-	margin: 0;
-}
-
-a {
-	color: balck;
+.btns {
+	text-align: right;
 }
 
 .search_box {
-	width: 800px;
+	width: 1000px;
 	margin: auto;
 }
-
-
-.header img {
-	display: block;
-	margin:auto;
-}
-
 </style>
 <script>
-	$(function() {
-		$("#write")
-				.on(
-						"click",
-						function() {
-							location.href = "${pageContext.request.contextPath}/board/boardWrite.jsp";
-						})
-		$("#back").on("click", function() {
-			location.href = "${pageContext.request.contextPath}/main2.jsp";
+	$(function(){
+		
+		const cards = document.querySelectorAll('.card');
+
+		/* View Controller
+		-----------------------------------------*/
+		const btns = document.querySelectorAll('.js-btn');
+		btns.forEach((btn) => {
+		  btn.addEventListener('click', on_btn_click, true);
+		  btn.addEventListener('touch', on_btn_click, true);
+		});
+
+		function on_btn_click (e) {
+		  const nextID = e.currentTarget.getAttribute('data-target');
+		  const next = document.getElementById(nextID);
+		  if(!next) return;
+		  bg_change(nextID);
+		  view_change(next);
+		  return false;
+		}
+
+		/* Add class to the body */
+		function bg_change(next) {
+		  document.body.className = '';
+		  document.body.classList.add('is-'+next);
+		}
+
+		/* Add class to a card */
+		function view_change(next) {
+		  cards.forEach((card) => { card.classList.remove('is-show'); });
+		  next.classList.add('is-show');
+		}	
+		
+		$(function() {
+			$("#write").on("click", function() {
+				location.href = "${pageContext.request.contextPath}/board/boardWrite.jsp";
+			})
+			
+			$("#back").on("click", function() {
+				location.href = "${pageContext.request.contextPath}/main2.jsp";
+			})
 		})
+		
 	})
 </script>
 </head>
 <body>
-	<div class="card border-secondary mb-3" id=container>
-		<div class="header">
-			<img src="logo.png" width="500px"><br>
-		</div>
-		<table class="table" align=center>
-			<tr align=center>
-				<td colspan=5>
-					<div
-						class="card-header bg-transparent border-secondary text-secondary">
-						<h5 class="card-title" id="title">자유게시판</h5>
+	<div class="container">
+		<div class="card-wrap">
+			<div class="card border-0 shadow card--welcome is-show" id="welcome">
+				<div class="card-body">
+
+					<div class="logo">
+						<img src="logo.png">
 					</div>
-			</tr>
-			<tr align=center>
-				<td width=7%><div class="card-body text-secondary">
-						<p class="card-text">No.</p>
-					</div>
-				<td width=63%><div class="card-body text-secondary">
-						<p class="card-text">Title</p>
-					</div>
-				<td width=10%><div class="card-body text-secondary">
-						<p class="card-text">Writer</p>
-					</div>
-				<td width=15%><div class="card-body text-secondary">
-						<p class="card-text">Date</p>
-					</div>
-				<td width=5%><div class="card-body text-secondary">
-						<p class="card-text">View</p>
-					</div>
-			</tr>
-			<c:forEach var="i" items="${list}">
-				<tr>
-					<td align="center"><div class="card-body text-secondary">
-							<p class="card-text">${i.board_num}</p>
-						</div>
-					<td><div class="card-body text-secondary">
-							<p class="card-text">
-								<a
-									href="${pageContext.request.contextPath}/boardView.board?board_num=${i.board_num}">${i.title}</a>
-							</p>
-						</div>
-					<td align="center"><div class="card-body text-secondary">
-							<p class="card-text">${i.nickname}</p>
-						</div>
-					<td align="center"><div class="card-body text-secondary">
-							<p class="card-text">${i.write_date}</p>
-						</div>
-					<td align="center"><div class="card-body text-secondary">
-							<p class="card-text">${i.view_count}</p>
-						</div>
-				</tr>
-			</c:forEach>
-			<tr>
-				<td colspan=5 align=center>
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">
-							<c:forEach var="i" items="${navi}" varStatus="s">
-								<c:choose>
-									<c:when test="${i == '&raquo;'}">
-										<li class="page-item"><a class="page-link"
-											href="${pageContext.request.contextPath}/list.board?cpage=${navi[s.index-1]+1}&category=${category}&keyword=${keyword}">${i}</a></li>
-									</c:when>
-									<c:when test="${i == '&laquo;'}">
-										<li class="page-item"><a class="page-link"
-											href="${pageContext.request.contextPath}/list.board?cpage=${navi[s.index-1]+1}&category=${category}&keyword=${keyword}">${i}</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="page-item"><a class="page-link"
-											href="${pageContext.request.contextPath}/list.board?cpage=${i}&category=${category}&keyword=${keyword}">${i}</a></li>
-									</c:otherwise>
-								</c:choose>
+					<br> <br>
+
+					<div class="row body cnt">
+						<div class="col-12">
+
+							<div class="row boardlistMain">
+								<div class="col-1">No.</div>
+								<div class="col-5">Title</div>
+								<div class="col-3">Writer</div>
+								<div class="col-2">Date</div>
+								<div class="col-1">View</div>
+							</div>
+
+							<c:forEach var="i" items="${list}">
+								<div class="row boardlist">
+									<div class="col-1">${i.board_num}</div>
+									<div class="col-5" id="titleMove">
+										<a href="">${i.title}</a>
+									</div>
+									<div class="col-3">${i.nickname}</div>
+									<div class="col-2">${i.write_date}</div>
+									<div class="col-1">${i.view_count}</div>
+								</div>
 							</c:forEach>
-						</ul>
-					</nav>
-			</tr>
-			<tr>
-				<td colspan=5 align=right>
-					<button type="button" class="btn btn-outline-secondary" id="back">뒤로가기</button>
-					<button type="button" class="btn btn-outline-secondary" id="write">글
-						쓰기</button>
-			</tr>
-		</table>
-	</div>
-	<div class="search_box">
-		<form action="${pageContext.request.contextPath}/list.board?cpage=1"
-			method="post">
-			<div class="row">
-				<div class="col-3">
-					<select class="form-control" name="category" id="srch_item">
-						<option value="" selected>선택하세요.</option>
-						<option value="writer">작성자</option>
-						<option value="title">제목</option>
-						<option value="contents">내용</option>
-					</select>
-				</div>
-				<div class="col-7">
-					<input type="text" class="form-control mb-2" name="keyword" id=""
-						placeholder="검색할 내용을 입력해 주세요." value=""> <input
-						type="hidden" name="cpage" value="1">
-				</div>
-				<div class="col-2">
-					<button type="submit" class="btn btn-dark mb-2 w-100" id="btn_srch">검색</button>
+
+							<div class="row btns" align="right">
+								<button type="button" class="btn btn-outline-secondary"
+									id="back">뒤로가기</button>
+								<button type="button" class="btn btn-outline-secondary"
+									id="write">글 쓰기</button>
+							</div>
+						</div>
+						<div id=""></div>
+						<div class="search_box">
+							<form action="" method="post">
+								<div class="row">
+									<div class="col-3">
+										<select class="form-control" name="category" id="srch_item">
+											<option value="" selected>선택하세요.</option>
+											<option value="writer">작성자</option>
+											<option value="title">제목</option>
+											<option value="contents">내용</option>
+										</select>
+									</div>
+									<div class="col-7">
+										<input type="text" class="form-control mb-2" name="keyword"
+											id="" placeholder="검색할 내용을 입력해 주세요." value=""> <input
+											type="hidden" name="cpage" value="1">
+									</div>
+									<div class="col-2">
+										<button type="submit" class="btn btn-dark mb-2 w-100"
+											id="btn_srch">검색</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
 </body>
 </html>
