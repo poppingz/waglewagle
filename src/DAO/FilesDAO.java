@@ -47,7 +47,7 @@ public class FilesDAO {
 
 	}
 	public List<FilesDTO> selectBySeq(int parent)throws Exception{
-		String sql = "select * from files where parent = ?";
+		String sql = "select * from pfiles where parent = ?";
 		try (	Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
