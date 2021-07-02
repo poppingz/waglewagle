@@ -158,13 +158,13 @@ a {
 		</table>
 	</div>
 	<div class="search_box">
-		<form action="${pageContext.request.contextPath}/list.board?cpage=1"
+		<form action="${pageContext.request.contextPath}/List.board?cpage=1"
 			method="post">
 			<div class="row">
 				<div class="col-3">
-					<select class="form-control" name="category" id="srch_item">
+					<select class="form-control" name="category1" id="srch_item">
 						<option value="" selected>선택하세요.</option>
-						<option value="writer">작성자</option>
+						<option value="nickname">작성자</option>
 						<option value="title">제목</option>
 						<option value="contents">내용</option>
 					</select>

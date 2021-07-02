@@ -19,6 +19,7 @@ import DAO.FilesDAO;
 import DTO.BoardDTO;
 import DTO.FilesDTO;
 import DTO.MemberDTO;
+import config.BoardConfig;
 
 
 
@@ -42,6 +43,8 @@ public class BoardController extends HttpServlet {
 		try {
 
 			if(url.contentEquals("/select.board")) {
+				
+				
 				int category = Integer.parseInt(request.getParameter("category"));
 
 				List<BoardDTO> list = dao.sellectAll(category);
@@ -49,7 +52,39 @@ public class BoardController extends HttpServlet {
 		
 				request.getRequestDispatcher("board/boardList.jsp").forward(request, response);
 
-			}else if(url.contentEquals("/insert.board")) {	
+			}else if(url.contentEquals("/List.board")){
+				
+				String category1 = request.getParameter("category1");
+				String keyword = request.getParameter("keyword");
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+
+				System.out.println("현재 페이지 : " + cpage);
+				System.out.println("검색 분류 : " + category1);
+				System.out.println("검색어 : " + keyword);
+
+
+				int endNum = cpage * BoardConfig.RECORD_COUNT_PER_PAGE;
+				int startNum = endNum - (BoardConfig.RECORD_COUNT_PER_PAGE-1);
+
+				List<BoardDTO> list;
+				if(keyword == null || keyword.contentEquals("")) {
+					list = dao.getPageList(startNum,endNum);
+				}else {
+					list = dao.getPageList(startNum, endNum, category1, keyword);
+				}
+
+
+				List<String> pageNavi  = dao.getPageNavi(cpage,category1,keyword);
+
+				request.setAttribute("list", list);
+				request.setAttribute("navi", pageNavi);
+				request.setAttribute("category", category1);
+				request.setAttribute("keyword", keyword);				
+				request.getRequestDispatcher("board/boardList.jsp").forward(request, response);
+
+			
+				
+				}else if(url.contentEquals("/insert.board")) {	
 				
 				String filesPath = request.getServletContext().getRealPath("files");
 				File filesFolder = new File(filesPath);
