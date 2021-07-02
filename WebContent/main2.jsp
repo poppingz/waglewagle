@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Wagle Wagle</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -84,62 +84,22 @@ ul, ol {
 	font-weight: bold;
 }
 
-.content .cnt02 {
-	background-color: #ffffff;
-	overflow: hidden;
-}
-
-.content .cnt02 div {
-	float: left;
-}
-
-.content .cnt02 .img {
-	position: relative;
-}
-
-#f1 {
-	position: absolute;
-	top: 250px;
-	left: 100px;
-	transform: rotate(-5deg);
-}
-
-#f2 {
-	position: absolute;
-	top: 400px;
-	left: 400px;
-	transform: rotate(10deg);
-}
-
-.content .cnt02 .somewhere {
-	position: relative;
-}
-
-#cnts1{
-	top: 300px;
-	left: 1100px;
-}
-
-.content .cnt03 {
-	background-color: #ffffff;
-}
-
-.content .cnt04 {
-	background-color: #ffffff;
-}
-
-.content .cnt02 div {
-	display: block;
-	margin: auto;
-	vertical-align: middle;
-}
-
 #side-menu {
 	position: fixed;
-	width: 120px;
-	height: 210px;
+	width: 150px;
 	top: 350px;
-	background-color: #f0f8ff;
+	left: -120px;
+	background-color: #F7CAC9;
+	transition-duration: 1s;
+}
+
+#side-menu:hover {
+	transform: translate(120px, 0px);
+	transition-duration: 1s;
+}
+
+#side-menu:hover #latch {
+	display: none;
 }
 
 #menu-list {
@@ -149,6 +109,7 @@ ul, ol {
 }
 
 #menu-list a {
+	color:black;
 	text-decoration: none;
 }
 
@@ -161,6 +122,123 @@ ul, ol {
 #side-menu li:hover {
 	background-color: #fff0f5;
 	cursor: pointer;
+	border-radius: 15px;
+}
+
+#latch {
+	position: absolute;
+	width: 19px;
+	height: 25px;
+	right: 0px;
+	top: 50%;
+	transform: translate(0, -50%);
+	cursor: pointer;
+	color: white;
+}
+
+.content .cnt02 {
+	background-color: #ffffff;
+	overflow: hidden;
+}
+
+.content .cnt02 div {
+	float: left;
+}
+
+.img {
+	position: relative;
+}
+
+.somewhere {
+	position: relative;
+}
+
+#f1 {
+	position: absolute;
+	top: 250px;
+	left: 150px;
+	transform: rotate(-5deg);
+	border-radius: 15px;
+}
+
+#f2 {
+	position: absolute;
+	top: 500px;
+	left: 450px;
+	transform: rotate(7deg);
+	border-radius: 15px;
+}
+
+#f1:hover {
+	z-index: 3;
+}
+
+#f2:hover {
+	z-index: 3;
+}
+
+#cnts1 {
+	top: 300px;
+	left: 1200px;
+}
+
+.content .cnt03 {
+	background-color: #ffffff;
+	overflow: hidden;
+}
+
+.content .cnt03 div {
+	float: left;
+}
+
+#a1 {
+	position: absolute;
+	top: 170px;
+	left: 300px;
+	border-radius: 15px;
+}
+
+#a2 {
+	position: absolute;
+	top: 250px;
+	left: -90px;
+	transform: rotate(-7deg);
+	border-radius: 15px;
+}
+
+#a3 {
+	position: absolute;
+	top: 500px;
+	left: 430px;
+	transform: rotate(7deg);
+	border-radius: 15px;
+}
+
+#a1:hover {
+	z-index: 3;
+}
+
+#a2:hover {
+	z-index: 3;
+}
+
+#a3:hover {
+	z-index: 3;
+}
+
+#cnts2 {
+	top: 300px;
+	left: 150px;
+}
+
+.content .cnt04 {
+	background-color: #ffffff;
+}
+
+.content .cnt02 div {
+	display: block;
+	margin: auto;
+	vertical-align: middle;
 }
 </style>
 <script>
@@ -236,21 +314,28 @@ ul, ol {
 		};
 
 		scroll();
-		
-		$("#board1").on("click", function(){
-	         location.href = "${pageContext.request.contextPath}/select.board?category=1"
-	      })
-	      
-	      $("#board2").on("click", function(){
-	         location.href = "${pageContext.request.contextPath}/select.board?category=2"
-	      })
-	      
-	      $("#board3").on("click", function(){
-	         location.href = "${pageContext.request.contextPath}/select.board?category=3"
-	      })
-		
-		
-		
+
+		$("#board1")
+				.on(
+						"click",
+						function() {
+							location.href = "${pageContext.request.contextPath}/select.board?category=1"
+						})
+
+		$("#board2")
+				.on(
+						"click",
+						function() {
+							location.href = "${pageContext.request.contextPath}/select.board?category=2"
+						})
+
+		$("#board3")
+				.on(
+						"click",
+						function() {
+							location.href = "${pageContext.request.contextPath}/select.board?category=3"
+						})
+
 	})
 </script>
 </head>
@@ -271,18 +356,19 @@ ul, ol {
 
 			<div id=side-menu style="border-radius: 15px">
 				<ul id=menu-list>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Home</a></li>
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="#">비밀번호 변경</a></li>
+					<li><a href="#">로그아웃</a></li>
+					<li><a href="#">회원탈퇴</a></li>
 				</ul>
 			</div>
+			<div id=latch>▷</div>
 		</div>
 
 		<div class="cnt02">
 			<div class="imgs">
-				<img src="fashion.jpg" width="600px" id="f1">
-				<img src="fashion2.jpg" width="600px" id="f2">
+				<img src="fashion.jpg" width="650px" id="f1"> <img
+					src="fashion2.jpg" width="650px" id="f2">
 			</div>
 			<div class="col-sm-6 somewhere">
 				<div class="card-body" id="cnts1">
@@ -293,10 +379,24 @@ ul, ol {
 					<button type="button" class="btn btn-success btn-lg" id="board1">GO!</button>
 				</div>
 			</div>
-
 		</div>
 
-		<div class="cnt03"></div>
+		<div class="cnt03">
+			<div class="col-sm-6 somewhere">
+				<div class="card-body" id="cnts2">
+					<h1 class="card-title">Card title</h1>
+					<p></p>
+					<h2 class="card-text">Some quick example text.</h2>
+					<p></p>
+					<button type="button" class="btn btn-warning btn-lg" id="board2">GO!</button>
+				</div>
+			</div>
+			<div class="imgs">
+				<img src="ani1.jpg" width="600px" id="a1">
+				<img src="ani2.jpg" width="500px" id="a2">
+				<img src="bugu.jpg" width="400px" id="a3">
+			</div>
+		</div>
 
 		<div class="cnt04"></div>
 	</div>
