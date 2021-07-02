@@ -281,12 +281,12 @@ public class BoardDAO {
 		}
 	}
 
-	public List<String> getPageNavi(int currentPage, String category, String keyword) throws Exception{ // 페이징 넘버
+	public List<String> getPageNavi(int currentPage, String category1, String keyword) throws Exception{ // 페이징 넘버
 	      int recordTotalCount = 0;
 	      if(keyword == null || keyword.contentEquals("")) {
 	         recordTotalCount = this.getRecordCount(); // 전체 레코드의 개수 -> db에서 꺼내지는 값
 	      }else {
-	         recordTotalCount = this.getRecordCount(category, keyword);
+	         recordTotalCount = this.getRecordCount(category1, keyword);
 	      }
 	      int recordCountPerPage = BoardConfig.RECORD_COUNT_PER_PAGE; // 한 페이지 당 보여줄 게시글의 개수 -> 개발자가 정하는 값
 	      int naviCountPerPage = BoardConfig.NAVI_COUNT_PER_PAGE; // 내 위치 페이지를 기준으로 시작부터 끝까지의 페이지가 총 몇개인지 -> 개발자가 정하는 값
