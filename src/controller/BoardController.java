@@ -52,7 +52,8 @@ public class BoardController extends HttpServlet {
 
 				request.setAttribute("result", result);	
 
-				response.sendRedirect("/select.board?category="+ category);
+			
+				response.sendRedirect("select.board?category="+ category);
 
 			}else if(url.contentEquals("/modify.board")) {
 				int board_num = Integer.parseInt(request.getParameter("board_num"));
@@ -61,7 +62,7 @@ public class BoardController extends HttpServlet {
 				int result = dao.modify(new BoardDTO(board_num,title,contents));
 
 				request.setAttribute("result", result);
-				response.sendRedirect("/boardView.board?board_num="+board_num);
+				response.sendRedirect("boardView.board?board_num="+board_num);
 
 
 
@@ -70,7 +71,7 @@ public class BoardController extends HttpServlet {
 				BoardDTO result = dao.DetailView(board_num);
 				request.setAttribute("Board_Context", result);
 
-				request.getRequestDispatcher("modify.jsp").forward(request, response);
+				request.getRequestDispatcher("board/boardModify.jsp").forward(request, response);
 
 			}else if(url.contentEquals("/delete.board")) {
 
@@ -78,11 +79,11 @@ public class BoardController extends HttpServlet {
 				int category = Integer.parseInt(request.getParameter("category"));
 				dao.deleteBoard(board_num);
 				if(category==1) {
-					response.sendRedirect("/select.board?category=1");
+					response.sendRedirect("select.board?category=1");
 				}else if(category==2) {
-					response.sendRedirect("/select.board?category=2");
+					response.sendRedirect("select.board?category=2");
 				}else if(category==3) {
-					response.sendRedirect("/select.board?category=3");
+					response.sendRedirect("select.board?category=3");
 				}
 			}else if(url.contentEquals("/boardView.board")) {
 				int board_num = (Integer.parseInt(request.getParameter("board_num")));
@@ -98,7 +99,7 @@ public class BoardController extends HttpServlet {
 				dao.getReportCount(board_num, result.getReport());
 
 				request.setAttribute("Board_Context", result);
-				request.getRequestDispatcher("/boardView.board?board_num="+board_num).forward(request, response);
+				request.getRequestDispatcher("boardView.board?board_num="+board_num).forward(request, response);
 			}
 
 
