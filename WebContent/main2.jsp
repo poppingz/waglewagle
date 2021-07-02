@@ -109,7 +109,7 @@ ul, ol {
 }
 
 #menu-list a {
-	color:black;
+	color: black;
 	text-decoration: none;
 }
 
@@ -194,14 +194,14 @@ ul, ol {
 #a1 {
 	position: absolute;
 	top: 170px;
-	left: 300px;
+	left: 230px;
 	border-radius: 15px;
 }
 
 #a2 {
 	position: absolute;
 	top: 250px;
-	left: -90px;
+	left: -120px;
 	transform: rotate(-7deg);
 	border-radius: 15px;
 }
@@ -209,7 +209,7 @@ ul, ol {
 #a3 {
 	position: absolute;
 	top: 500px;
-	left: 430px;
+	left: 380px;
 	transform: rotate(7deg);
 	border-radius: 15px;
 }
@@ -233,13 +233,54 @@ ul, ol {
 
 .content .cnt04 {
 	background-color: #ffffff;
+	overflow: hidden;
 }
 
-.content .cnt02 div {
-	display: block;
-	margin: auto;
-	vertical-align: middle;
+.content .cnt04 div {
+	float: left;
 }
+
+#s1 {
+	position: absolute;
+	top: 250px;
+	left: 150px;
+	transform: rotate(-5deg);
+	border-radius: 15px;
+}
+
+#s2 {
+	position: absolute;
+	top: 330px;
+	left: 500px;
+	transform: rotate(7deg);
+	border-radius: 15px;
+}
+
+#s3 {
+	position: absolute;
+	top: 600px;
+	left: 250px;
+	border-radius: 15px;
+}
+
+#s1:hover {
+	z-index: 3;
+}
+
+#s2:hover {
+	z-index: 3;
+}
+
+#s3:hover {
+	z-index: 3;
+}
+
+#cnts3 {
+	top: 300px;
+	left: 1200px;
+}
+
+
 </style>
 <script>
 	$(function() {
@@ -376,7 +417,7 @@ ul, ol {
 					<p></p>
 					<h2 class="card-text">Some quick example text.</h2>
 					<p></p>
-					<button type="button" class="btn btn-success btn-lg" id="board1">GO!</button>
+					<button type="button" class="btn btn-info btn-lg" id="board1">GO!</button>
 				</div>
 			</div>
 		</div>
@@ -392,13 +433,28 @@ ul, ol {
 				</div>
 			</div>
 			<div class="imgs">
-				<img src="ani1.jpg" width="600px" id="a1">
-				<img src="ani2.jpg" width="500px" id="a2">
-				<img src="bugu.jpg" width="400px" id="a3">
+				<img src="ani1.jpg" width="600px" id="a1"> <img src="ani2.jpg"
+					width="500px" id="a2"> <img src="bugu.jpg" width="400px"
+					id="a3">
 			</div>
 		</div>
 
-		<div class="cnt04"></div>
+		<div class="cnt04">
+			<div class="imgs">
+				<img src="spo1.jpg" width="600px" id="s1">
+				<img src="spo2.jpg" width="550px" id="s2">
+				<img src="spo3.jpg" width="700px" id="s3">
+			</div>
+			<div class="col-sm-6 somewhere">
+				<div class="card-body" id="cnts3">
+					<h1 class="card-title">Card title</h1>
+					<p></p>
+					<h2 class="card-text">Some quick example text.</h2>
+					<p></p>
+					<button type="button" class="btn btn-success btn-lg" id="board3">GO!</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
