@@ -23,7 +23,7 @@
 <script>
 	$(function(){
 		$("#toList").on("click",function(){
-			location.href="";
+			location.href="${pageContext.request.contextPath}/board/boardList.jsp";
 		});
 		
 		$("input[type='file']").on("change",function(){
@@ -56,7 +56,7 @@
 </script>
 </head>
 <body>
-	<form action="" method="post" enctype="multipart/form-data">
+	<form action="${pageContext.request.contextPath}/insert.board" method="post" enctype="multipart/form-data">
 	<div class="card border-secondary mb-3" id=container>
 		<table class="table">
 			<tr align=center>

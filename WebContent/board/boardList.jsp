@@ -214,8 +214,8 @@ body {
 
 									<div class="col-7">
 										<input type="text" class="form-control mb-2" name="keyword"
-											id="" placeholder="검색할 내용을 입력해 주세요." value=""> <input
-											type="hidden" name="cpage" value="1">
+											id="" placeholder="검색할 내용을 입력해 주세요." value="">
+											<input type="hidden" name="cpage" value="1">
 									</div>
 									<div class="col-2">
 										<button type="submit" class="btn btn-dark mb-2 w-100"
