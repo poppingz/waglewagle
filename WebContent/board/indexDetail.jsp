@@ -182,6 +182,9 @@
 			<div id="replyuser">
 				<div id="userid" contenteditable="true"></div>
 			</div>
+				<c:forEach var="file" items="${fileList }">
+				    <div>${file.oriName }</div>
+				</c:forEach>
 			<div id="replycon">
 				<div id="con" contenteditable="true"></div>
 				<div id="btn">

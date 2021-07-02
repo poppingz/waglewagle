@@ -7,8 +7,21 @@
 <meta charset="UTF-8">
 <title>Board List</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	$(function(){
+		$("#write").on("click", function(){
+			location.href = "board/boardWrite.jsp"
+		})
+		
+		$("#back").on("click", function(){
+			location.href = "main2.jsp;"
+		})
+		
+	})
+</script>
+
 <style>
 #container {
 	width: 800px;
