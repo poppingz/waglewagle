@@ -264,4 +264,19 @@ public class BoardDAO {
 
 	        return pageNavi;
 	    }	
+	 
+	 
+	 public int getSeq()throws Exception{
+			String sql ="select board_num_seq.nextval from dual";
+
+			
+			try(	Connection con = this.getConnection();
+					PreparedStatement pstat = con.prepareStatement(sql);				
+					ResultSet rs = pstat.executeQuery();){
+				
+				rs.next();
+				return rs.getInt(1);
+			}
+			
+		}
 	}

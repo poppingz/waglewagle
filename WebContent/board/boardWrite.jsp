@@ -59,7 +59,7 @@
 
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/insert.board" method="post">
+	<form action="${pageContext.request.contextPath}/insert.board" method="post"  enctype="multipart/form-data">
 		<div class="container">
 			<select name=category>
 				<option value="1">1</option>

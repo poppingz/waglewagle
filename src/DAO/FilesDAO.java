@@ -34,7 +34,7 @@ public class FilesDAO {
 	}
 
 	public int insert(FilesDTO dto) throws Exception{
-		String sql = "insert into files values(files_seq.nextval,?,?,sysdate,?)";
+		String sql = "insert into pfiles values(?,?,sysdate,?)";
 		try (	Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql)){
 			pstat.setNString(1, dto.getOriName());
@@ -54,8 +54,7 @@ public class FilesDAO {
 			pstat.setInt(1, parent);
 			List<FilesDTO> list = new ArrayList<>();
 			try(ResultSet rs = pstat.executeQuery()){
-				while(rs.next()) {
-					int seq = rs.getInt("seq");
+				while(rs.next()) {					
 					String oriName = rs.getNString("oriname");
 					String sysName = rs.getNString("sysname");
 					Date reg_date = rs.getDate("reg_date");

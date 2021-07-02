@@ -47,7 +47,7 @@ ul, ol {
 	float: left;
 	border-left: 1px solid rgba(255, 255, 255, 0);
 	box-sizing: border-box;
-	width: 25%
+	width: 25%;
 }
 
 .header ul li:first-child {
@@ -125,15 +125,13 @@ ul, ol {
 	border-radius: 15px;
 }
 
-#latch {
+.content .cnt01 {
+	position: relative;
+}
+
+#carouselExampleCaptions{
 	position: absolute;
-	width: 19px;
-	height: 25px;
-	right: 0px;
-	top: 50%;
-	transform: translate(0, -50%);
-	cursor: pointer;
-	color: white;
+	top: 250px;
 }
 
 .content .cnt02 {
@@ -279,8 +277,6 @@ ul, ol {
 	top: 300px;
 	left: 1200px;
 }
-
-
 </style>
 <script>
 	$(function() {
@@ -360,21 +356,43 @@ ul, ol {
 				.on(
 						"click",
 						function() {
-							location.href = "${pageContext.request.contextPath}/select.board?category=1"
+							location.href = "${pageContext.request.contextPath}/select.board?category=1";
 						})
 
 		$("#board2")
 				.on(
 						"click",
 						function() {
-							location.href = "${pageContext.request.contextPath}/select.board?category=2"
+							location.href = "${pageContext.request.contextPath}/select.board?category=2";
 						})
 
 		$("#board3")
 				.on(
 						"click",
 						function() {
-							location.href = "${pageContext.request.contextPath}/select.board?category=3"
+							location.href = "${pageContext.request.contextPath}/select.board?category=3";
+						})
+
+		$("#mypage").on("click", function() {
+			location.href = "${pageContext.request.contextPath}/";
+		})
+
+		$("#changepw").on("click", function() {
+			location.href = "${pageContext.request.contextPath}/";
+		})
+
+		$("#logout").on("click", function() {
+			location.href = "${pageContext.request.contextPath}/logout.mem";
+		})
+
+		$("#memberout")
+				.on(
+						"click",
+						function() {
+							let result = confirm("정말 탈퇴하시겠습니까?");
+							if (result) {
+								location.href = "${pageContext.request.contextPath}/memberout.mem";
+							}
 						})
 
 	})
@@ -382,7 +400,7 @@ ul, ol {
 </head>
 <body>
 	<div class="header">
-		<img src="logo.png" width="500px">
+		<img src="logo.png" width="500px"><br>
 		<ul>
 			<li class="on" class="a"><a href="#">My Page</a></li>
 			<li><a href="#">패션</a></li>
@@ -393,17 +411,60 @@ ul, ol {
 	<div class="content">
 
 		<div class="cnt01">
-			<p>${login.id}님환영합니다.</p>
+		<div id="carouselExampleCaptions" class="carousel slide"
+				data-ride="carousel">
+				<ol class="carousel-indicators">
+					<li data-target="#carouselExampleCaptions" data-slide-to="0"
+						class="active"></li>
+					<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+					<li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="..." class="d-block w-100" alt="...">
+						<div class="carousel-caption d-none d-md-block">
+							<h5>First slide label</h5>
+							<p>Some representative placeholder content for the first
+								slide.</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img src="..." class="d-block w-100" alt="...">
+						<div class="carousel-caption d-none d-md-block">
+							<h5>Second slide label</h5>
+							<p>Some representative placeholder content for the second
+								slide.</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img src="..." class="d-block w-100" alt="...">
+						<div class="carousel-caption d-none d-md-block">
+							<h5>Third slide label</h5>
+							<p>Some representative placeholder content for the third
+								slide.</p>
+						</div>
+					</div>
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleCaptions"
+					role="button" data-slide="prev"> <span
+					class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+					class="sr-only">Previous</span>
+				</a> <a class="carousel-control-next" href="#carouselExampleCaptions"
+					role="button" data-slide="next"> <span
+					class="carousel-control-next-icon" aria-hidden="true"></span> <span
+					class="sr-only">Next</span>
+				</a>
+			</div>
 
 			<div id=side-menu style="border-radius: 15px">
 				<ul id=menu-list>
-					<li><a href="#">마이페이지</a></li>
-					<li><a href="#">비밀번호 변경</a></li>
-					<li><a href="#">로그아웃</a></li>
-					<li><a href="#">회원탈퇴</a></li>
+					<li id="mypage">마이페이지</li>
+					<li id="changepw">비밀번호 변경</li>
+					<li id="logout">로그아웃</li>
+					<li id="memberout">회원탈퇴</li>
 				</ul>
 			</div>
-			<div id=latch>▷</div>
+			
 		</div>
 
 		<div class="cnt02">
@@ -441,9 +502,9 @@ ul, ol {
 
 		<div class="cnt04">
 			<div class="imgs">
-				<img src="spo1.jpg" width="600px" id="s1">
-				<img src="spo2.jpg" width="550px" id="s2">
-				<img src="spo3.jpg" width="700px" id="s3">
+				<img src="spo1.jpg" width="600px" id="s1"> <img src="spo2.jpg"
+					width="550px" id="s2"> <img src="spo3.jpg" width="700px"
+					id="s3">
 			</div>
 			<div class="col-sm-6 somewhere">
 				<div class="card-body" id="cnts3">
