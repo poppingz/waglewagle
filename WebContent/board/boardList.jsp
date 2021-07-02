@@ -222,9 +222,6 @@ body {
 											id="btn_srch">검색</button>
 									</div>
 
-
-
-
 								</div>
 							</form>
 						</div>

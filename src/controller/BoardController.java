@@ -32,6 +32,7 @@ public class BoardController extends HttpServlet {
 		String requestURI = request.getRequestURI();
 		String ctxPath = request.getContextPath();
 		String url = requestURI.substring(ctxPath.length());
+		System.out.println("요청 URL : " + url);
 
 		BoardDAO dao = BoardDAO.getInstance();
 		FilesDAO fdao = FilesDAO.getInstance();
@@ -93,6 +94,8 @@ public class BoardController extends HttpServlet {
 				String title = multi.getParameter("title");
 				String contents = multi.getParameter("contents");
 				String nickname = multi.getParameter("nickname");
+				
+				System.out.println(category + " : " + title + " : " + contents + " : " + nickname);
 
 				int seq = dao.getSeq();
 				int result = dao.insert(dto.getId(), category, title, contents, nickname);
@@ -102,8 +105,8 @@ public class BoardController extends HttpServlet {
 				Set<String> fileNames = multi.getFileNameSet();
 
 				for(String fileName : fileNames) {
-					String oriName =	multi.getOriginalFileName(fileName);
-					String sysName =	multi.getFilesystemName(fileName);
+					String oriName = multi.getOriginalFileName(fileName);
+					String sysName = multi.getFilesystemName(fileName);
 
 					if(oriName != null) { 
 						System.out.println("파일 오리지널이름 : " +  oriName + "DB에 저장됨.");
