@@ -51,7 +51,7 @@
              <img src="logo.png" alt="">
          </div>
          <div id="txtBox">
-             <h1>${result.id}님 환영합니다.</h1>
+             <h1>${login.id}님 환영합니다.</h1>
          </div>
       </div>
       <div id="section2" class="bg-warning"> 

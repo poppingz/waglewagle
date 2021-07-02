@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Wagle Wagle</title>
+<title>Welcome To WagleWagle</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
