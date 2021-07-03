@@ -79,9 +79,13 @@ public class MemberDAO {
 			{
 				if(rs.next()) {
 					String tmpId = rs.getString("id");
+					int id_num = rs.getInt("id_num");
 					dto.setId(tmpId);
+					dto.setId_num(id_num);
+					
+					return dto;
 				}
-				return dto;
+			return dto;
 			}
 		}
 	}
@@ -137,6 +141,20 @@ public class MemberDAO {
 			return result;	
 		}
 	}
+	
+	public int memberOut(String id) throws Exception{ // 탈퇴
+		String sql = "delete from pmember where id = ?";
+		try(
+			Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);
+		){
+			pstat.setString(1, id);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+
 //	mypage 구문 시작
 	public MemberDTO getMyInfo(String paramID) throws Exception {
 		String sql = "select * from pmember where id = ?";
@@ -149,6 +167,9 @@ public class MemberDAO {
 					System.out.println("패스워드값 : " + pw);
 					String email = rs.getString("email");
 					Date reg_date = rs.getDate("reg_date");
+
+					System.out.println("reg_date값 : " + reg_date);
+
 					return new MemberDTO(id,pw,email,reg_date);
 				}
 			}
@@ -157,18 +178,6 @@ public class MemberDAO {
 	}
 //	mypage 구문 끝
 
-// 탈퇴 구문 시작
-	public int memberOut(String id) throws Exception {
-		String sql = "delete from pmember where id = ?";
-		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setString(1, id);
-			int result = pstat.executeUpdate();
-			con.commit();
-			return result;
-		}
-	}
-
-// 탈퇴 구문 끝
 // 수정 구문 시작
 	public int modify(MemberDTO dto) throws Exception {
 		String sql = "update pmember set email=? where id = ?";

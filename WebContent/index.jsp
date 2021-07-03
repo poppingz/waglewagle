@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome To WagleWagle</title>
+<title>Welcome To Wagle Wagle</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -390,7 +390,7 @@ body.is-login {
 			<!-- 인덱스 -->
 			<div class="card border-0 shadow card--welcome is-show" id="welcome">
 				<div class="card-body">
-					<h2 class="card-title">WELCOME TO</h2>
+					<h2 class="card-title">WELCOME TO sodyd</h2>
 					<p></p>
 					<div><img src="logo.png" width="400px"></div>
 					<br>

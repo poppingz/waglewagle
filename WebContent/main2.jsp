@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Wagle Wagle</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -47,7 +47,7 @@ ul, ol {
 	float: left;
 	border-left: 1px solid rgba(255, 255, 255, 0);
 	box-sizing: border-box;
-	width: 25%
+	width: 25%;
 }
 
 .header ul li:first-child {
@@ -74,7 +74,7 @@ ul, ol {
 	position: relative
 }
 
-.content .cnt01 p {
+/* .content .cnt01 p {
 	position: absolute;
 	top: 50%;
 	margin-top: -40px;
@@ -82,6 +82,56 @@ ul, ol {
 	width: 100%;
 	font-size: 40px;
 	font-weight: bold;
+} */
+
+#side-menu {
+	position: fixed;
+	width: 150px;
+	top: 350px;
+	left: -120px;
+	background-color: #F7CAC9;
+	transition-duration: 1s;
+}
+
+#side-menu:hover {
+	transform: translate(120px, 0px);
+	transition-duration: 1s;
+}
+
+#side-menu:hover #latch {
+	display: none;
+}
+
+#menu-list {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+
+#menu-list a {
+	color: black;
+	text-decoration: none;
+}
+
+#side-menu li {
+	margin: 0px;
+	padding: 14px;
+	height: 25%;
+}
+
+#side-menu li:hover {
+	background-color: #fff0f5;
+	cursor: pointer;
+	border-radius: 15px;
+}
+
+.content .cnt01 {
+	position: relative;
+}
+
+#carouselExampleCaptions{
+	position: absolute;
+	top: 250px;
 }
 .content .cnt01 form{
 	position: absolute;
@@ -100,75 +150,222 @@ ul, ol {
 	float: left;
 }
 
-.content .cnt02 .img {
+.img {
+	position: relative;
+}
+
+.somewhere {
 	position: relative;
 }
 
 #f1 {
 	position: absolute;
 	top: 250px;
-	left: 100px;
+	left: 150px;
 	transform: rotate(-5deg);
+	border-radius: 15px;
 }
 
 #f2 {
 	position: absolute;
-	top: 400px;
-	left: 400px;
-	transform: rotate(10deg);
+	top: 500px;
+	left: 450px;
+	transform: rotate(7deg);
+	border-radius: 15px;
 }
 
-.content .cnt02 .somewhere {
-	position: relative;
+#f1:hover {
+	z-index: 3;
 }
 
-#cnts1{
+#f2:hover {
+	z-index: 3;
+}
+
+#cnts1 {
 	top: 300px;
-	left: 1100px;
+	left: 1200px;
 }
 
 .content .cnt03 {
 	background-color: #ffffff;
+	overflow: hidden;
+}
+
+.content .cnt03 div {
+	float: left;
+}
+
+#a1 {
+	position: absolute;
+	top: 170px;
+	left: 230px;
+	border-radius: 15px;
+}
+
+#a2 {
+	position: absolute;
+	top: 250px;
+	left: -120px;
+	transform: rotate(-7deg);
+	border-radius: 15px;
+}
+
+#a3 {
+	position: absolute;
+	top: 500px;
+	left: 380px;
+	transform: rotate(7deg);
+	border-radius: 15px;
+}
+
+#a1:hover {
+	z-index: 3;
+}
+
+#a2:hover {
+	z-index: 3;
+}
+
+#a3:hover {
+	z-index: 3;
+}
+
+#cnts2 {
+	top: 300px;
+	left: 150px;
 }
 
 .content .cnt04 {
 	background-color: #ffffff;
+	overflow: hidden;
 }
 
-.content .cnt02 div {
-	display: block;
-	margin: auto;
-	vertical-align: middle;
+.content .cnt04 div {
+	float: left;
 }
 
-#side-menu {
-	position: fixed;
-	width: 120px;
-	height: 210px;
-	top: 350px;
-	background-color: #f0f8ff;
+#s1 {
+	position: absolute;
+	top: 250px;
+	left: 150px;
+	transform: rotate(-5deg);
+	border-radius: 15px;
 }
 
-#menu-list {
-	padding: 0px;
-	margin: 0px;
-	list-style-type: none;
+#s2 {
+	position: absolute;
+	top: 330px;
+	left: 500px;
+	transform: rotate(7deg);
+	border-radius: 15px;
 }
 
-#menu-list a {
-	text-decoration: none;
+#s3 {
+	position: absolute;
+	top: 600px;
+	left: 250px;
+	border-radius: 15px;
 }
 
-#side-menu li {
-	margin: 0px;
-	padding: 14px;
-	height: 25%;
+#s1:hover {
+	z-index: 3;
 }
 
-#side-menu li:hover {
-	background-color: #fff0f5;
-	cursor: pointer;
+#s2:hover {
+	z-index: 3;
 }
+
+#s3:hover {
+	z-index: 3;
+}
+
+#cnts3 {
+	top: 300px;
+	left: 1200px;
+}
+
+ /* 메인슬라이드 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        #mainslide {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #mainslide ul {
+            width: 400%;
+            height: 100%;
+            transition: 1s;
+        }
+
+        #mainslide ul:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        #mainslide li {
+            float: left;
+            width: 25%;
+            height: 100%;
+        }
+
+        #mainslide>ul>li>img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #mainslide input {
+            display: none;
+        }
+
+        #mainslide label {
+            display: inline-block;
+            vertical-align: middle;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #666;
+            background: #fff;
+            transition: 0.3s;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #mainslide .mainpos {
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        #mainpos1:checked~ul {
+            margin-left: 0%;
+        }
+
+        #mainpos2:checked~ul {
+            margin-left: -100%;
+        }
+
+        #mainpos3:checked~ul {
+            margin-left: -200%;
+        }
+
+        #mainpos4:checked~ul {
+            margin-left: -300%;
+        }
+		.top-navi{margin:0;}
 </style>
 <script>
 	$(function() {
@@ -243,6 +440,7 @@ ul, ol {
 		};
 
 		scroll();
+
 		
 		$("#board1").on("click", function(){
 	         location.href = "${pageContext.request.contextPath}/select.board?category=1"
@@ -282,13 +480,58 @@ ul, ol {
 		         $("#tdEmail").text(resp.email);
 		         $("#tdSignUp").text(resp.reg_date);
 		         });
+
+
+		$("#board1")
+				.on(
+						"click",
+						function() {
+							location.href = "${pageContext.request.contextPath}/select.board?category=1";
+						})
+
+		$("#board2")
+				.on(
+						"click",
+						function() {
+							location.href = "${pageContext.request.contextPath}/select.board?category=2";
+						})
+
+		$("#board3")
+				.on(
+						"click",
+						function() {
+							location.href = "${pageContext.request.contextPath}/select.board?category=3";
+						})
+
+		$("#mypage").on("click", function() {
+			window.open("member/mypage.jsp","My Page", "width=500, height=650");
+		})
+
+		$("#changepw").on("click", function() {
+			window.open("member/changepw.jsp","changepw", "width=700, height=300");
+			/* location.href = "member/changepw.jsp"; */
+		})
+
+		$("#logout").on("click", function() {
+			location.href = "${pageContext.request.contextPath}/logout.mem";
+		})
+
+		$("#memberout")
+				.on(
+						"click",
+						function() {
+							let result = confirm("정말 탈퇴하시겠습니까?");
+							if (result) {
+								location.href = "${pageContext.request.contextPath}/memberout.mem";
+							}
+						})
 	})
 </script>
 </head>
 <body>
 	<div class="header">
-		<img src="logo.png" width="500px">
-		<ul>
+		<img src="logo.png" width="500px"><br>
+		<ul class="top-navi">
 			<li class="on" class="a"><a href="#">My Page</a></li>
 			<li><a href="#">패션</a></li>
 			<li><a href="#">동물</a></li>
@@ -298,56 +541,42 @@ ul, ol {
 	<div class="content">
 
 		<div class="cnt01">
-			<p>${login.id}님환영합니다.</p>
-			<form action="${pageContext.request.contextPath}/modifyInfo.mem" method="get" id=frm>
-		<table border=1 align=center>
-			<tr align=center>
-				<th colspan=3>MyInfo
-			</tr>
-			<tr>
-				<td>ID
-				<td id="id" name="id">
-			</tr>
-			<tr>
-				<td>PW
-				<td id="tdPw" name="pw">
-				<td><button id="modifyPw" type=button>수정</button>
-			</tr>
-			<tr>
-				<td>EMAIL
-				<td id="tdEmail" name="email">
-				<td><button id="modifyEmail" type=button>수정</button>
-			</tr>
 
-			<tr>
-				<td>SignUp date
-				<td id="tdSignUp" name="signUp">
-				<td>
-			</tr>
-			<tr>
-				<td colspan=3>
-					<input type="submit" id="apply" value="적용">
-					<button id="memberOut" type=button>탈퇴하기</button>
-			</tr>
-		</table>
-		<input type=hidden id="pw" name="pw" value="${myInfo.pw }">
-		<input type=hidden id="email" name="email" value="${myInfo.email }">
-	</form>
+			<div id="mainslide">
+        	    <input type="radio" name="mainpos" id="mainpos1" checked>
+                <input type="radio" name="mainpos" id="mainpos2">
+                <input type="radio" name="mainpos" id="mainpos3">
+                <input type="radio" name="mainpos" id="mainpos4">
+                <ul>
+                    <li style="background-color: #0f4c81;"></li>
+                    <li style="background-color: #0f4c8140;"></li>
+                    <li style="background-color: #0f4c8160;"></li>
+                    <li style="background-color: #0f4c8180;"></li>
+                </ul>
+                <p class="mainpos">
+                    <label for="mainpos1"></label>
+                    <label for="mainpos2"></label>
+                    <label for="mainpos3"></label>
+                    <label for="mainpos4"></label>
+                </p>
+            </div>
+
 
 			<div id=side-menu style="border-radius: 15px">
 				<ul id=menu-list>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Home</a></li>
+					<li id="mypage">마이페이지</li>
+					<li id="changepw">비밀번호 변경</li>
+					<li id="logout">로그아웃</li>
+					<li id="memberout">회원탈퇴</li>
 				</ul>
 			</div>
+			
 		</div>
 
 		<div class="cnt02">
 			<div class="imgs">
-				<img src="fashion.jpg" width="600px" id="f1">
-				<img src="fashion2.jpg" width="600px" id="f2">
+				<img src="fashion.jpg" width="650px" id="f1"> <img
+					src="fashion2.jpg" width="650px" id="f2">
 			</div>
 			<div class="col-sm-6 somewhere">
 				<div class="card-body" id="cnts1">
@@ -355,15 +584,44 @@ ul, ol {
 					<p></p>
 					<h2 class="card-text">Some quick example text.</h2>
 					<p></p>
-					<button type="button" class="btn btn-success btn-lg" id="board1">GO!</button>
+					<button type="button" class="btn btn-info btn-lg" id="board1">GO!</button>
 				</div>
 			</div>
-
 		</div>
 
-		<div class="cnt03"></div>
+		<div class="cnt03">
+			<div class="col-sm-6 somewhere">
+				<div class="card-body" id="cnts2">
+					<h1 class="card-title">Card title</h1>
+					<p></p>
+					<h2 class="card-text">Some quick example text.</h2>
+					<p></p>
+					<button type="button" class="btn btn-warning btn-lg" id="board2">GO!</button>
+				</div>
+			</div>
+			<div class="imgs">
+				<img src="ani1.jpg" width="600px" id="a1"> <img src="ani2.jpg"
+					width="500px" id="a2"> <img src="bugu.jpg" width="400px"
+					id="a3">
+			</div>
+		</div>
 
-		<div class="cnt04"></div>
+		<div class="cnt04">
+			<div class="imgs">
+				<img src="spo1.jpg" width="600px" id="s1"> <img src="spo2.jpg"
+					width="550px" id="s2"> <img src="spo3.jpg" width="700px"
+					id="s3">
+			</div>
+			<div class="col-sm-6 somewhere">
+				<div class="card-body" id="cnts3">
+					<h1 class="card-title">Card title</h1>
+					<p></p>
+					<h2 class="card-text">Some quick example text.</h2>
+					<p></p>
+					<button type="button" class="btn btn-success btn-lg" id="board3">GO!</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </body>

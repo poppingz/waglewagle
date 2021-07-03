@@ -1,15 +1,13 @@
 package controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.google.gson.Gson;
-
+import com.google.gson.GsonBuilder;
 import DAO.MemberDAO;
 import DTO.MemberDTO;
 import util.MemberUtil;
@@ -59,9 +57,16 @@ public class MemberController extends HttpServlet {
 				System.out.println("로그인 결과 : " + dto);
 				
 				if(dto.getId() != null) { // 로그인에 성공했다면
+					if(dto.getId_num() == 1) { // 시퀀스가 1번이라면 관리자 페이지로 이동
+						request.getSession().setAttribute("login", dto);
+						response.sendRedirect("manager/reportList.jsp");
+					}
 					request.getSession().setAttribute("login", dto); // session key 발급 후
+					response.sendRedirect("main2.jsp"); // 메인페이지로 이동
+				}else {
+					response.sendRedirect("member/loginfail.jsp");
 				}
-				response.sendRedirect("main2.jsp"); // 메인페이지로 이동
+				
 				
 			}else if(cmd.contentEquals("/findid.mem")) { // 아이디 찾기
 				String email = request.getParameter("email");
@@ -80,8 +85,8 @@ public class MemberController extends HttpServlet {
 				response.getWriter().append(String.valueOf(result));
 				
 			}else if(cmd.contentEquals("/changepw.mem")) { // 비밀번호 변경
-				String id = request.getParameter("id");
-				String pw = util.getSHA512(request.getParameter("repw"));
+				String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
+				String pw = util.getSHA512(request.getParameter("newpw"));
 				System.out.println(id + " : " + pw);
 				
 				int result = dao.updatePw(pw, id);
@@ -89,6 +94,7 @@ public class MemberController extends HttpServlet {
 				
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("member/updateView.jsp").forward(request, response);
+
 			}else if(cmd.contentEquals("/myPage.mem")) {
 				response.sendRedirect("member/myPage.jsp");
 				
@@ -108,6 +114,19 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("main2.jsp").forward(request, response);
 				
+
+				
+			}else if(cmd.contentEquals("/logout.mem")) { // 로그아웃
+				request.getSession().invalidate();
+				response.sendRedirect("index.jsp");
+				
+			}else if(cmd.contentEquals("/memberout.mem")) { // 회원탈퇴
+				MemberDTO sessionDTO = (MemberDTO)request.getSession().getAttribute("login");
+				int result = dao.memberOut(sessionDTO.getId());
+				
+				request.getSession().invalidate();
+				response.sendRedirect("index.jsp");	
+
 				
 			}else if(cmd.contentEquals("/page.mem")) {
 				String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
@@ -115,9 +134,9 @@ public class MemberController extends HttpServlet {
 	            MemberDTO dto = dao.getMyInfo(id);
 	            
 	            Gson g = new Gson();
+	            g = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	            String result = g.toJson(dto);
-	            
-	            response.setContentType("text/html; charset=utf-8;");
+//	            response.setContentType("text/html; charset=utf-8;");
 	            response.getWriter().append(result);
 	            System.out.println("내정보불러오기 : " + result);
 			}
