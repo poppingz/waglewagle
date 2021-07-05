@@ -90,7 +90,7 @@ public class BoardController extends HttpServlet {
 				dao.view_countPlus(board_num, result.getView_count());
 
 				request.setAttribute("Board_Context", result);
-				request.getRequestDispatcher("indexDetail.jsp").forward(request, response);
+				request.getRequestDispatcher("board/indexDetail.jsp").forward(request, response);
 
 			}else if(url.contentEquals("/report.board")) {
 				int board_num = Integer.parseInt(request.getParameter("board_num"));
