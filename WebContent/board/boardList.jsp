@@ -13,26 +13,9 @@
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet"
-<<<<<<< HEAD
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="http://code.jquery.com/jquery-3.6.0.js"></script>
-<script>
-	$(function(){
-		$("#write").on("click", function(){
-			location.href = "board/boardWrite.jsp"
-		})
-		
-		$("#back").on("click", function(){
-			location.href = "main.jsp;"
-		})
-		
-	})
-</script>
-=======
 	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
 	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
 	crossorigin="anonymous">
->>>>>>> 489db7b2d0ea1c3e0512de945791a721e25d5189
 <style>
 body {
 	display: flex;
@@ -251,7 +234,7 @@ body {
 						</div>
 						<div id=""></div>
 						<div class="search_box">
-							<form action="${pageContext.request.contextPath}List.board?cpage=1"	method="get">
+							<form action="${pageContext.request.contextPath}/List.board?cpage=1"	method="get">
 								<div class="row">
 									<div class="col-3">
 										<select class="form-control" name="category1" id="srch_item">

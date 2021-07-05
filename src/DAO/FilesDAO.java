@@ -58,8 +58,8 @@ public class FilesDAO {
 					String oriName = rs.getNString("oriname");
 					String sysName = rs.getNString("sysname");
 					Date reg_date = rs.getDate("reg_date");
-					int parent_ = rs.getInt("parent");
-					list.add(new FilesDTO(oriName,sysName,reg_date,parent));
+					int parent2 = rs.getInt("parent");
+					list.add(new FilesDTO(oriName,sysName,reg_date,parent2));
 				}
 				return list;
 			}

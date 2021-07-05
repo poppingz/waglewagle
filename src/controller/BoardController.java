@@ -44,6 +44,9 @@ public class BoardController extends HttpServlet {
               //게시판 글 목록출력
 			if(url.contentEquals("/select.board")) {
 				
+				response.setCharacterEncoding("utf-8");
+				response.setContentType("text/html; charset =utf-8");
+				
 				
 				int category = Integer.parseInt(request.getParameter("category"));
 
@@ -135,6 +138,10 @@ public class BoardController extends HttpServlet {
 				response.sendRedirect("select.board?category="+ category);
              // 글 수정
 			}else if(url.contentEquals("/modify.board")) {
+				
+				response.setCharacterEncoding("utf-8");
+				response.setContentType("text/html; charset =utf-8");
+				
 				int board_num = Integer.parseInt(request.getParameter("board_num"));
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
