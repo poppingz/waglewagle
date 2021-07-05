@@ -201,7 +201,7 @@ body {
 						</div>
 						<div id=""></div>
 						<div class="search_box">
-							<form action="${pageContext.request.contextPath}List.board?cpage=1"	method="get">
+							<form action="${pageContext.request.contextPath}/List.board?cpage=1"	method="get">
 								<div class="row">
 									<div class="col-3">
 										<select class="form-control" name="category1" id="srch_item">
