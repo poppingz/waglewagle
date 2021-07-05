@@ -1,203 +1,433 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+
+   pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
 <meta charset="UTF-8">
-<title>Sample Board Detail</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="http://code.jquery.com/jquery-3.6.0.js"></script>
-<script></script>
+
+<title>W.W indexDetail</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<link
+
+   href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+
+   rel="stylesheet" id="bootstrap-css">
+
+<script
+
+   src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet"
+
+   href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+
+   integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+
+   crossorigin="anonymous">
+
 <style>
-    *{box-sizing: border-box;}
-    #board{border: 1px solid black; width: 1000px; height: 700px; margin: auto; overflow: auto;}
-    
-    /* nickname, wirtedate, viewcount */
-    #etcBox{border: 1px solid black; margin:0px; padding: 0px;}
-    #etcBox>#nickname{float: left; width: 50%; border: 1px solid black;}
-    #etcBox>#writedate{float: left; width: 25%; border: 1px solid black;}
-    #etcBox>#count{float: left; width: 24%; border: 1px solid black;}
 
-    /*boardcontext*/
-    #contents{border: 1px solid black; margin-top:3%; height: 82%;}
+/* 템플릿 */
 
-    /* boardFooter */
-    #boardFooter{text-align: center;}
-            /* 댓글 작성 */
-        #replybox{
-            border: 1px solid black;
-            width: 800px;
-            margin: auto;
-            height: 130px;
-        }
-        /* 댓글 작성창 헤더부분 */
-        #replyuser{
-            border: 1px solid black;
-            height: 30px;
-            background-color: rgba(95, 95, 95, 0.514);
-        }
-        #replyuser>input{
-            border: 1px solid black;
-            margin-top: 7px;
-        }
-        #replycon{
-            border: 1px solid black;
-            height: 100px;
-            width: 100%;
-            float: left;
-        }
-        /* 댓글 내용부분 */
+body {
 
-        #con{
-            border: 1px solid black;
-            height: 100px;
-            width: 80%;
-            float: left;
-            overflow-y: auto;
-        }
-        #btn{
-            border: 1px solid black;
-            height: 100px;
-            width: 20%;
-            float: left;
-        }
-        #btn>button{
-            border: 1px solid black;
-            height: 100%;
-            width: 101%;
-        }
+   display: flex;
 
-        /* 리플 작성시 보이는 화면 */
-        #box{
-            border: 1px solid black;
-            height: 160px;
-            padding: 1%;
-            
-        }
+   min-height: 55rem;
 
-        #reply{
-            width: 800px;
-            margin: auto;
-            height: 166px;
-        }
-        #replycon2{
-            width: 80%;
-            float: left;
-        }
-        #replyhead{
-           margin: auto;
-           width: 615px;
-           height: 20px;
-           
-           background-color: rgba(95, 95, 95, 0.514);
-           
-        }
-        #con2{
-            border: 1px solid black;
-            margin: auto;
-            width: 615px;
-            height: 122px;
-            overflow:auto ;
-        }
-        #delbtn{
-            float: left;
-            height: 100%;
-            width: 159.6px;
-            
-        }
-        .delete{
-            margin-top: 50px;
-            margin-left: 43px;
-            height: 50px;
-            width: 70px;
-        }
+   align-items: center;
 
-        #userid{
-            border: 1px solid black;
-            background-color: white;
-            width: 150px;
-            margin-left:10px;
-            margin-top:6px;
-        }
+   justify-content: center;
+
+   margin: auto;
+
+}
+
+ 
+
+.container {
+
+   margin: auto;
+
+}
+
+ 
+
+.card {
+
+   position: absolute;
+
+   top: 50%;
+
+   left: 50%;
+
+   width: 100%;
+
+   padding-top: 1rem;
+
+   padding-bottom: 1rem;
+
+   -webkit-transform: translate(-50%, -50%);
+
+   transform: translate(-50%, -50%);
+
+}
+
+ 
+
+.card-wrap {
+
+   position: relative;
+
+   margin: 0 auto;
+
+}
+
+ 
+
+@media ( min-width : 1400px) {
+
+   .card-wrap {
+
+      max-width: 1500px;
+
+   }
+
+}
+
+ 
+
+.card-body {
+
+   display: flex;
+
+   flex-direction: column;
+
+   align-items: center;
+
+   justify-content: center;
+
+   text-align: center;
+
+}
+
+ 
+
+.card-body p {
+
+   font-size: 1.1rem;
+
+}
+
+ 
+
+.card-title {
+
+   font-weight: bold;
+
+   font-size: 1.8rem;
+
+}
+
+ 
+
+.shadow { /*UI중 가장 흰 바탕 크기 조절*/
+
+   width: 1500px;
+
+}
+
+ 
+
+.card--welcome {
+
+   z-index: 3;
+
+}
+
+ 
+
+.card--welcome .card-title {
+
+   color: #ee9ca7;
+
+}
+
+ 
+
+body {
+
+   background: linear-gradient(to right, #ffdde1, #ee9ca7, #a7bfe8, #6190e8);
+
+   background-size: 500% 500%;
+
+   transition: background 3s ease;
+
+   background-position: 50% 50%;
+
+}
+
+ 
+
+.card {
+
+   transition: all .3s .1s ease-out;
+
+}
+
+ 
+
+.card:not(.is-show) {
+
+   opacity: 0;
+
+   -webkit-transform: translate(-50%, -50%) rotateX(95deg);
+
+   transform: translate(-50%, -50%) rotateX(95deg);
+
+}
+
+ 
+
+.card.is-show {
+
+   opacity: 1;
+
+   -webkit-transform: translate(-50%, -50%);
+
+   transform: translate(-50%, -50%);
+
+   z-index: 5;
+
+}
+
+ 
+
+/* 여기부터 꾸미기 시작 */
+
+/* 게시판 부분 */
+
+.board{width: 1000px;}
+
+#hr{height: 1px; background-color: rgb(148, 148, 148);}
+
+span{color: gray; width: 3px;}
+
+ 
+
+/* 댓글 부분 */
+
+#con{width: 1000px; height: 100px; border: 1px solid gray; overflow-y: scroll;}
+
+#userid{border: 1px solid gray; width: 200px;margin-bottom:5px;}
+
+#btn{margin:10px;}
+
+/* 리플 부분 */
+
+#box{border-top: 1px solid gray; width: 1000px; padding: 5px;}
+
+#replyhead{height: 50px; text-align: left;}
+
+#con2{text-align: left;}
+
 </style>
 
 <script>
-	$(function(){
-		$("#back").on("click", function(){
-			location.href = "${pageContext.request.contextPath}/select.board?category=${Board_Context.category}"
-		})
-		
-		$("#modify").on("click", function(){
-			location.href = "${pageContext.request.contextPath}/modifyView.board?board_num=${Board_Context.board_num}";
-		})
-		
-		$("#report").on("click", function(){
-			location.href = "${pageContext.request.contextPath}/report.board?board_num=${Board_Context.board_num}";
-		})
-		
-		$("#delete").on("click", function(){
-			location.href = "${pageContext.request.contextPath}/delete.board?board_num=${Board_Context.board_num}&&category=${Board_Context.category}";
-		})
-		
+
+   $(function(){
+
+     $("#back").on("click", function(){
+
+         location.href = "${pageContext.request.contextPath}/select.board?category=${Board_Context.category}"
+
+      })
+
+      
+
+      $("#modify").on("click", function(){
+
+         location.href = "${pageContext.request.contextPath}/modifyView.board?board_num=${Board_Context.board_num}";
+
+      })
+
+      
+
+      $("#report").on("click", function(){
+
+         location.href = "${pageContext.request.contextPath}/report.board?board_num=${Board_Context.board_num}";
+
+      })
+
+      
+
+      $("#delete").on("click", function(){
+
+         location.href = "${pageContext.request.contextPath}/delete.board?board_num=${Board_Context.board_num}&&category=${Board_Context.category}";
+
+      })
+
+      
+
         $("#btn").on("click",function(){
 
-	        let a = $("<div id=box><div id=replycon2><div id=replyhead>"+$("#userid").html()+" 님의 글</div><div id=con2>"+$("#con").html()+"</div></div><button class=delete>삭제</button></div>");
-    	    $("#reply").append(a);
-        	$("#con").html("");
-            $("#userid").html("");
-                
-            })
+         let a = $("<div id=box><div id=replycon2><div id=replyhead>"+$("#userid").html()+" 님의 글<input type=button class=delete value=X></div><div id=con2>"+$("#con").html()+"</div></div></div>");
 
-       $(document).on("click", ".delete", function(e) {
-            $(this).parent().remove();
+         $("#reply").append(a);
+
+         $("#con").html("");
+
+         $("#userid").html("");
+
+      })
+
+ 
+
+      $(document).on("click", ".delete", function(e) {
+
+         let result = confirm("정말 삭제하시겠습니까?");
+
+         if(result) {
+
+            $(this).parent().parent().parent().remove();
+
+         } 
+
                 
-          	})
-		
-	})
+
+        })
+
+   })
+
 </script>
 
 </head>
+
 <body>
-    <div id="board">
-    <input type="text" name="board_num"  value="${Board_Context.board_num}">
-        <div id="viewTitle">
-            <h1>${Board_Context.title}</h1>
-        </div>
-        <div id="etcBox">
-            <div id="nickname">
-            	${Board_Context.id}
-                ${Board_Context.nickname}
+
+   <div class="container">
+
+      <div class="card-wrap">
+
+         <div class="card border-0 shadow card--welcome is-show" id="welcome">
+
+            <div class="card-body">
+
+ 
+
+               <div class="logo">
+
+                  <img src="logo.png">
+
+               </div>
+
+               <br> <br>
+
+               <!-- 여기부터 꾸미기 시작 -->
+
+               <div class="board" id="board">
+
+                  <div class="viewTitle" id="viewTitle" align=left>
+
+                     <h3>${Board_Context.title}</h3>
+
+                  </div>
+
+                  <hr id="hr">
+
+                  <div class="row etcBox">
+
+                     <div class="col-6" align=left>
+
+                        ${Board_Context.id} ${Board_Context.nickname}  <span>l</span>  ${Board_Context.write_date}
+
+                     </div>
+
+                     <div class="col-6" align=right>
+
+                        조회수 : ${Board_Context.view_count}  <span>l</span>  신고수 : ${Board_Context.report}
+
+                     </div>
+
+                  </div>
+
+                  <hr>
+
+                  <div class="content" id="content" align=left>
+
+                     ${Board_Context.contents}
+
+                  </div>
+
+                  <hr>
+
+                  <div class="button" align=right>
+
+                     <button type="button" class="btn btn-outline-secondary"   id="delete">삭제</button>
+
+                     <button type="button" class="btn btn-outline-secondary"   id="modify">수정</button>
+
+                     <button type="button" class="btn btn-outline-secondary"   id="report">신고</button>
+
+                     <button type="button" class="btn btn-dark" id="back">돌아가기</button>
+
+                  </div>
+
+                  <hr id="hr">
+
+                  <div class="col-12" align="left">
+
+                     <b>댓글</b>
+
+                  </div>
+
+                  <hr>
+
+                  <div class="row comment">
+
+                     <div class="col-12" align=left>
+
+                        <div id="userid" contenteditable="true"></div>
+
+                     </div>
+
+                     <div class="col-12" align=left>
+
+                        <div id="con" contenteditable="true"></div>
+
+                     </div>
+
+                     <div class="col-12" align=right>
+
+                        <button type="button" class="btn btn-outline-info" id="btn">등록</button>
+
+                     </div>
+
+                  </div>
+
+                  <div id="reply"></div>
+
+                  <hr id="hr">
+
+                    </div>
+
             </div>
-            <div id="writedate">
-                ${Board_Context.write_date}
-            </div>
-            <div id="count">
-                조회수: ${Board_Context.view_count}
-                신고수: ${Board_Context.report}
-            </div>
-        </div>
-		<div id="contents">${Board_Context.contents}</div>
-		<div id="replybox">
-			<div id="replyuser">
-				<div id="userid" contenteditable="true"></div>
-			</div>
-			<div id="replycon">
-				<div id="con" contenteditable="true"></div>
-				<div id="btn">
-					<button>Reply</button>
-				</div>
-			</div>
-		</div>
-		<br>
-		<hr>
-		<div id="reply"></div>
-		<div id="boardFooter">
-        	<button id="delete">삭제</button>
-        	<button id="modify">수정</button>
-        	<button id="report">신고</button>
-            <button id="back" class="btn btn-danger">뒤로가기</button>
-        </div>
-    </div>
+
+         </div>
+
+      </div>
+
+   </div>
+
 </body>
+
 </html>

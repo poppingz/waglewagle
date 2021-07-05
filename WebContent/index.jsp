@@ -390,7 +390,7 @@ body.is-login {
 			<!-- 인덱스 -->
 			<div class="card border-0 shadow card--welcome is-show" id="welcome">
 				<div class="card-body">
-					<h2 class="card-title">WELCOME TO sodyd</h2>
+					<h2 class="card-title">WELCOME TO</h2>
 					<p></p>
 					<div><img src="logo.png" width="400px"></div>
 					<br>

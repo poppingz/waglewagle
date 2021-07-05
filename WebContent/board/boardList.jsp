@@ -145,47 +145,14 @@ body {
 </style>
 <script>
    $(function(){
-      
-      const cards = document.querySelectorAll('.card');
-
-      /* View Controller
-      -----------------------------------------*/
-      const btns = document.querySelectorAll('.js-btn');
-      btns.forEach((btn) => {
-        btn.addEventListener('click', on_btn_click, true);
-        btn.addEventListener('touch', on_btn_click, true);
-      });
-
-      function on_btn_click (e) {
-        const nextID = e.currentTarget.getAttribute('data-target');
-        const next = document.getElementById(nextID);
-        if(!next) return;
-        bg_change(nextID);
-        view_change(next);
-        return false;
-      }
-
-      /* Add class to the body */
-      function bg_change(next) {
-        document.body.className = '';
-        document.body.classList.add('is-'+next);
-      }
-
-      /* Add class to a card */
-      function view_change(next) {
-        cards.forEach((card) => { card.classList.remove('is-show'); });
-        next.classList.add('is-show');
-      }   
-      
-      $(function() {
-         $("#write").on("click", function() {
-            location.href = "${pageContext.request.contextPath}/board/boardWrite.jsp";
-         })
-         
-         $("#back").on("click", function() {
-            location.href = "${pageContext.request.contextPath}/main2.jsp";
-         })
-      })
+       
+	   $("#write").on("click", function() {
+           location.href = "${pageContext.request.contextPath}/board/boardWrite.jsp";
+        })
+        
+        $("#back").on("click", function() {
+           location.href = "${pageContext.request.contextPath}/main2.jsp";
+        })
       
    })
 </script>
@@ -247,16 +214,13 @@ body {
 
 									<div class="col-7">
 										<input type="text" class="form-control mb-2" name="keyword"
-											id="" placeholder="검색할 내용을 입력해 주세요." value=""> <input
-											type="hidden" name="cpage" value="1">
+											id="" placeholder="검색할 내용을 입력해 주세요." value="">
+											<input type="hidden" name="cpage" value="1">
 									</div>
 									<div class="col-2">
 										<button type="submit" class="btn btn-dark mb-2 w-100"
 											id="btn_srch">검색</button>
 									</div>
-
-
-
 
 								</div>
 							</form>
