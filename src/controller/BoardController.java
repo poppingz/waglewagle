@@ -38,7 +38,7 @@ public class BoardController extends HttpServlet {
 		FilesDAO fdao = FilesDAO.getInstance();
 
 		try {
-
+              //게시판 글 목록출력
 			if(url.contentEquals("/select.board")) {
 				
 				int category = Integer.parseInt(request.getParameter("category"));
@@ -47,7 +47,8 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("list", list);
 		
 				request.getRequestDispatcher("board/boardList.jsp").forward(request, response);
-
+				
+             //게시판 글 검색 목록출력
 			}else if(url.contentEquals("/List.board")){
 				
 				String category1 = request.getParameter("category1");
@@ -76,7 +77,11 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("category", category1);
 				request.setAttribute("keyword", keyword);				
 				request.getRequestDispatcher("board/boardList.jsp").forward(request, response);
-				
+
+
+			
+				// 게시판 글 등록
+
 				}else if(url.contentEquals("/insert.board")) {	
 				
 				String filesPath = request.getServletContext().getRealPath("files");
@@ -116,7 +121,7 @@ public class BoardController extends HttpServlet {
 				}			
 			
 				response.sendRedirect("select.board?category="+ category);
-
+             // 글 수정
 			}else if(url.contentEquals("/modify.board")) {
 				int board_num = Integer.parseInt(request.getParameter("board_num"));
 				String title = request.getParameter("title");
@@ -126,13 +131,18 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("result", result);
 				response.sendRedirect("boardView.board?board_num="+board_num);
 
+
+
+             // 글수정 페이지 이동
+
 			}else if(url.contentEquals("/modifyView.board")) {
 				int board_num = Integer.parseInt(request.getParameter("board_num"));
 				BoardDTO result = dao.DetailView(board_num);
 				request.setAttribute("Board_Context", result);
 
 				request.getRequestDispatcher("board/boardModify.jsp").forward(request, response);
-
+				
+             // 글 삭제
 			}else if(url.contentEquals("/delete.board")) {
 
 				int board_num = Integer.parseInt(request.getParameter("board_num"));
@@ -146,6 +156,7 @@ public class BoardController extends HttpServlet {
 					response.sendRedirect("select.board?category=3");
 				}
 				
+				// 게시글 자세히보기
 			}else if(url.contentEquals("/boardView.board")) {
 				
 				int board_num = (Integer.parseInt(request.getParameter("board_num")));

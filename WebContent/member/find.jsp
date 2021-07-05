@@ -316,7 +316,7 @@ $(function(){
 	}
 	
 	$(".toIndex").on("click",function(){
-		location.href="${pageContext.request.contextPath}/Index.jsp";
+		location.href="${pageContext.request.contextPath}/index.jsp";
 	})
 	
 
