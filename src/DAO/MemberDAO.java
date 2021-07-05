@@ -78,9 +78,13 @@ public class MemberDAO {
 			{
 				if(rs.next()) {
 					String tmpId = rs.getString("id");
+					int id_num = rs.getInt("id_num");
 					dto.setId(tmpId);
+					dto.setId_num(id_num);
+					
+					return dto;
 				}
-				return dto;
+			return dto;
 			}
 		}
 	}
@@ -134,6 +138,19 @@ public class MemberDAO {
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;	
+		}
+	}
+	
+	public int memberOut(String id) throws Exception{ // 탈퇴
+		String sql = "delete from pmember where id = ?";
+		try(
+			Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);
+		){
+			pstat.setString(1, id);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
 		}
 	}
 	

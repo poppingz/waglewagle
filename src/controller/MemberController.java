@@ -55,9 +55,16 @@ public class MemberController extends HttpServlet {
 				System.out.println("로그인 결과 : " + dto);
 				
 				if(dto.getId() != null) { // 로그인에 성공했다면
+					if(dto.getId_num() == 1) { // 시퀀스가 1번이라면 관리자 페이지로 이동
+						request.getSession().setAttribute("login", dto);
+						response.sendRedirect("manager/reportList.jsp");
+					}
 					request.getSession().setAttribute("login", dto); // session key 발급 후
+					response.sendRedirect("main2.jsp"); // 메인페이지로 이동
+				}else {
+					response.sendRedirect("member/loginfail.jsp");
 				}
-				response.sendRedirect("main.jsp"); // 메인페이지로 이동
+				
 				
 			}else if(cmd.contentEquals("/findid.mem")) { // 아이디 찾기
 				String email = request.getParameter("email");
@@ -86,6 +93,16 @@ public class MemberController extends HttpServlet {
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("member/updateView.jsp").forward(request, response);
 				
+			}else if(cmd.contentEquals("/logout.mem")) { // 로그아웃
+				request.getSession().invalidate();
+				response.sendRedirect("index.jsp");
+				
+			}else if(cmd.contentEquals("/memberout.mem")) { // 회원탈퇴
+				MemberDTO sessionDTO = (MemberDTO)request.getSession().getAttribute("login");
+				int result = dao.memberOut(sessionDTO.getId());
+				
+				request.getSession().invalidate();
+				response.sendRedirect("index.jsp");	
 				
 			}
 			

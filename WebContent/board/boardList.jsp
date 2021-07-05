@@ -5,8 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board List</title>
+<title>Board</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet"
+<<<<<<< HEAD
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
@@ -21,69 +28,260 @@
 		
 	})
 </script>
+=======
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	crossorigin="anonymous">
+>>>>>>> 489db7b2d0ea1c3e0512de945791a721e25d5189
 <style>
-* {box-sizing: border-box;}
-
-#boardBody {
-	border: 1px solid black;
-	width: 1000px;
-	height: 700px;
+body {
+	display: flex;
+	min-height: 35rem;
+	align-items: center;
+	justify-content: center;
 	margin: auto;
 }
 
-/* Board Title */
-#title {border: 1px solid black;text-align: center;}
+.container {
+	margin: auto;
+}
 
-/* Search Bar */
-#search {text-align: center;padding-top: 5px;}
-#search>input {height: 30px;}
+.card {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
 
-/* Sub Title */
-#subTitle>div {float: left;}
-#subTitle>#subTitle1 {width: 70%;text-align: center;}
-#subTitle>#subTitle2 {width: 10%;text-align: center;}
+.card-wrap {
+	position: relative;
+	margin: 0 auto;
+}
 
-/* Board Contents */
-#boardContentsBox {border: 1px solid black;	height: 500px;}
-#boardContents>div {float: left;border: 1px solid black;}
-#boardContents>#boardContents1 {width: 70%;text-align: center;}
-#boardContents>#boardContents2 {width: 10%;	text-align: center;}
+@media ( min-width : 1400px) {
+	.card-wrap {
+		max-width: 1500px;
+	}
+}
 
-/* Page */
+.card-body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
 
-/* Board Footer */
-#BoardFooter {text-align: right;}
+.card-body p {
+	font-size: 1.1rem;
+}
+
+.card-title {
+	font-weight: bold;
+	font-size: 1.8rem;
+}
+
+.shadow {
+	width: 1500px;
+}
+
+.card--welcome {
+	z-index: 3;
+}
+
+.card--welcome .card-title {
+	color: #ee9ca7;
+}
+
+body {
+	background: linear-gradient(to right, #ffdde1, #ee9ca7, #a7bfe8, #6190e8);
+	background-size: 500% 500%;
+	transition: background 3s ease;
+	background-position: 50% 50%;
+}
+
+.card {
+	transition: all .3s .1s ease-out;
+}
+
+.card:not(.is-show) {
+	opacity: 0;
+	-webkit-transform: translate(-50%, -50%) rotateX(95deg);
+	transform: translate(-50%, -50%) rotateX(95deg);
+}
+
+.card.is-show {
+	opacity: 1;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	z-index: 5;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.cnt {
+	width: 1300px;
+}
+
+/* 헤더 */
+.logo {
+	text-align: center;
+}
+
+.boardlistMain { /*게시물 컬럼*/
+	border-top: 2px solid gray;
+	border-bottom: 1px solid gray;
+	height: 70px;
+	line-height: 60px;
+}
+
+.boardlist { /*게시글 리스트*/
+	border-bottom: 1px solid gray;
+	line-height: 45px;
+}
+
+.boardlist>#titleMove>a { /* 타이틀 클릭시 효과 */
+	color: black;
+	text-decoration: none;
+}
+
+.btns {
+	text-align: right;
+}
+
+.search_box {
+	width: 1000px;
+	margin: auto;
+}
 </style>
+<script>
+   $(function(){
+      
+      const cards = document.querySelectorAll('.card');
+
+      /* View Controller
+      -----------------------------------------*/
+      const btns = document.querySelectorAll('.js-btn');
+      btns.forEach((btn) => {
+        btn.addEventListener('click', on_btn_click, true);
+        btn.addEventListener('touch', on_btn_click, true);
+      });
+
+      function on_btn_click (e) {
+        const nextID = e.currentTarget.getAttribute('data-target');
+        const next = document.getElementById(nextID);
+        if(!next) return;
+        bg_change(nextID);
+        view_change(next);
+        return false;
+      }
+
+      /* Add class to the body */
+      function bg_change(next) {
+        document.body.className = '';
+        document.body.classList.add('is-'+next);
+      }
+
+      /* Add class to a card */
+      function view_change(next) {
+        cards.forEach((card) => { card.classList.remove('is-show'); });
+        next.classList.add('is-show');
+      }   
+      
+      $(function() {
+         $("#write").on("click", function() {
+            location.href = "${pageContext.request.contextPath}/board/boardWrite.jsp";
+         })
+         
+         $("#back").on("click", function() {
+            location.href = "${pageContext.request.contextPath}/main2.jsp";
+         })
+      })
+      
+   })
+</script>
 </head>
 <body>
-	<div id="boardBody">
-		<div id="title">
-			<h1>게시판</h1>
-		</div>
-		<div id="search">
-			<input type="text">
-			<button class="btn btn-success">검색</button>
-		</div>
-		<div id="subTitle">
-			<div id="subTitle1">TITLE</div>
-			<div id="subTitle2">WRITER</div>
-			<div id="subTitle2">VIEW</div>
-			<div id="subTitle2">DATE</div>
-		</div>
-		<div id="boardContentsBox">
-			<div id="boardContents">
-				<c:forEach var="i" items="${list}">
-					<div id="boardContents1"><a href="${pageContext.request.contextPath}/boardView.board?board_num=${i.board_num}">${i.title }</a></div>
-					<div id="boardContents2">${i.nickname }</div>
-					<div id="boardContents2">${i.view_count }</div>
-					<div id="boardContents2">${i.write_date }</div>					
-				</c:forEach>
+	<div class="container">
+		<div class="card-wrap">
+			<div class="card border-0 shadow card--welcome is-show" id="welcome">
+				<div class="card-body">
+
+					<div class="logo">
+						<img src="logo.png">
+					</div>
+					<br> <br>
+
+					<div class="row body cnt">
+						<div class="col-12">
+
+							<div class="row boardlistMain">
+								<div class="col-1">No.</div>
+								<div class="col-5">Title</div>
+								<div class="col-3">Writer</div>
+								<div class="col-2">Date</div>
+								<div class="col-1">View</div>
+							</div>
+
+							<c:forEach var="i" items="${list}">
+								<div class="row boardlist">
+									<div class="col-1">${i.board_num}</div>
+									<div class="col-5" id="titleMove">
+										<a
+											href="${pageContext.request.contextPath}/boardView.board?board_num=${i.board_num}">${i.title}</a>
+									</div>
+									<div class="col-3">${i.nickname}</div>
+									<div class="col-2">${i.write_date}</div>
+									<div class="col-1">${i.view_count}</div>
+								</div>
+							</c:forEach>
+
+							<div class="row btns" align="right">
+								<button type="button" class="btn btn-outline-secondary"
+									id="back">뒤로가기</button>
+								<button type="button" class="btn btn-outline-secondary"
+									id="write">글 쓰기</button>
+							</div>
+						</div>
+						<div id=""></div>
+						<div class="search_box">
+							<form action="${pageContext.request.contextPath}List.board?cpage=1"	method="get">
+								<div class="row">
+									<div class="col-3">
+										<select class="form-control" name="category1" id="srch_item">
+											<option value="" selected>선택하세요.</option>
+											<option value="nickname">작성자</option>
+											<option value="title">제목</option>
+											<option value="contents">내용</option>
+										</select>
+									</div>
+
+									<div class="col-7">
+										<input type="text" class="form-control mb-2" name="keyword"
+											id="" placeholder="검색할 내용을 입력해 주세요." value=""> <input
+											type="hidden" name="cpage" value="1">
+									</div>
+									<div class="col-2">
+										<button type="submit" class="btn btn-dark mb-2 w-100"
+											id="btn_srch">검색</button>
+									</div>
+
+
+
+
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
 			</div>
-		</div>
-		<div id="page"></div>
-		<div id="BoardFooter">
-			<button id="write" class="btn btn-primary">글쓰기</button>
-			<button id="back" class="btn btn-danger">뒤로가기</button>
 		</div>
 	</div>
 </body>
