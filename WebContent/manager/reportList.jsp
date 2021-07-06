@@ -45,7 +45,13 @@
         #delBtn{height:35px; width:35px; line-height:10px; margin-top:10px}
     </style>
     <script>
-    	$(function{
+    	$(function(){
+    		// 로그아웃
+    		$("#logout").on("click",function(){
+    			location.href = "${pageContext.request.contextPath}/logout.mem";
+    		})
+    		
+    		// 신고내역 삭제
     		$("#delBtn").on("click",function(){
     			if(confirm("정말 삭제하시겠습니까?")){
     				$(this).parent().parent().remove();
@@ -65,16 +71,16 @@
             <div class="col-3 left">
                 <div class="col-12 card" align=center>
                     <div class="card-body">
-                        관리자 페이지<br>
+                        ${login.id}님의<br> 관리자 페이지<br>
                         <br>
-                        <button type="button" class="btn btn-outline-danger">Logout</button>
+                        <button type="button" class="btn btn-outline-danger" id="logout">Logout</button>
                     </div>
                 </div>
 
                 <div class="col-12 navi">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href>신고내역</a></li>
-                        <li class="list-group-item"><a href>홈으로</a></li> <!-- index 다 만들어지면 메인으로 링크걸기 -->
+                        <li class="list-group-item"><a href="reportList.jsp">신고내역</a></li>
+                        <li class="list-group-item"><a href="${pageContext.request.contextPath}/main2.jsp">홈으로</a></li>
                     </ul>
                 </div>
             </div>
@@ -97,7 +103,7 @@
                     <div class="col-1">Del</div>
                 </div>
                 <!-- 신고내역 목록 출력 -->
-                <c:forEach var="i" items="">
+                <c:forEach var="i" items="${reportList }">
                 	<form action="${pageContext.request.contextPath}/delete.rep?list=${i.report_num}" method="post">
                 		<div class="row memberList">       
                     		<div class="col-2">${i.id }</div>
