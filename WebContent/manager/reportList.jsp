@@ -53,9 +53,7 @@
     		
     		// 신고내역 삭제
     		$("#delBtn").on("click",function(){
-    			if(confirm("정말 삭제하시겠습니까?")){
-    				$(this).parent().parent().remove();
-    			}
+    			confirm("정말 삭제하시겠습니까?")
     		})
     	})
     </script>
@@ -64,7 +62,7 @@
 <body>
     <div class="container">
         <div class="logo">
-            <img src="memberpageLogo.png">   
+            <img src="logo.png">   
         </div>
         <div class="margin1"></div>
         <div class="row body">
@@ -104,7 +102,7 @@
                 </div>
                 <!-- 신고내역 목록 출력 -->
                 <c:forEach var="i" items="${reportList }">
-                	<form action="${pageContext.request.contextPath}/delete.rep?list=${i.report_num}" method="post">
+                	<form action="${pageContext.request.contextPath}/reportDelete.rep?list=${i.report_num}" method="post">
                 		<div class="row memberList">       
                     		<div class="col-2">${i.id }</div>
                     		<div class="col-1">${i.board_num }</div>
