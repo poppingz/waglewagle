@@ -60,7 +60,7 @@ body{
 						name="title">
 				</div>
 				<div class="col-12" style="height: 600px"><br>
-					<div id="summernote" name="contents"></div>
+					<textarea id="summernote" name="contents"></textarea>
 				</div>
 
 				<div class="col-12 btns" align="right">
