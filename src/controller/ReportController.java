@@ -44,7 +44,14 @@ public class ReportController extends HttpServlet {
 				
 			// 신고내역 출력
 			}else if(cmd.contentEquals("/reportList.rep")) {
-				List<ReportDTO> list = dao.getAllList();
+				String inputID = request.getParameter("inputID"); // 검색어 입력
+				
+				List<ReportDTO> list;
+				if(inputID == null) {
+					list = dao.getAllList(); // 검색어 X 출력
+				}else {
+					list = dao.getAllList(inputID); // 검색어 O 출력
+				}
 				
 				request.setAttribute("reportList", list);
 				request.getRequestDispatcher("manager/reportList.jsp").forward(request, response);
