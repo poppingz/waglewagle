@@ -71,7 +71,30 @@ public class ReportDAO {
 		}
 	}
 	
-	// 검색기능
+	// id로 신고자 검색기능
+	public List<ReportDTO> getAllList(String inputID) throws Exception{
+		String sql = "select * from preport where id=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, inputID);
+			try(ResultSet rs = pstat.executeQuery();) {
+				List<ReportDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int report_num = rs.getInt("report_num");
+					String id = rs.getString("id");
+					int board_num = rs.getInt("board_num");
+					String title = rs.getString("title");
+					String reason = rs.getString("reason");
+					
+					ReportDTO dto = new ReportDTO(report_num,id,board_num,title,reason);
+					list.add(dto);
+				}
+				return list;
+			}
+		}
+	}
 	
 	// 신고내역 삭제
 	public int delete(int report_num) throws Exception{
