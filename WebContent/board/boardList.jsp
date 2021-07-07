@@ -192,15 +192,15 @@ body {
 								</div>
 							</c:forEach>
 
-							<div class="row btns" align="right">
+							<div class="col-12 btns" align="right"><br>
 								<button type="button" class="btn btn-outline-secondary"
 									id="back">뒤로가기</button>
 								<button type="button" class="btn btn-outline-secondary"
 									id="write">글 쓰기</button>
 							</div>
 						</div>
-						<div id=""></div>
-						<div class="search_box">
+
+						<div class="search_box"><br>
 							<form action="${pageContext.request.contextPath}/List.board?cpage=1"	method="get">
 								<div class="row">
 									<div class="col-3">
