@@ -102,7 +102,7 @@ public class MemberController extends HttpServlet {
 				MemberDTO sessionDTO = (MemberDTO)request.getSession().getAttribute("login");
 				int result = dao.memberOut(sessionDTO.getId());
 				request.getSession().invalidate();
-				response.sendRedirect("Index.jsp");
+				response.sendRedirect("index.jsp");
 				
 			}else if(cmd.contentEquals("/modifyInfo.mem")) {
 				MemberDTO sessionDTO = (MemberDTO)request.getSession().getAttribute("login");

@@ -7,283 +7,236 @@
 <meta charset="UTF-8">
 <title>Wagle Wagle</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+<link 
+rel="stylesheet" 
+href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+crossorigin="anonymous">
 <style>
-* {
-	margin: 0;
-	padding: 0
-}
-
-html, body {
-	overflow-y: hidden
-}
-
-ul, ol {
-	list-style: none
-}
-
-.header {
-	position: fixed;
-	z-index: 10;
-	top: 0;
-	width: 100%;
-	background-color: #fff;
-}
-
-.header img {
-	display: block;
-	margin: auto;
-}
-
-.header ul:after {
-	content: "";
-	display: block;
-	clear: both
-}
-
-.header ul li {
-	float: left;
-	border-left: 1px solid rgba(255, 255, 255, 0);
-	box-sizing: border-box;
-	width: 25%;
-}
-
-.header ul li:first-child {
-	border-left: none
-}
-
-.header ul li a {
-	display: block;
-	height: 50px;
-	text-align: center;
-	line-height: 50px;
-	font-size: 20px;
-	text-decoration: none;
-	background-color: #F7CAC9;
-	color: #fff
-}
-
-.header ul li.on a {
-	background-color: #92A8D1;
-	color: #000
-}
-
-.content div {
-	position: relative
-}
-
-/* .content .cnt01 p {
-	position: absolute;
-	top: 50%;
-	margin-top: -40px;
-	text-align: center;
-	width: 100%;
-	font-size: 40px;
-	font-weight: bold;
-} */
-
-#side-menu {
-	position: fixed;
-	width: 150px;
-	top: 350px;
-	left: -120px;
-	background-color: #F7CAC9;
-	transition-duration: 1s;
-}
-
-#side-menu:hover {
-	transform: translate(120px, 0px);
-	transition-duration: 1s;
-}
-
-#side-menu:hover #latch {
-	display: none;
-}
-
-#menu-list {
-	padding: 0px;
-	margin: 0px;
-	list-style-type: none;
-}
-
-#menu-list a {
-	color: black;
-	text-decoration: none;
-}
-
-#side-menu li {
-	margin: 0px;
-	padding: 14px;
-	height: 25%;
-}
-
-#side-menu li:hover {
-	background-color: #fff0f5;
-	cursor: pointer;
-	border-radius: 15px;
-}
-
-.content .cnt01 {
-	position: relative;
-}
-
-#carouselExampleCaptions{
-	position: absolute;
-	top: 250px;
-}
-.content .cnt01 form{
-	position: absolute;
-	top: 65%;
-	left: 50%;
-	margin-top: -40px;
-	text-align: center;
-}
-
-.content .cnt02 {
-	background-color: #ffffff;
-	overflow: hidden;
-}
-
-.content .cnt02 div {
-	float: left;
-}
-
-.img {
-	position: relative;
-}
-
-.somewhere {
-	position: relative;
-}
-
-#f1 {
-	position: absolute;
-	top: 250px;
-	left: 150px;
-	transform: rotate(-5deg);
-	border-radius: 15px;
-}
-
-#f2 {
-	position: absolute;
-	top: 500px;
-	left: 450px;
-	transform: rotate(7deg);
-	border-radius: 15px;
-}
-
-#f1:hover {
-	z-index: 3;
-}
-
-#f2:hover {
-	z-index: 3;
-}
-
-#cnts1 {
-	top: 300px;
-	left: 1200px;
-}
-
-.content .cnt03 {
-	background-color: #ffffff;
-	overflow: hidden;
-}
-
-.content .cnt03 div {
-	float: left;
-}
-
-#a1 {
-	position: absolute;
-	top: 170px;
-	left: 230px;
-	border-radius: 15px;
-}
-
-#a2 {
-	position: absolute;
-	top: 250px;
-	left: -120px;
-	transform: rotate(-7deg);
-	border-radius: 15px;
-}
-
-#a3 {
-	position: absolute;
-	top: 500px;
-	left: 380px;
-	transform: rotate(7deg);
-	border-radius: 15px;
-}
-
-#a1:hover {
-	z-index: 3;
-}
-
-#a2:hover {
-	z-index: 3;
-}
-
-#a3:hover {
-	z-index: 3;
-}
-
-#cnts2 {
-	top: 300px;
-	left: 150px;
-}
-
-.content .cnt04 {
-	background-color: #ffffff;
-	overflow: hidden;
-}
-
-.content .cnt04 div {
-	float: left;
-}
-
-#s1 {
-	position: absolute;
-	top: 250px;
-	left: 150px;
-	transform: rotate(-5deg);
-	border-radius: 15px;
-}
-
-#s2 {
-	position: absolute;
-	top: 330px;
-	left: 500px;
-	transform: rotate(7deg);
-	border-radius: 15px;
-}
-
-#s3 {
-	position: absolute;
-	top: 600px;
-	left: 250px;
-	border-radius: 15px;
-}
-
-#s1:hover {
-	z-index: 3;
-}
-
-#s2:hover {
-	z-index: 3;
-}
-
-#s3:hover {
-	z-index: 3;
-}
-
-#cnts3 {
-	top: 300px;
-	left: 1200px;
-}
+	* {margin: 0; padding: 0}
+	
+	html, body {overflow-y: hidden}
+	
+	ul, ol {list-style: none}
+	
+	.header {
+		position: fixed;
+		z-index: 10;
+		top: 0;
+		width: 100%;
+		background-color: #fff;
+	}
+	
+	.header img {display: block; margin: auto;}
+	
+	.header ul:after {
+		content: "";
+		display: block;
+		clear: both
+	}
+	
+	.header ul li {
+		float: left;
+		border-left: 1px solid rgba(255, 255, 255, 0);
+		box-sizing: border-box;
+		width: 25%;
+	}
+	
+	.header ul li:first-child {border-left: none}
+	
+	.header ul li a {
+		display: block;
+		height: 50px;
+		text-align: center;
+		line-height: 50px;
+		font-size: 20px;
+		text-decoration: none;
+		background-color: #F7CAC9;
+		color: #fff
+	}
+	
+	.header ul li.on a {
+		background-color: #92A8D1;
+		color: #000
+	}
+	
+	.content div {position: relative}
+	
+	/* .content .cnt01 p {
+		position: absolute;
+		top: 50%;
+		margin-top: -40px;
+		text-align: center;
+		width: 100%;
+		font-size: 40px;
+		font-weight: bold;
+	} */
+	
+	#side-menu {
+		position: fixed;
+		width: 150px;
+		top: 350px;
+		left: -120px;
+		background-color: #F7CAC9;
+		transition-duration: 1s;
+	}
+	
+	#side-menu:hover {
+		transform: translate(120px, 0px);
+		transition-duration: 1s;
+	}
+	
+	#side-menu:hover #latch {display: none;}
+	
+	#menu-list {
+		padding: 0px;
+		margin: 0px;
+		list-style-type: none;
+	}
+	
+	#menu-list a {
+		color: black;
+		text-decoration: none;
+	}
+	
+	#side-menu li {
+		margin: 0px;
+		padding: 14px;
+		height: 25%;
+	}
+	
+	#side-menu li:hover {
+		background-color: #fff0f5;
+		cursor: pointer;
+		border-radius: 15px;
+	}
+	
+	.content .cnt01 {position: relative;}
+	
+	#carouselExampleCaptions{
+		position: absolute;
+		top: 250px;
+	}
+	.content .cnt01 form{
+		position: absolute;
+		top: 65%;
+		left: 50%;
+		margin-top: -40px;
+		text-align: center;
+	}
+	
+	.content .cnt02 {
+		background-color: #ffffff;
+		overflow: hidden;
+	}
+	
+	.content .cnt02 div {float: left;}
+	
+	.img {position: relative;}
+	
+	.somewhere {position: relative;}
+	
+	#f1 {
+		position: absolute;
+		top: 250px;
+		left: 150px;
+		transform: rotate(-5deg);
+		border-radius: 15px;
+	}
+	
+	#f2 {
+		position: absolute;
+		top: 500px;
+		left: 450px;
+		transform: rotate(7deg);
+		border-radius: 15px;
+	}
+	
+	#f1:hover {z-index: 3;}
+	#f2:hover {z-index: 3;}
+	
+	#cnts1 {
+		top: 300px;
+		left: 1200px;
+	}
+	
+	.content .cnt03 {
+		background-color: #ffffff;
+		overflow: hidden;
+	}
+	
+	.content .cnt03 div {float: left;}
+	
+	#a1 {
+		position: absolute;
+		top: 170px;
+		left: 230px;
+		border-radius: 15px;
+	}
+	
+	#a2 {
+		position: absolute;
+		top: 250px;
+		left: -120px;
+		transform: rotate(-7deg);
+		border-radius: 15px;
+	}
+	
+	#a3 {
+		position: absolute;
+		top: 500px;
+		left: 380px;
+		transform: rotate(7deg);
+		border-radius: 15px;
+	}
+	
+	#a1:hover {z-index: 3;}
+	#a2:hover {z-index: 3;}
+	#a3:hover {z-index: 3;}
+	
+	#cnts2 {
+		top: 300px;
+		left: 150px;
+	}
+	
+	.content .cnt04 {
+		background-color: #ffffff;
+		overflow: hidden;
+	}
+	
+	.content .cnt04 div {float: left;}
+	
+	#s1 {
+		position: absolute;
+		top: 250px;
+		left: 150px;
+		transform: rotate(-5deg);
+		border-radius: 15px;
+	}
+	
+	#s2 {
+		position: absolute;
+		top: 330px;
+		left: 500px;
+		transform: rotate(7deg);
+		border-radius: 15px;
+	}
+	
+	#s3 {
+		position: absolute;
+		top: 600px;
+		left: 250px;
+		border-radius: 15px;
+	}
+	
+	#s1:hover {z-index: 3;}
+	#s2:hover {z-index: 3;}
+	#s3:hover {z-index: 3;}
+	
+	#cnts3 {
+		top: 300px;
+		left: 1200px;
+	}
 
  /* 메인슬라이드 */
         * {
@@ -366,6 +319,8 @@ ul, ol {
             margin-left: -300%;
         }
 		.top-navi{margin:0;}
+		.main-contents{position:relative; top:154px;}
+		
 </style>
 <script>
 	$(function() {
@@ -546,18 +501,22 @@ ul, ol {
         	    <input type="radio" name="mainpos" id="mainpos1" checked>
                 <input type="radio" name="mainpos" id="mainpos2">
                 <input type="radio" name="mainpos" id="mainpos3">
-                <input type="radio" name="mainpos" id="mainpos4">
-                <ul>
-                    <li style="background-color: #0f4c81;"></li>
-                    <li style="background-color: #0f4c8140;"></li>
-                    <li style="background-color: #0f4c8160;"></li>
-                    <li style="background-color: #0f4c8180;"></li>
+                <ul class="main-contents">
+                	<li>
+                		<img src="animal.jpg">
+                	</li>
+                    <li>
+                		<img src="sports.jpg">
+                	</li>
+                	<li>
+                		<img src="fashion3.jpg">
+                	</li>
                 </ul>
+                
                 <p class="mainpos">
                     <label for="mainpos1"></label>
                     <label for="mainpos2"></label>
                     <label for="mainpos3"></label>
-                    <label for="mainpos4"></label>
                 </p>
             </div>
 

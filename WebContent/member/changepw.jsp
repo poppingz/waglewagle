@@ -37,7 +37,7 @@
 				}else{
 					let style = document.getElementById("msg").getAttribute("style");
 		          	document.getElementById("msg").setAttribute("style", "color:orangered;");
-		          	document.getElementById("msg").innerHTML = "비밀번호 형식을 다시 확인해주세요.\n8~16자의 영문 소문자, 숫자만 사용 가능합니다."	
+		          	document.getElementById("msg").innerHTML = "8~16자의 영문 소문자, 숫자만 사용 가능합니다."	
 				}
 				
 			} else {
@@ -273,7 +273,7 @@ card {
 			<h2 class="card-title">비밀번호 변경</h2><br>
 			<form action="${pageContext.request.contextPath}/changepw.mem" method="post">
 				<div class="form-group">
-					<input class="form-control" type="password" placeholder="비밀번호를 입력해주세요." required />
+					<input class="form-control" type="password" id="pw" placeholder="비밀번호를 입력해주세요." required />
 				</div>
 				<div class="form-group">
 					<input class="form-control" type="password" id="newpw" name="newpw" placeholder="한번 더 입력해주세요." required />
