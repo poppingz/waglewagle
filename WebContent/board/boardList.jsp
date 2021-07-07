@@ -142,6 +142,10 @@ body {
 	width: 1000px;
 	margin: auto;
 }
+#row_btns{position:relative;} 
+
+.page_nav{position:absolute;left:50%;top:calc(50% + 0.475rem);transform:translate(-50%,-50%);}
+
 </style>
 <script>
    $(function(){
@@ -192,16 +196,21 @@ body {
 								</div>
 							</c:forEach>
 
-							<div class="row btns" align="right">
+							<div class="row btns" id="row_btns" align="right">
 								<button type="button" class="btn btn-outline-secondary"
 									id="back">뒤로가기</button>
 								<button type="button" class="btn btn-outline-secondary"
 									id="write">글 쓰기</button>
+						
+
+
 							</div>
 						</div>
 						<div id=""></div>
 						<div class="search_box">
-							<form action="${pageContext.request.contextPath}/List.board?cpage=1"	method="get">
+							<form
+								action="${pageContext.request.contextPath}/List.board?cpage=1"
+								method="get">
 								<div class="row">
 									<div class="col-3">
 										<select class="form-control" name="category1" id="srch_item">
@@ -214,8 +223,8 @@ body {
 
 									<div class="col-7">
 										<input type="text" class="form-control mb-2" name="keyword"
-											id="" placeholder="검색할 내용을 입력해 주세요." value="">
-											<input type="hidden" name="cpage" value="1">
+											id="" placeholder="검색할 내용을 입력해 주세요." value=""> <input
+											type="hidden" name="cpage" value="1">
 									</div>
 									<div class="col-2">
 										<button type="submit" class="btn btn-dark mb-2 w-100"
