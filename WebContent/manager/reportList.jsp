@@ -53,7 +53,7 @@
     		
     		// 신고내역 삭제
     		$("#delBtn").on("click",function(){
-    			confirm("정말 삭제하시겠습니까?")
+    			confirm("정말 삭제하시겠습니까?");
     		})
     	})
     </script>
@@ -88,10 +88,13 @@
                     <h6>● 관리자 페이지 > 신고내역</h6>
                 </div>
                 <div class="margin2"></div>
-                <div class="search">
-                    <input type="text" id="inputID" name="inputID" placeholder="찾고 싶은 회원의 ID를 입력하세요">
-                    <button type="button" class="btn btn-danger" id="searchBtn">search</button>
-                </div>
+                <!-- 검색 기능 -->
+                <form action="${pageContext.request.contextPath}/reportList.rep" method="get">
+                	<div class="search">
+                    	<input type="text" id="inputID" name="inputID" placeholder="찾고 싶은 회원의 ID를 입력하세요">
+                    	<button type="submit" class="btn btn-danger" id="searchBtn">search</button>
+                	</div>
+                </form>
                 <div class="margin3"></div>
                 <div class="row memberListMain">
                     <div class="col-2">ID</div>
@@ -106,7 +109,7 @@
                 		<div class="row memberList">       
                     		<div class="col-2">${i.id }</div>
                     		<div class="col-1">${i.board_num }</div>
-                    		<div class="col-4" id="titleMove"><a href="">${i.title }</a></div>
+                    		<div class="col-4" id="titleMove"><a href="${pageContext.request.contextPath}/boardView.board?board_num=${i.board_num }">${i.title }</a></div>
                     		<div class="col-4">${i.reason}</div>
                     		<div class="col-1"><button id="delBtn">X</button></div>
                 		</div>
