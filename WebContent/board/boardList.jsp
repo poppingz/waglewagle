@@ -20,12 +20,13 @@
 body {
 	display: flex;
 	min-height: 35rem;
-
+	align-items: center;
+	justify-content: center;
+	margin: auto;
 }
 
 .container {
 	margin: auto;
-	margin-top:50px;
 }
 
 .card {
@@ -71,13 +72,6 @@ body {
 	width: 1500px;
 }
 
-.card--welcome {
-	z-index: 3;
-}
-
-.card--welcome .card-title {
-	color: #ee9ca7;
-}
 
 body {
 	background: linear-gradient(to right, #ffdde1, #ee9ca7, #a7bfe8, #6190e8);
@@ -88,9 +82,6 @@ body {
 
 
 
-* {
-	box-sizing: border-box;
-}
 
 .cnt {
 	width: 1300px;
