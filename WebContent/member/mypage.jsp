@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -20,21 +20,33 @@
 <script>
 	$(function() {
 		$.ajax({
-			url:"${pageContext.request.contextPath}/page.mem", type:"get", dataType:"json"
-			}).done(function(resp){
-				console.log(resp);
-		        console.log(resp.id);
-		        console.log(resp.pw);
-		        console.log(resp.reg_date)
-		        
-		        $("#id").text(resp.id+"");
-		        $("#reg_date").text("Member Since " + resp.reg_date);
-		        });
+			url : "${pageContext.request.contextPath}/page.mem",
+			type : "get",
+			dataType : "json"
+		}).done(function(resp) {
+			console.log(resp);
+			console.log(resp.id);
+			console.log(resp.pw);
+			console.log(resp.reg_date)
+
+			$("#id").text(resp.id + "");
+			$("#reg_date").text("Member Since " + resp.reg_date);
+		});
+		$(".titleClick").on("click", function() {
+			let boardNum = $(this).prev().text();
+			console.log(boardNum);
+			window.opener.location.href="${pageContext.request.contextPath}/boardView.board?board_num="+boardNum;
+			close();
 		})
+	})
 </script>
 <style>
-	/* body{margin: 0 auto;} */
-	.member-container{width:35%;height:30%;}
+/* body{margin: 0 auto;} */
+.member-container {
+	width: 35%;
+	height: 30%;
+}
+
 body {
 	display: flex;
 	min-height: 35rem;
@@ -43,12 +55,15 @@ body {
 	margin: auto;
 }
 
-.mypage-container{width:590px;}
-.nameTag{
+.mypage-container {
+	width: 590px;
+}
+
+.nameTag {
 	font-family: 'Josefin Sans', sans-serif;
 	font-weight: bold;
 	color: #ee9ca7;
-	}
+}
 
 .container {
 	margin: auto;
@@ -133,7 +148,10 @@ body {
 	box-sizing: border-box;
 }
 
-.cnt {width: 100%;margin: 0 auto;}
+.cnt {
+	width: 100%;
+	margin: 0 auto;
+}
 
 /* 헤더 */
 .logo {
@@ -165,8 +183,14 @@ body {
 	width: 1000px;
 	margin: auto;
 }
-.date{text-align:center;}
-.view_count{text-align:center;}
+
+.date {
+	text-align: center;
+}
+
+.view_count {
+	text-align: center;
+}
 </style>
 </head>
 <body>
@@ -177,26 +201,26 @@ body {
 		</div>
 		<hr>
 		<div>내가 쓴 글</div>
-			<div class="row body cnt">
-				<div class="col-12">
-					<div class="row boardlistMain">
-						<div class="col-2">글번호</div>
-						<div class="col-4">제목</div>
-						<div class="col-3 date">작성일</div>
-						<div class="col-2 view_count">조회수</div>
-					</div>
-					<c:forEach var="i" items="${list}">
-						<div class="row boardlist">
-							<div class="col-2">${i.board_num}</div>
-							<div class="col-4" id="titleMove">
-								<a href="${pageContext.request.contextPath}/boardView.board?board_num=${i.board_num}">${i.title}</a>
-							</div>
-							<div class="col-3 date">${i.write_date}</div>
-							<div class="col-2 view_count">${i.view_count}</div>
-						</div>
-					</c:forEach>
+		<div class="row body cnt">
+			<div class="col-12">
+				<div class="row boardlistMain">
+					<div class="col-2">글번호</div>
+					<div class="col-4">제목</div>
+					<div class="col-3 date">작성일</div>
+					<div class="col-2 view_count">조회수</div>
 				</div>
+				<c:forEach var="i" items="${list}">
+					<div class="row boardlist">
+						<div class="col-2">${i.board_num}</div>
+						<div class="col-4 titleClick">
+							<a href="">${i.title}</a>
+						</div>
+						<div class="col-3 date">${i.write_date}</div>
+						<div class="col-2 view_count">${i.view_count}</div>
+					</div>
+				</c:forEach>
 			</div>
+		</div>
 	</div>
 </body>
 </html>
