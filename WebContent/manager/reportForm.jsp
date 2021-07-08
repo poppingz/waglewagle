@@ -83,7 +83,7 @@ textarea {
 					<div class="col-2 title1" align=right>
 						<b>제 목 : </b>
 					</div>
-					<div class="col-10 title2">${Board_Context.title}</div>
+					<div class="col-10 title2">${param.title}</div>
 				</div>
 				<hr>
 				<div class="reprotReason">
@@ -94,9 +94,9 @@ textarea {
 					<div class="reportReason">
 						<textarea placeholder="신고사유를 입력해주세요" id="reason" name="reason"></textarea>
 					</div>
-					<input type="hidden" value="${login.id }" name="login">
-					<input type="hidden" value="${Board_Context.board_num }" name="board_num">
-					<input type="hidden" value="${Board_Context.title }" name="title">
+					<input type="hidden" value="${param.login}" name="login">
+					<input type="hidden" value="${param.board_num}" name="board_num">
+					<input type="hidden" value="${param.title}" name="title">
 				</div>
 				<hr>
 				<div class="reportButton" align=center>
