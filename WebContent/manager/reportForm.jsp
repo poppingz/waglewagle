@@ -75,7 +75,7 @@ textarea {
 						</h5>
 					</div>
 					<div class="col-9" align=right>
-						<img src="memberpageLogo.png">
+						<img src="logo.png">
 					</div>
 				</div>
 				<hr>
