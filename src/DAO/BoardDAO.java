@@ -38,6 +38,7 @@ public class BoardDAO {
 
 
 	public int insert(String id, int category , String title, String contents, String nickname) throws Exception {
+		System.out.println(id + " : " + category + " : " + title + " : " + contents + " : " + nickname);
 		String sql = "insert into pboard values(board_num_seq.nextval, ?, ?, ?, ?, ?, sysdate, 0, 0)";
 		try (
 				Connection con = this.getConnection();
