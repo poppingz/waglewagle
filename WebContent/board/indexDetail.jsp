@@ -36,17 +36,17 @@ span {
 }
 
 /* 댓글 부분 */
-#con {
-	width: 1000px;
-	height: 100px;
-	border: 1px solid gray;
-	overflow-y: scroll;
-}
-
 #userid {
 	border: 1px solid gray;
 	width: 200px;
 	margin-bottom: 5px;
+}
+
+#con {
+	width: 1074px;
+	height: 100px;
+	border: 1px solid gray;
+	overflow-y: scroll;
 }
 
 #btn {
@@ -54,6 +54,11 @@ span {
 }
 
 /* 리플 부분 */
+
+#box{border-top: 1px solid gray; width: 1100px; padding: 5px;}
+#replyhead{height: 50px; text-align: left;}
+#con2{text-align: left;}
+.row{margin-left:0;}
 </style>
 
 <script>
@@ -80,8 +85,20 @@ span {
     		let result = confirm("게시글을 삭제하시겠습니까?");
     			if(result){
     				location.href = "${pageContext.request.contextPath}/delete.board?board_num=${Board_Context.board_num}&&category=${Board_Context.category}";
+    			}else{
+    				return false;
     			}
 
+		})
+		
+		// 댓글 삭제하기
+		$(".cdelete").on("click",function(){
+			let result = confirm("댓글을 삭제하시겠습니까?");
+			if(result) {
+				$("#replyDelete").submit();
+			}else{
+				return false;
+			}
 		})
 	})
 
@@ -179,17 +196,14 @@ span {
 				</div>
 			</form>
 
-			<hr>
-
 			<!-- 리플 -->
 			<form
 				action="${pageContext.request.contextPath}/delete.comment?parent_board=${Board_Context.board_num}"
-				method="post">
+				method="post" id="replyDelete">
 				<c:forEach var="i" items="${comments}">
-					<div class="row comment">
-						<div class="col-1">${i.nickname}</div>
-						<div class="col-5">${i.comments}</div>
-						<button id="cdelete">X</button>
+					<div class="row comment" id="box">
+						<div class="col-12" id="replyhead">${i.nickname}님의 댓글<button id="cdelete" class="cdelete">X</button></div>
+						<div class="col-12" id="con2">${i.comments}</div>
 					</div>
 					<input type="text" name="comm_num" value="${i.comm_num}"
 						style="visibility: hidden;">
