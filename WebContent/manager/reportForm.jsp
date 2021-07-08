@@ -47,8 +47,6 @@ textarea {
 </style>
 <script>
 	$(function(){
-		opener.document.getElementById("viewTitle").value = document.getElementById("viewTitle2").value;
-		
 		//신고하기 버튼을 눌렀을 때
 		$("#reportBtn").on("click",function(){
 			if($("#reason").val() == ""){
