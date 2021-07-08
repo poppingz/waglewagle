@@ -12,12 +12,16 @@
 	<script>
 	<c:choose>
 		<c:when test="${result > 0}">
-			alert("비밀번호 변경이 완료되었습니다.")
-			location.href="${pageContext.request.contextPath}/index.jsp";
+			alert("비밀번호 변경이 완료되었습니다.")	
+			
+			window.opener.location.href="${pageContext.request.contextPath}/index.jsp";
+			close();
 		</c:when>
 		<c:otherwise>
 			alert("비밀번호 변경에 실패했습니다.")
-			location.href="${pageContext.request.contextPath}/index.jsp";
+	
+			window.opener.location.href="${pageContext.request.contextPath}/index.jsp";
+			close();
 	</c:otherwise>
 	</c:choose>
 	</script>
