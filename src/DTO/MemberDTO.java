@@ -20,7 +20,29 @@ public class MemberDTO {
 		this.reg_date = reg_date;
 		this.id_num = id_num;
 	}
+	
+	public MemberDTO(String id, String email) {
+		super();
+		this.id = id;
+		this.email = email;
+	}
 
+	public MemberDTO(String id,String pw, String email) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.email = email;
+	}
+	
+	public MemberDTO(String id, String pw, String email, Date reg_date) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.email = email;
+		this.reg_date = reg_date;
+
+	}
+	
 	public String getId() {
 		return id;
 	}
