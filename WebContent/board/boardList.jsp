@@ -81,8 +81,6 @@ body {
 }
 
 
-
-
 .cnt {
 	width: 1300px;
 }
