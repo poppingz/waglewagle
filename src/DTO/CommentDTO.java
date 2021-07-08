@@ -29,6 +29,12 @@ public class CommentDTO {
 		this.comments = comments;
 	}
 
+	public CommentDTO(int comm_num, String nickname, String comments) {
+		this.comm_num = comm_num;
+		this.nickname = nickname;
+		this.comments = comments;
+	}
+
 	public int getComm_num() {
 		return comm_num;
 	}

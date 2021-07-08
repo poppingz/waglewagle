@@ -15,8 +15,10 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import DAO.BoardDAO;
+import DAO.CommentDAO;
 import DAO.FilesDAO;
 import DTO.BoardDTO;
+import DTO.CommentDTO;
 import DTO.FilesDTO;
 import DTO.MemberDTO;
 import config.BoardConfig;
@@ -36,6 +38,7 @@ public class BoardController extends HttpServlet {
 
 		BoardDAO dao = BoardDAO.getInstance();
 		FilesDAO fdao = FilesDAO.getInstance();
+		CommentDAO cdao = CommentDAO.getInstance();
 
 		try {
               //게시판 글 목록출력
@@ -165,14 +168,16 @@ public class BoardController extends HttpServlet {
 				
 				// 게시글 자세히보기
 			}else if(url.contentEquals("/boardView.board")) {
-				
+			
 				int board_num = (Integer.parseInt(request.getParameter("board_num")));
 				BoardDTO result = dao.DetailView(board_num);
 				List<FilesDTO> flist = fdao.selectBySeq(board_num); //첨부 파일 목록을 가져오는 코드
 				dao.view_countPlus(board_num, result.getView_count());
+				List<CommentDTO> clist = cdao.selectComment(board_num);
 
 				request.setAttribute("fileList", flist);
 				request.setAttribute("Board_Context", result);
+				request.setAttribute("comments", clist);
 				request.getRequestDispatcher("board/indexDetail.jsp").forward(request, response);
 
 			}else if(url.contentEquals("/report.board")) {
