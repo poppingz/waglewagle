@@ -32,9 +32,9 @@ public class ReportController extends HttpServlet {
 			// 신고내역 받기
 			if(cmd.contentEquals("/reportGet.rep")) {
 				System.out.println("신고내역요청 들어옴");
-				String id = ((MemberDTO)request.getSession().getAttribute("login")).getId(); //신고아이디
-				int board_num = Integer.parseInt(request.getParameter("")); //게시판번호
-				String title = request.getParameter(""); //신고게시글 제목
+				String id = request.getParameter("login"); //신고당하는아이디
+				int board_num = Integer.parseInt(request.getParameter("board_num")); //게시판번호
+				String title = request.getParameter("title"); //신고게시글 제목
 				String reason = request.getParameter("reason"); //신고사유
 				
 				int result = dao.insert(new ReportDTO(0,id,board_num,title,reason));
