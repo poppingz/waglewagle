@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>without bootstrap</title>
+<title>Board Write</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
@@ -20,25 +20,30 @@
       $("#toList").on("click", function() {
             location.href = "${pageContext.request.contextPath}/List.board?cpage=1";
       })
-      });
+      
+  });
  
  
-  </script>
+</script>
+<style>
+body{
+	padding-top:20px;
+}
+.container{
+	width:1500px;
+}
+
+</style>
 </head>
 <body>
-
-	<form action="${pageContext.request.contextPath}/insert.board"
-		method="post" enctype="multipart/form-data">
+	<div class="container">
+	<form action="${pageContext.request.contextPath}/insert.board" method="post" enctype="multipart/form-data">
 
 		<div class="row">
-			<div class="col-12">
-				<div
-					class="card-header bg-transparent border-secondary text-secondary col-12">
+				<div class="card-header bg-transparent border-secondary text-secondary col-12">
 					<h5 class="card-title" id="title">자유게시판 글 쓰기</h5>
 				</div>
-
-
-				<div class="col-3">
+				<div class="col-3"><br>
 					<select class="form-control" name="category" id="srch_item">
 						<option value="" selected>선택하세요.</option>
 						<option value="1">패션</option>
@@ -46,38 +51,32 @@
 						<option value="3">스포츠</option>
 					</select>
 				</div>
-				<div class="col-9">
+				<div class="col-9"><br>
 					<input type=text class="form-control mb-2" name="nickname"
 						placeholder="닉네임">
 				</div>
-
-
 				<div class="col-12">
 					<input type=text class="form-control mb-2" placeholder="제목을 입력하세요."
 						name="title">
 				</div>
-
-				<div class="col-12" style="height: 400px">
+				<div class="col-12" style="height: 600px"><br>
 					<textarea id="summernote" name="contents"></textarea>
 				</div>
 
-				<div class="row btns" align="right">
+				<div class="col-12 btns" align="right">
 					<button type="submit" class="btn btn-outline-secondary"
 						id="toWrite">글 쓰기</button>
 					<button type="button" class="btn btn-outline-secondary" id="toList">목록으로</button>
 				</div>
-			</div>
+
 		</div>
 	</form>
-
-
-
-
+	</div>
 
 	<script>
       $('#summernote').summernote({
-        placeholder: 'Hello stand alone ui',
-        height: 120,
+        placeholder: '내용을 입력하세요.',
+        height: 500,
         callbacks:{
         	onImageUpload: function(files) {
         		let editor = this; // SummerNote 인스턴스의 주소를 editor 변수에 저장

@@ -142,23 +142,22 @@ body {
 	width: 1000px;
 	margin: auto;
 }
-#row_btns{position:relative;} 
-
-.page_nav{position:absolute;left:50%;top:calc(50% + 0.475rem);transform:translate(-50%,-50%);}
-
 </style>
 <script>
-   $(function(){
-       
-	   $("#write").on("click", function() {
-           location.href = "${pageContext.request.contextPath}/board/boardWrite.jsp";
-        })
-        
-        $("#back").on("click", function() {
-           location.href = "${pageContext.request.contextPath}/main2.jsp";
-        })
-      
-   })
+	$(function() {
+
+		$("#write")
+				.on(
+						"click",
+						function() {
+							location.href = "${pageContext.request.contextPath}/board/boardWrite.jsp";
+						})
+
+		$("#back").on("click", function() {
+			location.href = "${pageContext.request.contextPath}/main2.jsp";
+		})
+
+	})
 </script>
 </head>
 <body>
@@ -196,49 +195,57 @@ body {
 								</div>
 							</c:forEach>
 
-							<div class="row btns" id="row_btns" align="right">
-								<button type="button" class="btn btn-outline-secondary"
-									id="back">뒤로가기</button>
-								<button type="button" class="btn btn-outline-secondary"
-									id="write">글 쓰기</button>
-						
+
+							<div class="row btns" align="right">
+
+								<div class="col-12 btns" align="right">
+									<br>
+
+									<button type="button" class="btn btn-outline-secondary"
+										id="back">뒤로가기</button>
+									<button type="button" class="btn btn-outline-secondary"
+										id="write">글 쓰기</button>
 
 
-							</div>
-						</div>
-						<div id=""></div>
-						<div class="search_box">
-							<form
-								action="${pageContext.request.contextPath}/List.board?cpage=1"
-								method="get">
-								<div class="row">
-									<div class="col-3">
-										<select class="form-control" name="category1" id="srch_item">
-											<option value="" selected>선택하세요.</option>
-											<option value="nickname">작성자</option>
-											<option value="title">제목</option>
-											<option value="contents">내용</option>
-										</select>
-									</div>
-
-									<div class="col-7">
-										<input type="text" class="form-control mb-2" name="keyword"
-											id="" placeholder="검색할 내용을 입력해 주세요." value=""> <input
-											type="hidden" name="cpage" value="1">
-									</div>
-									<div class="col-2">
-										<button type="submit" class="btn btn-dark mb-2 w-100"
-											id="btn_srch">검색</button>
-									</div>
 
 								</div>
-							</form>
-						</div>
-					</div>
+							</div>
 
+
+
+							<div class="search_box">
+								<br>
+								<form
+									action="${pageContext.request.contextPath}/List.board?cpage=1"
+									method="get">
+									<div class="row">
+										<div class="col-3">
+											<select class="form-control" name="category1" id="srch_item">
+												<option value="" selected>선택하세요.</option>
+												<option value="nickname">작성자</option>
+												<option value="title">제목</option>
+												<option value="contents">내용</option>
+											</select>
+										</div>
+
+										<div class="col-7">
+											<input type="text" class="form-control mb-2" name="keyword"
+												id="" placeholder="검색할 내용을 입력해 주세요." value=""> <input
+												type="hidden" name="cpage" value="1">
+										</div>
+										<div class="col-2">
+											<button type="submit" class="btn btn-dark mb-2 w-100"
+												id="btn_srch">검색</button>
+										</div>
+
+									</div>
+								</form>
+							</div>
+						</div>
+
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>
