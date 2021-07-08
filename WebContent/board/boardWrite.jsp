@@ -5,76 +5,99 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sample Board Write</title>
+<title>Board Write</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="http://code.jquery.com/jquery-3.6.0.js"></script>
-
-<style>
-.container {
-	width: 500px;
-}
-
-#contents {
-	height: 200px;
-	width: 100%;
-}
-</style>
-
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 
 <script>
-     $(function(){
-    	 
-    	 $("#file-box").on("click",".delFile",function(){
-    		$(this).parent().remove();
-    	 })
-    	 
-    	 let fileCount = 1;
-    	 $("#addFile").on("click",function(){
-    		 let fileLine = $("<div>"); 
-    		 
-    		 
-    		 let inputFile = $("<input>");
-    		 inputFile.attr("type","file");
-    		 inputFile.attr("name","file"+fileCount++);
-    		 
-    		 let btnDelete = $("<button>");
-    		 btnDelete.addClass("delFile");    		 
-    		 btnDelete.attr("type","button");
-    		 btnDelete.text("-");
-    		 
-    		 
-    		 fileLine.append(inputFile);
-    		 fileLine.append(btnDelete);
-    		 
-    		 $("#file-box").append(fileLine);
-    		 
-    		 
-    	
-    	 });
-    	 
-    	
-     })
+  $(function() {
+      $("#toList").on("click", function() {
+            location.href = "${pageContext.request.contextPath}/board/boardList.jsp";
+      })
+      
+  });
+ 
+ 
 </script>
+<style>
+body{
+	padding-top:20px;
+}
+.container{
+	width:1500px;
+}
 
+</style>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/insert.board" method="post"  enctype="multipart/form-data">
-		<div class="container">
-			<select name=category>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-			</select> <input type=text name="nickname" placeholder="닉네임"><input
-				type=text name="title" placeholder="제목"><br>				
-			<textarea id="contents" name=contents placeholder="내용"></textarea>
-			<fieldset id="file-box">
-					      <legend>파일첨부</legend>
-					      <button id="addFile" type="button">+</button>
-					</fieldset>	<br>
-			<br>
-			<button>쓰기</button>
+	<div class="container">
+	<form action="${pageContext.request.contextPath}/insert.board" method="post" enctype="multipart/form-data">
+
+		<div class="row">
+				<div class="card-header bg-transparent border-secondary text-secondary col-12">
+					<h5 class="card-title" id="title">자유게시판 글 쓰기</h5>
+				</div>
+				<div class="col-3"><br>
+					<select class="form-control" name="category" id="srch_item">
+						<option value="" selected>선택하세요.</option>
+						<option value="1">패션</option>
+						<option value="2">동물</option>
+						<option value="3">스포츠</option>
+					</select>
+				</div>
+				<div class="col-9"><br>
+					<input type=text class="form-control mb-2" name="nickname"
+						placeholder="닉네임">
+				</div>
+				<div class="col-12">
+					<input type=text class="form-control mb-2" placeholder="제목을 입력하세요."
+						name="title">
+				</div>
+				<div class="col-12" style="height: 600px"><br>
+					<textarea id="summernote" name="contents"></textarea>
+				</div>
+
+				<div class="col-12 btns" align="right">
+					<button type="submit" class="btn btn-outline-secondary"
+						id="toWrite">글 쓰기</button>
+					<button type="button" class="btn btn-outline-secondary" id="toList">목록으로</button>
+				</div>
+
 		</div>
 	</form>
+	</div>
+
+	<script>
+      $('#summernote').summernote({
+        placeholder: '내용을 입력하세요.',
+        height: 500,
+        callbacks:{
+        	onImageUpload: function(files) {
+        		let editor = this; // SummerNote 인스턴스의 주소를 editor 변수에 저장
+        		let file = files[0]; //업로드 해야하는 파일 인스턴스
+        		
+        		let form = new FormData();
+        		form.append("abc",file); // "" 안은 name값 
+        		
+        		$.ajax({
+        			data:form,
+        			type:"post",
+        			url:"${pageContext.request.contextPath}/upload.file",
+        			contentType:false,
+        			processData:false
+        		}).done(function(resp){
+        			$(editor).summernote('insertImage',"${pageContext.request.contextPath}"+resp)
+        			// editor 인스턴스의 insertImage  기능으로 이미지를 화면에 출력
+        		});
+        	}
+        }
+      });
+    </script>
 </body>
 </html>

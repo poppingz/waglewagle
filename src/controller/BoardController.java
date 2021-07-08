@@ -22,8 +22,6 @@ import DTO.MemberDTO;
 import config.BoardConfig;
 
 
-
-
 @WebServlet("*.board")
 public class BoardController extends HttpServlet {
 
@@ -34,24 +32,28 @@ public class BoardController extends HttpServlet {
 		String requestURI = request.getRequestURI();
 		String ctxPath = request.getContextPath();
 		String url = requestURI.substring(ctxPath.length());
-
+		System.out.println("요청 URL : " + url);
 
 		BoardDAO dao = BoardDAO.getInstance();
 		FilesDAO fdao = FilesDAO.getInstance();
 
-
 		try {
-
+              //게시판 글 목록출력
 			if(url.contentEquals("/select.board")) {
 				
+
+				response.setCharacterEncoding("utf-8");
+				response.setContentType("text/html; charset =utf-8");
 				
+
 				int category = Integer.parseInt(request.getParameter("category"));
 
 				List<BoardDTO> list = dao.sellectAll(category);
 				request.setAttribute("list", list);
 		
 				request.getRequestDispatcher("board/boardList.jsp").forward(request, response);
-
+				
+             //게시판 글 검색 목록출력
 			}else if(url.contentEquals("/List.board")){
 				
 				String category1 = request.getParameter("category1");
@@ -61,7 +63,6 @@ public class BoardController extends HttpServlet {
 				System.out.println("현재 페이지 : " + cpage);
 				System.out.println("검색 분류 : " + category1);
 				System.out.println("검색어 : " + keyword);
-
 
 				int endNum = cpage * BoardConfig.RECORD_COUNT_PER_PAGE;
 				int startNum = endNum - (BoardConfig.RECORD_COUNT_PER_PAGE-1);
@@ -82,8 +83,10 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("keyword", keyword);				
 				request.getRequestDispatcher("board/boardList.jsp").forward(request, response);
 
+
 			
-				
+				// 게시판 글 등록
+
 				}else if(url.contentEquals("/insert.board")) {	
 				
 				String filesPath = request.getServletContext().getRealPath("files");
@@ -94,8 +97,6 @@ public class BoardController extends HttpServlet {
 				if(!filesFolder.exists()) filesFolder.mkdir();// files 폴더가 없다면, mkdir로 폴더만듬
 
 				MultipartRequest multi = new MultipartRequest(request, filesPath, maxSize, "utf8", new DefaultFileRenamePolicy());
-
-				
 				
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("login");	
 				System.out.println(dto.getId());
@@ -103,37 +104,34 @@ public class BoardController extends HttpServlet {
 				String title = multi.getParameter("title");
 				String contents = multi.getParameter("contents");
 				String nickname = multi.getParameter("nickname");
+				
+				System.out.println(category + " : " + title + " : " + contents + " : " + nickname);
 
 				int seq = dao.getSeq();
 				int result = dao.insert(dto.getId(), category, title, contents, nickname);
-
-				
+		
 				request.setAttribute("result", result);	
-
-				
+	
 				Set<String> fileNames = multi.getFileNameSet();
 
 				for(String fileName : fileNames) {
-					String oriName =	multi.getOriginalFileName(fileName);
-					String sysName =	multi.getFilesystemName(fileName);
-
-
+					String oriName = multi.getOriginalFileName(fileName);
+					String sysName = multi.getFilesystemName(fileName);
 
 					if(oriName != null) { 
 						System.out.println("파일 오리지널이름 : " +  oriName + "DB에 저장됨.");
 						System.out.println(seq);
 						fdao.insert(new FilesDTO(oriName,sysName,null,seq));
-
 					}
 				}			
-
-
-
-
 			
 				response.sendRedirect("select.board?category="+ category);
-
+             // 글 수정
 			}else if(url.contentEquals("/modify.board")) {
+				
+				response.setCharacterEncoding("utf-8");
+				response.setContentType("text/html; charset =utf-8");
+				
 				int board_num = Integer.parseInt(request.getParameter("board_num"));
 				String title = request.getParameter("title");
 				String contents = request.getParameter("contents");
@@ -144,13 +142,16 @@ public class BoardController extends HttpServlet {
 
 
 
+             // 글수정 페이지 이동
+
 			}else if(url.contentEquals("/modifyView.board")) {
 				int board_num = Integer.parseInt(request.getParameter("board_num"));
 				BoardDTO result = dao.DetailView(board_num);
 				request.setAttribute("Board_Context", result);
 
 				request.getRequestDispatcher("board/boardModify.jsp").forward(request, response);
-
+				
+             // 글 삭제
 			}else if(url.contentEquals("/delete.board")) {
 
 				int board_num = Integer.parseInt(request.getParameter("board_num"));
@@ -164,6 +165,7 @@ public class BoardController extends HttpServlet {
 					response.sendRedirect("select.board?category=3");
 				}
 				
+				// 게시글 자세히보기
 			}else if(url.contentEquals("/boardView.board")) {
 				
 				int board_num = (Integer.parseInt(request.getParameter("board_num")));

@@ -45,11 +45,15 @@
         #delBtn{height:35px; width:35px; line-height:10px; margin-top:10px}
     </style>
     <script>
-    	$(function{
+    	$(function(){
+    		// 로그아웃
+    		$("#logout").on("click",function(){
+    			location.href = "${pageContext.request.contextPath}/logout.mem";
+    		})
+    		
+    		// 신고내역 삭제
     		$("#delBtn").on("click",function(){
-    			if(confirm("정말 삭제하시겠습니까?")){
-    				$(this).parent().parent().remove();
-    			}
+    			confirm("정말 삭제하시겠습니까?");
     		})
     	})
     </script>
@@ -58,23 +62,23 @@
 <body>
     <div class="container">
         <div class="logo">
-            <img src="memberpageLogo.png">   
+            <img src="logo.png">   
         </div>
         <div class="margin1"></div>
         <div class="row body">
             <div class="col-3 left">
                 <div class="col-12 card" align=center>
                     <div class="card-body">
-                        관리자 페이지<br>
+                        ${login.id}님의<br> 관리자 페이지<br>
                         <br>
-                        <button type="button" class="btn btn-outline-danger">Logout</button>
+                        <button type="button" class="btn btn-outline-danger" id="logout">Logout</button>
                     </div>
                 </div>
 
                 <div class="col-12 navi">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href>신고내역</a></li>
-                        <li class="list-group-item"><a href>홈으로</a></li> <!-- index 다 만들어지면 메인으로 링크걸기 -->
+                        <li class="list-group-item"><a href="reportList.jsp">신고내역</a></li>
+                        <li class="list-group-item"><a href="${pageContext.request.contextPath}/main2.jsp">홈으로</a></li>
                     </ul>
                 </div>
             </div>
@@ -84,10 +88,13 @@
                     <h6>● 관리자 페이지 > 신고내역</h6>
                 </div>
                 <div class="margin2"></div>
-                <div class="search">
-                    <input type="text" id="inputID" name="inputID" placeholder="찾고 싶은 회원의 ID를 입력하세요">
-                    <button type="button" class="btn btn-danger" id="searchBtn">search</button>
-                </div>
+                <!-- 검색 기능 -->
+                <form action="${pageContext.request.contextPath}/reportList.rep" method="get">
+                	<div class="search">
+                    	<input type="text" id="inputID" name="inputID" placeholder="찾고 싶은 회원의 ID를 입력하세요">
+                    	<button type="submit" class="btn btn-danger" id="searchBtn">search</button>
+                	</div>
+                </form>
                 <div class="margin3"></div>
                 <div class="row memberListMain">
                     <div class="col-2">ID</div>
@@ -97,12 +104,12 @@
                     <div class="col-1">Del</div>
                 </div>
                 <!-- 신고내역 목록 출력 -->
-                <c:forEach var="i" items="">
-                	<form action="${pageContext.request.contextPath}/delete.rep?list=${i.report_num}" method="post">
+                <c:forEach var="i" items="${reportList }">
+                	<form action="${pageContext.request.contextPath}/reportDelete.rep?list=${i.report_num}" method="post">
                 		<div class="row memberList">       
                     		<div class="col-2">${i.id }</div>
                     		<div class="col-1">${i.board_num }</div>
-                    		<div class="col-4" id="titleMove"><a href="">${i.title }</a></div>
+                    		<div class="col-4" id="titleMove"><a href="${pageContext.request.contextPath}/boardView.board?board_num=${i.board_num }">${i.title }</a></div>
                     		<div class="col-4">${i.reason}</div>
                     		<div class="col-1"><button id="delBtn">X</button></div>
                 		</div>

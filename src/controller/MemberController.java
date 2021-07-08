@@ -59,7 +59,7 @@ public class MemberController extends HttpServlet {
 				if(dto.getId() != null) { // 로그인에 성공했다면
 					if(dto.getId_num() == 1) { // 시퀀스가 1번이라면 관리자 페이지로 이동
 						request.getSession().setAttribute("login", dto);
-						response.sendRedirect("manager/reportList.jsp");
+						response.sendRedirect("reportList.rep");
 					}
 					request.getSession().setAttribute("login", dto); // session key 발급 후
 					response.sendRedirect("main2.jsp"); // 메인페이지로 이동

@@ -17,7 +17,7 @@
 		</c:when>
 		<c:otherwise>
 			alert("신고가 정상적으로 처리되지 않았습니다.")
-			location.href="manager/reportForm.jsp";
+			location.href="reportForm.jsp";
 	</c:otherwise>
 	</c:choose>
 	</script>
