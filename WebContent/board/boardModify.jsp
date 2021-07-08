@@ -40,7 +40,7 @@ body{
 
 			<div class="row">
 					<div class="card-header bg-transparent border-secondary text-secondary col-12">
-						<h5 class="card-title" id="title">글 수정하기</h5>
+						<h4 class="card-title" id="title">글 수정하기</h4>
 					</div>
 
 					<div class="col-3"><br>
