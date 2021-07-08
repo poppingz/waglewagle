@@ -2,6 +2,8 @@ package DAO;
 
 
 import java.sql.Connection;
+import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -14,7 +16,16 @@ import javax.sql.DataSource;
 import DTO.CommentDTO;
 
 public class CommentDAO {
-	
+
+	private static CommentDAO instance;
+
+	public synchronized static CommentDAO getInstance() {
+		if(instance == null) {
+			instance = new CommentDAO();
+		}
+		return instance;
+	}
+
 	private CommentDAO() {}
 
 	private Connection getConnection() throws Exception{
@@ -23,7 +34,7 @@ public class CommentDAO {
 		return ds.getConnection();
 	}
 	
-	public int comInsert(String id, String nickname, String comments, int parent_board) throws Exception {
+	public int insertComment(String id, String nickname, String comments, int parent_board) throws Exception {
 		String sql = "insert into pcomments values(comm_num_seq.nextval, ?, ?, ?, sysdate, ?)";
 		try(
 			Connection con = this.getConnection();
@@ -66,7 +77,8 @@ public class CommentDAO {
 	}
 	
 	public int deleteComment(int delComNum) throws Exception {
-		String sql = "delete * from pcomments where comm_num=?";
+		String sql = "delete from pcomments where comm_num = ?";
+		 
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);
 				){
