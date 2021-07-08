@@ -20,13 +20,12 @@
 body {
 	display: flex;
 	min-height: 35rem;
-	align-items: center;
-	justify-content: center;
-	margin: auto;
+
 }
 
 .container {
 	margin: auto;
+	margin-top:50px;
 }
 
 .card {
@@ -87,22 +86,7 @@ body {
 	background-position: 50% 50%;
 }
 
-.card {
-	transition: all .3s .1s ease-out;
-}
 
-.card:not(.is-show) {
-	opacity: 0;
-	-webkit-transform: translate(-50%, -50%) rotateX(95deg);
-	transform: translate(-50%, -50%) rotateX(95deg);
-}
-
-.card.is-show {
-	opacity: 1;
-	-webkit-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-	z-index: 5;
-}
 
 * {
 	box-sizing: border-box;
@@ -247,5 +231,6 @@ body {
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 </html>
