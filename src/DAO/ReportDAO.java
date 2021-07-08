@@ -39,8 +39,8 @@ public class ReportDAO {
 				){
 			pstat.setString(1, dto.getId());
 			pstat.setInt(2, dto.getBoard_num());		
-			pstat.setString(2, dto.getTitle());
-			pstat.setString(3, dto.getReason());
+			pstat.setString(3, dto.getTitle());
+			pstat.setString(4, dto.getReason());
 			
 			int result = pstat.executeUpdate();
 			con.commit();
