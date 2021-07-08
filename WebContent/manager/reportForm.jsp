@@ -47,6 +47,8 @@ textarea {
 </style>
 <script>
 	$(function(){
+		opener.document.getElementById("viewTitle").value = document.getElementById("viewTitle2").value;
+		
 		//신고하기 버튼을 눌렀을 때
 		$("#reportBtn").on("click",function(){
 			if($("#reason").val() == ""){
@@ -58,7 +60,9 @@ textarea {
 		// 취소 버튼을 눌렀을 때
 		$("#cencelBtn").on("click",function(){
 			window.close();
-		})		
+		})	
+		
+		
 	})
 
 </script>
@@ -83,7 +87,7 @@ textarea {
 					<div class="col-2 title1" align=right>
 						<b>제 목 : </b>
 					</div>
-					<div class="col-10 title2">${Board_Context.title}</div>
+					<div class="col-10 title2" id="viewTitle2"></div>
 				</div>
 				<hr>
 				<div class="reprotReason">

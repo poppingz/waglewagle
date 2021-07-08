@@ -159,7 +159,7 @@ span {
 		
 		// 신고하기
       	$("#report").on("click", function(){
-      		window.open("${pageContext.request.contextPath}/manager/reportForm.jsp","","width=500, height=500"); 
+      		window.open("${pageContext.request.contextPath}/manager/reportForm.jsp?title=${Board_Context.title}&board_num=${Board_Context.board_num}&login=${Board_Context.id}","","width=500, height=500");
          	location.href = "${pageContext.request.contextPath}/report.board?board_num=${Board_Context.board_num}";
 		})
 		
