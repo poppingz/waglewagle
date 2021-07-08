@@ -202,7 +202,7 @@ span {
 				method="post" id="replyDelete">
 				<c:forEach var="i" items="${comments}">
 					<div class="row comment" id="box">
-						<div class="col-12" id="replyhead">${i.nickname}님의 댓글<button id="cdelete" class="cdelete">X</button></div>
+						<div class="col-12" id="replyhead">${i.nickname}님의 댓글<button id="cdelete" class="btn btn-outline-dark btn-sm cdelete">X</button></div>
 						<div class="col-12" id="con2">${i.comments}</div>
 					</div>
 					<input type="text" name="comm_num" value="${i.comm_num}"
