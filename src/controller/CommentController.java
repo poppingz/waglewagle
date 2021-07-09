@@ -16,7 +16,7 @@ import DTO.MemberDTO;
 @WebServlet("*.comment")
 public class CommentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset =utf-8");
 
 		String requestURI = request.getRequestURI();

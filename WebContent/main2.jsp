@@ -437,29 +437,9 @@ crossorigin="anonymous">
 		         });
 
 
-		$("#board1")
-				.on(
-						"click",
-						function() {
-							location.href = "${pageContext.request.contextPath}/select.board?category=1";
-						})
-
-		$("#board2")
-				.on(
-						"click",
-						function() {
-							location.href = "${pageContext.request.contextPath}/select.board?category=2";
-						})
-
-		$("#board3")
-				.on(
-						"click",
-						function() {
-							location.href = "${pageContext.request.contextPath}/select.board?category=3";
-						})
-
 		$("#mypage").on("click", function() {
-			window.open("member/mypage.jsp","My Page", "width=500, height=650");
+			window.open("${pageContext.request.contextPath}/myList.mem","My Page", "width=600, height=650");
+			//window.open(location.href = "${pageContext.request.contextPath}/myList.mem");
 		})
 
 		$("#changepw").on("click", function() {
@@ -470,16 +450,6 @@ crossorigin="anonymous">
 		$("#logout").on("click", function() {
 			location.href = "${pageContext.request.contextPath}/logout.mem";
 		})
-
-		$("#memberout")
-				.on(
-						"click",
-						function() {
-							let result = confirm("정말 탈퇴하시겠습니까?");
-							if (result) {
-								location.href = "${pageContext.request.contextPath}/memberout.mem";
-							}
-						})
 	})
 </script>
 </head>
