@@ -40,15 +40,15 @@ body{
 
 			<div class="row">
 					<div class="card-header bg-transparent border-secondary text-secondary col-12">
-						<h5 class="card-title" id="title">글 수정하기</h5>
+						<h4 class="card-title" id="title">글 수정하기</h4>
 					</div>
 
-					<div class="col-3">
+					<div class="col-3"><br>
 						글 번호 <input type="text" class="form-control mb-2" name="board_num"
 							value="${Board_Context.board_num}">
 
 					</div>
-					<div class="col-9">
+					<div class="col-9"><br>
 						닉네임 <input type=text class="form-control mb-2" name="nickname"
 							value="${Board_Context.nickname}">
 					</div>

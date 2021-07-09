@@ -212,7 +212,7 @@ body {
 				<c:forEach var="i" items="${list}">
 					<div class="row boardlist">
 						<div class="col-2">${i.board_num}</div>
-						<div class="col-4 titleClick">
+						<div class="col-4 titleClick" id="titleMove">
 							<a href="">${i.title}</a>
 						</div>
 						<div class="col-3 date">${i.write_date}</div>

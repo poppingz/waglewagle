@@ -42,7 +42,7 @@ body{
 
 		<div class="row">
 				<div class="card-header bg-transparent border-secondary text-secondary col-12">
-					<h5 class="card-title" id="title">자유게시판 글 쓰기</h5>
+					<h4 class="card-title" id="title">글 쓰기</h4>
 				</div>
 				<div class="col-3"><br>
 					<select class="form-control" name="category" id="srch_item">

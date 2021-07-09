@@ -42,7 +42,7 @@
         }
         .memberList>#titleMove>a{color: black; text-decoration: none;} /*신고게시물이동*/
         .memberList>#titleMove>a:hover{color: gray;}
-        #delBtn{height:35px; width:35px; line-height:10px; margin-top:10px}
+        .delBtn{height:35px; width:35px; line-height:10px; margin-top:10px}
     </style>
     <script>
     	$(function(){
@@ -52,8 +52,13 @@
     		})
     		
     		// 신고내역 삭제
-    		$("#delBtn").on("click",function(){
-    			confirm("정말 삭제하시겠습니까?");
+    		$(".delBtn").on("click",function(){
+    			let result = confirm("정말 삭제하시겠습니까?");
+    			if(result){
+    				$("#frm").submit();
+    			}else{
+    				return false;
+    			}
     		})
     	})
     </script>
@@ -77,7 +82,7 @@
 
                 <div class="col-12 navi">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href="reportList.jsp">신고내역</a></li>
+                        <li class="list-group-item"><a href="reportList.rep">신고내역</a></li>
                         <li class="list-group-item"><a href="${pageContext.request.contextPath}/main2.jsp">홈으로</a></li>
                     </ul>
                 </div>
@@ -105,13 +110,13 @@
                 </div>
                 <!-- 신고내역 목록 출력 -->
                 <c:forEach var="i" items="${reportList }">
-                	<form action="${pageContext.request.contextPath}/reportDelete.rep?list=${i.report_num}" method="post">
+                	<form action="${pageContext.request.contextPath}/reportDelete.rep?list=${i.report_num}" method="post" id=frm>
                 		<div class="row memberList">       
                     		<div class="col-2">${i.id }</div>
                     		<div class="col-1">${i.board_num }</div>
                     		<div class="col-4" id="titleMove"><a href="${pageContext.request.contextPath}/boardView.board?board_num=${i.board_num }">${i.title }</a></div>
                     		<div class="col-4">${i.reason}</div>
-                    		<div class="col-1"><button id="delBtn">X</button></div>
+                    		<div class="col-1"><button class="delBtn">X</button></div>
                 		</div>
                 	</form>
                 </c:forEach>

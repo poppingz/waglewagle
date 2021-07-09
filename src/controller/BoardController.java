@@ -84,9 +84,7 @@ public class BoardController extends HttpServlet {
 
 			
 				// 게시판 글 등록
-
 				}else if(url.contentEquals("/insert.board")) {	
-				
 				String filesPath = request.getServletContext().getRealPath("files");
 				File filesFolder = new File(filesPath);
 				int maxSize = 1024 * 1024 * 10; //최대 10mb 크기의 파일을 받기.
@@ -95,34 +93,35 @@ public class BoardController extends HttpServlet {
 				if(!filesFolder.exists()) filesFolder.mkdir();// files 폴더가 없다면, mkdir로 폴더만듬
 
 				MultipartRequest multi = new MultipartRequest(request, filesPath, maxSize, "utf8", new DefaultFileRenamePolicy());
-				
+
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("login");	
 				System.out.println(dto.getId());
-				int category = (Integer.parseInt(multi.getParameter("category")));
+
+				int category = Integer.parseInt(multi.getParameter("category"));
+
 				String title = multi.getParameter("title");
 				String contents = multi.getParameter("contents");
 				String nickname = multi.getParameter("nickname");
-				
+
 				System.out.println(category + " : " + title + " : " + contents + " : " + nickname);
 
 				int seq = dao.getSeq();
 				int result = dao.insert(dto.getId(), category, title, contents, nickname);
-		
+
 				request.setAttribute("result", result);	
-	
+
 				Set<String> fileNames = multi.getFileNameSet();
 
 				for(String fileName : fileNames) {
 					String oriName = multi.getOriginalFileName(fileName);
 					String sysName = multi.getFilesystemName(fileName);
-
 					if(oriName != null) { 
 						System.out.println("파일 오리지널이름 : " +  oriName + "DB에 저장됨.");
 						System.out.println(seq);
 						fdao.insert(new FilesDTO(oriName,sysName,null,seq));
 					}
 				}			
-			
+
 				response.sendRedirect("select.board?category="+ category);
              // 글 수정
 			}else if(url.contentEquals("/modify.board")) {
