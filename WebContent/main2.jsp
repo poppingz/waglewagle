@@ -12,6 +12,9 @@ rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
 integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
 crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <style>
 	* {margin: 0; padding: 0}
 	
@@ -27,7 +30,7 @@ crossorigin="anonymous">
 		background-color: #fff;
 	}
 	
-	.header img {display: block; margin: auto;}
+	.header img {display: block; margin: auto; padding:20px;}
 	
 	.header ul:after {
 		content: "";
@@ -45,19 +48,18 @@ crossorigin="anonymous">
 	.header ul li:first-child {border-left: none}
 	
 	.header ul li a {
-		display: block;
-		height: 50px;
-		text-align: center;
-		line-height: 50px;
-		font-size: 20px;
-		text-decoration: none;
-		background-color: #F7CAC9;
-		color: #fff
+        display: block;
+        height: 50px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 33px;
+        text-decoration: none;
+        color: rgb(250, 151, 168);
+        font-family: 'Lobster', cursive;
 	}
 	
 	.header ul li.on a {
-		background-color: #92A8D1;
-		color: #000
+		color: #92A8D1;
 	}
 	
 	.content div {position: relative}
@@ -455,12 +457,12 @@ crossorigin="anonymous">
 </head>
 <body>
 	<div class="header">
-		<img src="logo.png" width="500px"><br>
+		<img src="logo.png" width="700px"><br>
 		<ul class="top-navi">
 			<li class="on" class="a"><a href="#">My Page</a></li>
-			<li><a href="#">패션</a></li>
-			<li><a href="#">동물</a></li>
-			<li><a href="#">스포츠</a></li>
+			<li><a href="#">Fashion</a></li>
+			<li><a href="#">Animal</a></li>
+			<li><a href="#">Sports</a></li>
 		</ul>
 	</div>
 	<div class="content">
@@ -504,14 +506,14 @@ crossorigin="anonymous">
 
 		<div class="cnt02">
 			<div class="imgs">
-				<img src="fashion.jpg" width="650px" id="f1"> <img
-					src="fashion2.jpg" width="650px" id="f2">
+				<img src="fashion.jpg" width="600px" id="f1"> <img
+					src="fashion2.jpg" width="600px" id="f2">
 			</div>
 			<div class="col-sm-6 somewhere">
 				<div class="card-body" id="cnts1">
-					<h1 class="card-title">Card title</h1>
+					<h1 class="card-title">"Fashion Is My Passion"</h1>
 					<p></p>
-					<h2 class="card-text">Some quick example text.</h2>
+					<h2 class="card-text">패션의, <br> 패션에 의한,<br> 패션을 위한 사람들</h2>
 					<p></p>
 					<button type="button" class="btn btn-info btn-lg" id="board1">GO!</button>
 				</div>
@@ -521,15 +523,15 @@ crossorigin="anonymous">
 		<div class="cnt03">
 			<div class="col-sm-6 somewhere">
 				<div class="card-body" id="cnts2">
-					<h1 class="card-title">Card title</h1>
+					<h1 class="card-title">"Please love us!"</h1>
 					<p></p>
-					<h2 class="card-text">Some quick example text.</h2>
+					<h2 class="card-text">살아있는 모든 생명체에<br> 대한 사랑은,<br>인간의 가장 숭고한 본능이다.<br><br>-찰스다윈</h2>
 					<p></p>
 					<button type="button" class="btn btn-warning btn-lg" id="board2">GO!</button>
 				</div>
 			</div>
 			<div class="imgs">
-				<img src="ani1.jpg" width="600px" id="a1"> <img src="ani2.jpg"
+				<img src="ani1.jpg" width="550px" id="a1"> <img src="ani2.jpg"
 					width="500px" id="a2"> <img src="bugu.jpg" width="400px"
 					id="a3">
 			</div>
@@ -543,9 +545,9 @@ crossorigin="anonymous">
 			</div>
 			<div class="col-sm-6 somewhere">
 				<div class="card-body" id="cnts3">
-					<h1 class="card-title">Card title</h1>
+					<h1 class="card-title">"Run and run!"</h1>
 					<p></p>
-					<h2 class="card-text">Some quick example text.</h2>
+					<h2 class="card-text">누가 경기를 시작했는지는<br> 중요하지 않다.<br><br>누가 경기를 끝냈느냐가<br>중요하다.</h2>
 					<p></p>
 					<button type="button" class="btn btn-success btn-lg" id="board3">GO!</button>
 				</div>

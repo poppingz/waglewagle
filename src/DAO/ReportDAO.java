@@ -50,7 +50,7 @@ public class ReportDAO {
 	
 	// 신고내역 출력
 	public List<ReportDTO> getAllList() throws Exception{
-		String sql = "select * from preport";
+		String sql = "select * from preport order by 1";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
