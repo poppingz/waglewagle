@@ -21,9 +21,24 @@
             location.href = "${pageContext.request.contextPath}/List.board?cpage=1";
       })
       
-  });
- 
- 
+      
+  
+	let badwordRegex = /(쌍|썅)(년|놈) || (씨|시)(벌|빨|발|바) || 병신/;
+		$("#toWrite").on("click", function() {
+
+			let badwordResult = badwordRegex.test($("#summernote").val());
+			console.log(badwordResult);
+
+			if (badwordResult) {
+				alert("test")
+				return false;
+			} else {
+				$("#frm").submit();
+			}
+
+		})
+
+	});
 </script>
 <style>
 body{
@@ -37,7 +52,7 @@ body{
 </head>
 <body>
 	<div class="container">
-	<form action="${pageContext.request.contextPath}/insert.board" method="post" enctype="multipart/form-data">
+	<form action="${pageContext.request.contextPath}/insert.board" method="post" enctype="multipart/form-data" id="frm">
 
 		<div class="row">
 				<div class="card-header bg-transparent border-secondary text-secondary col-12">
@@ -98,6 +113,9 @@ body{
         	}
         }
       });
+      
+      
+      
     </script>
 </body>
 </html>
