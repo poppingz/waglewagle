@@ -14,6 +14,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import DTO.BoardDTO;
+import DTO.MemberDTO;
 import config.BoardConfig;
 
 public class BoardDAO {
@@ -70,6 +71,7 @@ public class BoardDAO {
 				List<BoardDTO> list = new ArrayList<>();
 				while(rs.next()) {
 					int board_num = rs.getInt("board_num");
+					System.out.println(board_num);
 					String id = rs.getNString("id");
 					int category1 = rs.getInt("category");
 					String title = rs.getNString("title");
@@ -87,6 +89,40 @@ public class BoardDAO {
 
 		}
 	}
+	
+//	mypage 구문 시작
+	public List<BoardDTO> selectMyList(String ParamId) throws Exception {
+		String sql = "select * from pboard where id=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+
+			pstat.setString(1, ParamId);
+
+			try(ResultSet rs = pstat.executeQuery();){
+				List<BoardDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int board_num = rs.getInt("board_num");
+					System.out.println(board_num);
+					String id = rs.getNString("id");
+					int category = rs.getInt("category");
+					String title = rs.getNString("title");
+					String contents = rs.getNString("contents");
+					String nickname = rs.getNString("nickname");
+					Date write_date = rs.getDate("write_date");
+					int view_count = rs.getInt("view_count");
+					int report = rs.getInt("report");
+
+					BoardDTO dto = new BoardDTO(board_num, id, category, title, contents, nickname, write_date, view_count, report);
+					list.add(dto);
+				}
+				return list;
+			}
+
+		}
+	}
+//	mypage 구문 끝
 
 	/* Board Detail View */
 	public BoardDTO DetailView(int board_num)throws Exception {

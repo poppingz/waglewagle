@@ -28,7 +28,7 @@ import config.BoardConfig;
 public class BoardController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset =utf-8");
 
 		String requestURI = request.getRequestURI();
@@ -42,8 +42,8 @@ public class BoardController extends HttpServlet {
 
 		try {
               //게시판 글 목록출력
-				if(url.contentEquals("/select.board")){
-				
+
+			if(url.contentEquals("/select.board")) {
 				
 				String category1 = request.getParameter("category1");
 				String keyword = request.getParameter("keyword");
@@ -89,8 +89,9 @@ public class BoardController extends HttpServlet {
 
 				MemberDTO dto = (MemberDTO)request.getSession().getAttribute("login");	
 				System.out.println(dto.getId());
-				
+
 				int category = Integer.parseInt(multi.getParameter("category"));
+
 				String title = multi.getParameter("title");
 				String contents = multi.getParameter("contents");
 				String nickname = multi.getParameter("nickname");
