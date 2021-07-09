@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import DAO.BoardDAO;
 import DAO.MemberDAO;
+import DTO.BoardDTO;
 import DTO.MemberDTO;
 import util.MemberUtil;
 
@@ -29,10 +34,10 @@ public class MemberController extends HttpServlet {
 		try {
 			MemberUtil util = new MemberUtil();
 			MemberDAO dao = MemberDAO.getInstance();
+			BoardDAO bdao = BoardDAO.getInstance();
 			
 			if(cmd.contentEquals("/idCheck.mem")) { // ID 중복확인
 				String id = request.getParameter("id");
-				System.out.println("인자 ID : " + id);
 		
 				boolean result = dao.isIdExist(id); // ajax 중복체크
 				response.getWriter().append(String.valueOf(result));
@@ -49,9 +54,7 @@ public class MemberController extends HttpServlet {
 				
 			}else if(cmd.contentEquals("/login.mem")) { // 로그인	
 				String id = request.getParameter("id");
-				System.out.println(id);
 				String pw = util.getSHA512(request.getParameter("pw"));
-				System.out.println(pw);
 				
 				MemberDTO dto = dao.login(id, pw);
 				System.out.println("로그인 결과 : " + dto);
@@ -87,10 +90,8 @@ public class MemberController extends HttpServlet {
 			}else if(cmd.contentEquals("/changepw.mem")) { // 비밀번호 변경
 				String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
 				String pw = util.getSHA512(request.getParameter("newpw"));
-				System.out.println(id + " : " + pw);
 				
 				int result = dao.updatePw(pw, id);
-				System.out.println(result);
 				
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("member/updateView.jsp").forward(request, response);
@@ -113,9 +114,7 @@ public class MemberController extends HttpServlet {
 				int result = dao.modify(new MemberDTO(id,email));
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("main2.jsp").forward(request, response);
-				
 
-				
 			}else if(cmd.contentEquals("/logout.mem")) { // 로그아웃
 				request.getSession().invalidate();
 				response.sendRedirect("index.jsp");
@@ -130,7 +129,6 @@ public class MemberController extends HttpServlet {
 				
 			}else if(cmd.contentEquals("/page.mem")) {
 				String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
-				System.out.println("page.mem의 ID값" + id);
 	            MemberDTO dto = dao.getMyInfo(id);
 	            
 	            Gson g = new Gson();
@@ -138,7 +136,21 @@ public class MemberController extends HttpServlet {
 	            String result = g.toJson(dto);
 //	            response.setContentType("text/html; charset=utf-8;");
 	            response.getWriter().append(result);
-	            System.out.println("내정보불러오기 : " + result);
+	            
+			}else if(cmd.contentEquals("/myList.mem")) {
+
+				 String id = ((MemberDTO)request.getSession().getAttribute("login")).getId();
+				 System.out.println("마이페이지 ID값 : " + id);
+				  
+					/* List<BoardDTO> list = bdao.selectMyList(id); */ 
+					/* Gson g = new Gson(); String result = g.toJson(list); */
+				 response.setContentType("text/html; charset=utf-8;");
+					/* response.getWriter().append(result); */
+					/* response.sendRedirect("member/mypage.jsp"); */
+
+				 List<BoardDTO> list = bdao.selectMyList(id);
+				 request.setAttribute("list", list);
+				 request.getRequestDispatcher("member/mypage.jsp").forward(request, response);
 			}
 			
 		}catch(Exception e) {
