@@ -186,27 +186,31 @@ public class BoardDAO {
 		}
 	}
 	
-	private int getRecordCount() throws Exception{
-		String sql ="select count(*) from pboard";
+	private int getRecordCount(int category) throws Exception{
+		String sql ="select count(*) from pboard where category = ?";
 
 		try(	Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery();
 				){
-			rs.next();
-			return rs.getInt(1);
+			pstat.setInt(1, category);
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				return rs.getInt(1);
+			}
+		
 		}
 	}
 
 
-	private int getRecordCount(String category, String keyword) throws Exception{
-		String sql ="select count(*) from pboard where " + category+" like ?";
+	private int getRecordCount2(String category1, String keyword, int category) throws Exception{
+		String sql ="select count(*) from pboard where "+category1+" like ? and category=?";
 
 		try(	Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 			
 				){
 			pstat.setNString(1, "%"+keyword+"%");
+			pstat.setInt(2, category);
 			try(ResultSet rs = pstat.executeQuery();){
 				rs.next();
 				return rs.getInt(1);
@@ -215,11 +219,11 @@ public class BoardDAO {
 		
 	}
 
-	public List<BoardDTO> getPageList(int startNum,int endNum,String category1, String keyword) throws Exception{
+	public List<BoardDTO> getPageList(String category1, String keyword, int category,int startNum,int endNum) throws Exception{
 		
 		System.out.println(category1 + " : " + keyword);
 		
-		String sql = "select * from (select row_number() over(order by board_num desc) rnum, board_num, id, category, title, contents, nickname, write_date, view_count from pboard where "+category1+" like ?) where rnum between ? and ?";
+		String sql = "select * from (select row_number() over(order by board_num desc) rnum, board_num, id, category, title, contents, nickname, write_date, view_count from pboard where "+category1+" like ? and category=?) where rnum between ? and ?";
 
 		try(
 				Connection con = this.getConnection();
@@ -227,8 +231,9 @@ public class BoardDAO {
 
 				){
 			pstat.setString(1, "%"+keyword+"%");
-			pstat.setInt(2, startNum);
-			pstat.setInt(3, endNum);
+			pstat.setInt(2, category);
+			pstat.setInt(3, startNum);
+			pstat.setInt(4, endNum);
 			try(ResultSet rs = pstat.executeQuery();){
 				List<BoardDTO> list = new ArrayList<>();
 				while(rs.next()) {
@@ -249,18 +254,19 @@ public class BoardDAO {
 		}
 	}
 
-	public List<BoardDTO> getPageList(int startNum, int endNum) throws Exception{
+	public List<BoardDTO> getPageList(int category, int startNum, int endNum) throws Exception{
 
 
-		String sql = "select * from (select row_number() over(order by board_num desc)  rnum, board_num, id, category, title, contents, nickname, write_date, view_count from pboard) where rnum between ? and ?";
+		String sql = "select * from (select row_number() over(order by board_num desc)  rnum, board_num, id, category, title, contents, nickname, write_date, view_count from pboard where category=?) where rnum between ? and ?";
 
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 
 				){
-			pstat.setInt(1, startNum);
-			pstat.setInt(2, endNum);
+			pstat.setInt(1, category);
+			pstat.setInt(2, startNum);
+			pstat.setInt(3, endNum);
 			try(ResultSet rs = pstat.executeQuery();){
 				List<BoardDTO> list = new ArrayList<BoardDTO>();
 				while(rs.next()) {
@@ -282,12 +288,12 @@ public class BoardDAO {
 		}
 	}
 
-	public List<String> getPageNavi(int currentPage, String category1, String keyword) throws Exception{ // 페이징 넘버
+	public List<String> getPageNavi(int currentPage, String category1, String keyword, int category) throws Exception{ // 페이징 넘버
 	      int recordTotalCount = 0;
 	      if(keyword == null || keyword.contentEquals("")) {
-	         recordTotalCount = this.getRecordCount(); // 전체 레코드의 개수 -> db에서 꺼내지는 값
+	         recordTotalCount = this.getRecordCount(category); // 전체 레코드의 개수 -> db에서 꺼내지는 값
 	      }else {
-	         recordTotalCount = this.getRecordCount(category1, keyword);
+	         recordTotalCount = this.getRecordCount2(category1, keyword, category);
 	      }
 	      int recordCountPerPage = BoardConfig.RECORD_COUNT_PER_PAGE; // 한 페이지 당 보여줄 게시글의 개수 -> 개발자가 정하는 값
 	      int naviCountPerPage = BoardConfig.NAVI_COUNT_PER_PAGE; // 내 위치 페이지를 기준으로 시작부터 끝까지의 페이지가 총 몇개인지 -> 개발자가 정하는 값
@@ -328,15 +334,15 @@ public class BoardDAO {
 	      List<String> pageNavi = new ArrayList<>(); // 페이지 번호 리스트
 	      
 	      if(needPrev) { // 이전 페이지가 필요하면 
-	         pageNavi.add("&laquo;"); // < 추가
+	         pageNavi.add("<"); // < 추가
 	      }
 	      
-	      for(int i = startNavi ; i <= endNavi ; i++) {
+	      for(int i = startNavi; i <= endNavi; i++) {
 	         pageNavi.add(String.valueOf(i));
 	      }
 	      
 	      if(needNext) { // 다음 페이지가 필요하면
-	         pageNavi.add("&raquo;"); // > 추가
+	         pageNavi.add(">"); // > 추가
 	      }
 	      
 	      return pageNavi;

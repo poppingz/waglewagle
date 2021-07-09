@@ -398,15 +398,15 @@ crossorigin="anonymous">
 
 		
 		$("#board1").on("click", function(){
-	         location.href = "${pageContext.request.contextPath}/select.board?category=1"
+	         location.href = "${pageContext.request.contextPath}/select.board?category=1&cpage=1"
 	      })
 	      
 	      $("#board2").on("click", function(){
-	         location.href = "${pageContext.request.contextPath}/select.board?category=2"
+	         location.href = "${pageContext.request.contextPath}/select.board?category=2&cpage=1"
 	      })
 	      
 	      $("#board3").on("click", function(){
-	         location.href = "${pageContext.request.contextPath}/select.board?category=3"
+	         location.href = "${pageContext.request.contextPath}/select.board?category=3&cpage=1"
 	      })
 	      $("#modifyPw").on("click", function() {
 			$("#tdPw").attr("contenteditable", "true")
@@ -436,27 +436,6 @@ crossorigin="anonymous">
 		         $("#tdSignUp").text(resp.reg_date);
 		         });
 
-
-		$("#board1")
-				.on(
-						"click",
-						function() {
-							location.href = "${pageContext.request.contextPath}/select.board?category=1";
-						})
-
-		$("#board2")
-				.on(
-						"click",
-						function() {
-							location.href = "${pageContext.request.contextPath}/select.board?category=2";
-						})
-
-		$("#board3")
-				.on(
-						"click",
-						function() {
-							location.href = "${pageContext.request.contextPath}/select.board?category=3";
-						})
 
 		$("#mypage").on("click", function() {
 			window.open("member/mypage.jsp","My Page", "width=500, height=650");

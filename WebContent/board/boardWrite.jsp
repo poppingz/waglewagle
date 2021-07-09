@@ -18,7 +18,7 @@
 <script>
   $(function() {
       $("#toList").on("click", function() {
-            location.href = "${pageContext.request.contextPath}/List.board?cpage=1";
+            location.href = "javascript:history.back()";
       })
       
   });

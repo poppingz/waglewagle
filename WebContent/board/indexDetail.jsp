@@ -66,12 +66,12 @@ span {
 	$(function() {
 		// 뒤로가기
      	$("#back").on("click", function(){
-        	location.href = "${pageContext.request.contextPath}/select.board?category=${Board_Context.category}"
+        	location.href = "${pageContext.request.contextPath}/select.board?category=${Board_Context.category}&cpage=1"
       	})
       	
       	// 수정하기
       	$("#modify").on("click", function(){
-         	location.href = "${pageContext.request.contextPath}/modifyView.board?board_num=${Board_Context.board_num}";
+         	location.href = "${pageContext.request.contextPath}/modifyView.board?board_num=${Board_Context.board_num}&category=${param.category}";
 		})
 		
 		// 신고하기
@@ -112,7 +112,7 @@ span {
 		</div>
 
 		<br>
-
+		${param.category }
 		<div class="board" id="board">
 			<div class="viewTitle" id="viewTitle" align=left>
 				<h3>${Board_Context.title}</h3>

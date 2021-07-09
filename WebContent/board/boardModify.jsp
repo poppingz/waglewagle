@@ -25,7 +25,7 @@ body{
 <script>
   $(function() {
       $("#toList").on("click", function() {
-            location.href = "${pageContext.request.contextPath}/List.board?cpage=1";
+            location.href = "javascript:history.back()";
       })
       
   });
@@ -37,7 +37,7 @@ body{
 	<div class="container">
 		<form action="${pageContext.request.contextPath}/modify.board"
 			method="post">
-
+			<input type=hidden value="${param.category }"/>
 			<div class="row">
 					<div class="card-header bg-transparent border-secondary text-secondary col-12">
 						<h4 class="card-title" id="title">글 수정하기</h4>
