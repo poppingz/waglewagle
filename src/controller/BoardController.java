@@ -42,22 +42,15 @@ public class BoardController extends HttpServlet {
 
 		try {
               //게시판 글 목록출력
+
 			if(url.contentEquals("/select.board")) {
-
-				int category = Integer.parseInt(request.getParameter("category"));
-
-				List<BoardDTO> list = dao.sellectAll(category);
-				request.setAttribute("list", list);
-		
-				request.getRequestDispatcher("board/boardList.jsp").forward(request, response);
-				
-             //게시판 글 검색 목록출력
-			}else if(url.contentEquals("/List.board")){
 				
 				String category1 = request.getParameter("category1");
 				String keyword = request.getParameter("keyword");
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
-
+				int category = Integer.parseInt(request.getParameter("category"));
+				
+				System.out.println("카테고리넘버 : "  + category);
 				System.out.println("현재 페이지 : " + cpage);
 				System.out.println("검색 분류 : " + category1);
 				System.out.println("검색어 : " + keyword);
@@ -67,17 +60,17 @@ public class BoardController extends HttpServlet {
 
 				List<BoardDTO> list;
 				if(keyword == null || keyword.contentEquals("")) {
-					list = dao.getPageList(startNum,endNum);
+					list = dao.getPageList(category,startNum,endNum);
 				}else {
-					list = dao.getPageList(startNum, endNum, category1, keyword);
+					list = dao.getPageList(category1,keyword,category,startNum,endNum);
 				}
 
 
-				List<String> pageNavi  = dao.getPageNavi(cpage,category1,keyword);
-
+				List<String> pageNavi  = dao.getPageNavi(cpage,category1,keyword,category);
+				
 				request.setAttribute("list", list);
 				request.setAttribute("navi", pageNavi);
-				request.setAttribute("category", category1);
+				request.setAttribute("category1", category1);
 				request.setAttribute("keyword", keyword);				
 				request.getRequestDispatcher("board/boardList.jsp").forward(request, response);
 
@@ -122,7 +115,7 @@ public class BoardController extends HttpServlet {
 					}
 				}			
 
-				response.sendRedirect("select.board?category="+ category);
+				response.sendRedirect("select.board?cpage=1&category="+ category);
              // 글 수정
 			}else if(url.contentEquals("/modify.board")) {
 				
@@ -155,11 +148,11 @@ public class BoardController extends HttpServlet {
 				int category = Integer.parseInt(request.getParameter("category"));
 				dao.deleteBoard(board_num);
 				if(category==1) {
-					response.sendRedirect("select.board?category=1");
+					response.sendRedirect("select.board?category=1&cpage=1");
 				}else if(category==2) {
-					response.sendRedirect("select.board?category=2");
+					response.sendRedirect("select.board?category=2&cpage=1");
 				}else if(category==3) {
-					response.sendRedirect("select.board?category=3");
+					response.sendRedirect("select.board?category=3&cpage=1");
 				}
 				
 				// 게시글 자세히보기
