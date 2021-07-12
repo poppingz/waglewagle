@@ -531,9 +531,9 @@ crossorigin="anonymous">
 				</div>
 			</div>
 			<div class="imgs">
-				<img src="ani1.jpg" width="550px" id="a1"> <img src="ani2.jpg"
-					width="500px" id="a2"> <img src="bugu.jpg" width="400px"
-					id="a3">
+				<img src="ani1.jpg" width="550px" id="a1"> 
+				<img src="ani2.jpg"	width="500px" id="a2"> 
+				<img src="bugu.jpg" width="400px" id="a3">
 			</div>
 		</div>
 
