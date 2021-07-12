@@ -508,13 +508,13 @@ crossorigin="anonymous">
                 <input type="radio" name="mainpos" id="mainpos3">
                 <ul class="main-contents">
                 	<li>
-                		<img src="animal.jpg">
+                		<img src="fashion3.jpg">
                 	</li>
                     <li>
-                		<img src="sports.jpg">
+                		<img src="animal.jpg">
                 	</li>
                 	<li>
-                		<img src="fashion3.jpg">
+                		<img src="sports.jpg">
                 	</li>
                 </ul>
                 
