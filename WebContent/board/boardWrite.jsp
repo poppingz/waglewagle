@@ -28,10 +28,17 @@
 			if($("#nickname").val() == ""){
 				alert("닉네임을 입력하세요.")
 				return false;
+<<<<<<< HEAD
+			}else if($("#title").val() == null){
+				alert("제목을 입력하세요.")
+				return false;
+			}else if($("#contents").val() == ""){
+=======
 			}else if($("#title2").val() == ""){
 				alert("제목을 입력하세요.")
 				return false;
 			}else if($("#summernote").val() == ""){
+>>>>>>> origin/master
 				alert("내용을 입력하세요.")
 				return false;
 			}
@@ -78,7 +85,7 @@ body{
 				</div>
 				<div class="col-9"><br>
 					<input type=text class="form-control mb-2" name="nickname"
-						placeholder="닉네임" id="nickname">
+						placeholder="닉네임" id="nickname" required>
 				</div>
 				<div class="col-12">
 					<input type=text class="form-control mb-2" placeholder="제목을 입력하세요."

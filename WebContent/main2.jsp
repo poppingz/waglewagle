@@ -16,6 +16,35 @@ crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <style>
+	/* 폰트 */
+	@font-face {
+    font-family: '양진체';
+    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
+	@font-face {
+    font-family: 'ROKABold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.1/ROKABold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
+	@font-face {
+     font-family: 'DungGeunMo';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+	}
+	
+	@font-face {
+    font-family: 'IM_Hyemin-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
 	* {margin: 0; padding: 0}
 	
 	html, body {overflow-y: hidden}
@@ -75,6 +104,7 @@ crossorigin="anonymous">
 	} */
 	
 	#side-menu {
+		font-family: 'DungGeunMo';
 		position: fixed;
 		width: 150px;
 		top: 350px;
@@ -158,6 +188,7 @@ crossorigin="anonymous">
 	#f2:hover {z-index: 3;}
 	
 	#cnts1 {
+		font-family: '양진체';
 		top: 300px;
 		left: 1200px;
 	}
@@ -197,6 +228,7 @@ crossorigin="anonymous">
 	#a3:hover {z-index: 3;}
 	
 	#cnts2 {
+		font-family: 'IM_Hyemin-Bold';
 		top: 300px;
 		left: 150px;
 	}
@@ -236,6 +268,7 @@ crossorigin="anonymous">
 	#s3:hover {z-index: 3;}
 	
 	#cnts3 {
+		font-family: 'ROKABold';
 		top: 300px;
 		left: 1200px;
 	}
@@ -342,7 +375,7 @@ crossorigin="anonymous">
 
 			var initEvent = function() {
 				$("html ,body").scrollTop(0);
-				winResize();
+				winResize();	
 				$(window).resize(function() {
 					winResize();
 				});
@@ -531,9 +564,9 @@ crossorigin="anonymous">
 				</div>
 			</div>
 			<div class="imgs">
-				<img src="ani1.jpg" width="550px" id="a1"> <img src="ani2.jpg"
-					width="500px" id="a2"> <img src="bugu.jpg" width="400px"
-					id="a3">
+				<img src="ani1.jpg" width="550px" id="a1"> 
+				<img src="ani2.jpg"	width="500px" id="a2"> 
+				<img src="bugu.jpg" width="400px" id="a3">
 			</div>
 		</div>
 
