@@ -221,17 +221,9 @@ card {
 	border: 2px solid rgba(238, 156, 167, .25);
 }
 
-.card--register .btn:focus {
-	box-shadow: 0 0 0 0.2rem rgba(238, 156, 167, .25);
-}
-
 .card--register .form-control {
 	color: #ee9ca7;
 	border-color: rgba(238, 156, 167, .25);
-}
-
-.card--register .form-control:focus {
-	box-shadow: 0 0 0 0.2rem rgba(238, 156, 167, .25);
 }
 
 .card--login .card-title {
@@ -253,30 +245,24 @@ card {
 	border: 2px solid rgba(167, 191, 232, .25);
 }
 
-.card--login .btn:focus {
-	box-shadow: 0 0 0 0.2rem rgba(167, 191, 232, .25);
-}
 
 .card--login .form-control {
 	color: #a7bfe8;
 	border-color: rgba(167, 191, 232, .25);
 }
 
-.card--login .form-control:focus {
-	box-shadow: 0 0 0 0.2rem rgba(167, 191, 232, .25);
-}
 </style>
 </head>
 <body>
-	<div class="card border-0 shadow card--login" id="login">
+	<div class="card border-0 card--login" id="login">
 		<div class="card-body">
 			<h2 class="card-title">비밀번호 변경</h2><br>
 			<form action="${pageContext.request.contextPath}/changepw.mem" method="post">
 				<div class="form-group">
-					<input class="form-control" type="password" id="pw" placeholder="비밀번호를 입력해주세요." required />
+					<input class="form-control" type="password" id="pw" placeholder="새로운 비밀번호" required />
 				</div>
 				<div class="form-group">
-					<input class="form-control" type="password" id="newpw" name="newpw" placeholder="한번 더 입력해주세요." required />
+					<input class="form-control" type="password" id="newpw" name="newpw" placeholder="비밀번호 확인" required />
 				</div>
 				<div id="msg"></div>					
 				<button class="btn btn-lg" type="submit">변경</button>
