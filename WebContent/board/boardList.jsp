@@ -96,33 +96,35 @@
 					</div>
 				
 			</c:forEach>
-	
 
-		<div id="boardlist">
-			<nav aria-label="Page Navigation" class="page_nav">
-				<c:forEach var="w" items="${navi}" varStatus="s">
-					
-					<!-- c:forEach var="i" begin="0" end="10" step="1" 같은 것. -->
-					<c:choose>
-						<c:when test="${w == '>'}">
-						<a
-							href="${pageContext.request.contextPath}/select.board?cpage=${navi[s.index-1]+1}&&category=${param.category}">${w }</a>
-						</c:when>
-						<c:when test="${w == '<'}">
-							<a href="${pageContext.request.contextPath}/select.board?cpage=${navi[s.index+1]-1}&&category=${param.category}">${w }</a>
-						</c:when>	
-						<c:otherwise>
-							<a
-								href="${pageContext.request.contextPath}/select.board?cpage=${w}&&category=${param.category}">${w }</a>
-						</c:otherwise>
-					</c:choose>
 
-					<!-- boolean으로 값이 마지막일 경우에만. true가 됩니다. -->
-				</c:forEach>
+				<div id="boardlist"><br>
+					<nav aria-label="Page navigation example" class="page_nav">
+						<ul class="pagination justify-content-center">
+							<c:forEach var="w" items="${navi}" varStatus="s">
 
-			</nav>
+								<!-- c:forEach var="i" begin="0" end="10" step="1" 같은 것. -->
+								<c:choose>
+									<c:when test="${w == '>'}">
+										<li class="page-item"><a class="page-link"
+											href="${pageContext.request.contextPath}/select.board?cpage=${navi[s.index-1]+1}&&category=${param.category}">${w }</a></li>
+									</c:when>
+									<c:when test="${w == '<'}">
+										<li class="page-item"><a class="page-link"
+											href="${pageContext.request.contextPath}/select.board?cpage=${navi[s.index+1]-1}&&category=${param.category}">${w }</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link"
+											href="${pageContext.request.contextPath}/select.board?cpage=${w}&&category=${param.category}">${w }</a></li>
+									</c:otherwise>
+								</c:choose>
 
-		</div>
+								<!-- boolean으로 값이 마지막일 경우에만. true가 됩니다. -->
+							</c:forEach>
+						</ul>
+					</nav>
+
+				</div>
 
 
 				<div class="row btns">
