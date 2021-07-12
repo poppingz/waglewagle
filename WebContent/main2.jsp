@@ -45,6 +45,13 @@ crossorigin="anonymous">
     font-style: normal;
 	}
 	
+	@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
 	* {margin: 0; padding: 0}
 	
 	html, body {overflow-y: hidden}
@@ -68,6 +75,7 @@ crossorigin="anonymous">
 	}
 	
 	.header ul li {
+
 		float: left;
 		border-left: 1px solid rgba(255, 255, 255, 0);
 		box-sizing: border-box;
@@ -84,7 +92,7 @@ crossorigin="anonymous">
         font-size: 33px;
         text-decoration: none;
         color: rgb(250, 151, 168);
-        font-family: 'Lobster', cursive;
+        font-family: 'yg-jalnan', cursive;
 	}
 	
 	.header ul li.on a {
