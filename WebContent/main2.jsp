@@ -16,8 +16,6 @@ crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <style>
-<<<<<<< HEAD
-=======
 	/* 폰트 */
 	@font-face {
     font-family: '양진체';
@@ -54,7 +52,6 @@ crossorigin="anonymous">
     font-style: normal;
 	}
 	
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
 	* {margin: 0; padding: 0}
 	
 	html, body {overflow-y: hidden}
@@ -78,10 +75,6 @@ crossorigin="anonymous">
 	}
 	
 	.header ul li {
-<<<<<<< HEAD
-=======
-
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
 		float: left;
 		border-left: 1px solid rgba(255, 255, 255, 0);
 		box-sizing: border-box;
@@ -98,11 +91,7 @@ crossorigin="anonymous">
         font-size: 33px;
         text-decoration: none;
         color: rgb(250, 151, 168);
-<<<<<<< HEAD
-        font-family: 'Lobster', cursive;
-=======
         font-family: 'yg-jalnan', cursive;
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
 	}
 	
 	.header ul li.on a {
@@ -111,21 +100,8 @@ crossorigin="anonymous">
 	
 	.content div {position: relative}
 	
-	/* .content .cnt01 p {
-		position: absolute;
-		top: 50%;
-		margin-top: -40px;
-		text-align: center;
-		width: 100%;
-		font-size: 40px;
-		font-weight: bold;
-	} */
-	
 	#side-menu {
-<<<<<<< HEAD
-=======
 		font-family: 'DungGeunMo';
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
 		position: fixed;
 		width: 150px;
 		top: 350px;
@@ -209,10 +185,7 @@ crossorigin="anonymous">
 	#f2:hover {z-index: 3;}
 	
 	#cnts1 {
-<<<<<<< HEAD
-=======
 		font-family: '양진체';
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
 		top: 300px;
 		left: 1200px;
 	}
@@ -252,10 +225,7 @@ crossorigin="anonymous">
 	#a3:hover {z-index: 3;}
 	
 	#cnts2 {
-<<<<<<< HEAD
-=======
 		font-family: 'IM_Hyemin-Bold';
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
 		top: 300px;
 		left: 150px;
 	}
@@ -295,10 +265,7 @@ crossorigin="anonymous">
 	#s3:hover {z-index: 3;}
 	
 	#cnts3 {
-<<<<<<< HEAD
-=======
 		font-family: 'ROKABold';
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
 		top: 300px;
 		left: 1200px;
 	}
@@ -322,7 +289,7 @@ crossorigin="anonymous">
 
         #mainslide ul {
             width: 400%;
-            height: 100%;
+            height: 74%;
             transition: 1s;
         }
 
@@ -340,11 +307,8 @@ crossorigin="anonymous">
 
         #mainslide>ul>li>img {
             width: 100%;
-<<<<<<< HEAD
             height: 74%;
-=======
             height: 100%;
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
         }
 
         #mainslide input {
@@ -388,18 +352,10 @@ crossorigin="anonymous">
             margin-left: -300%;
         }
 		.top-navi{margin:0;}
-<<<<<<< HEAD
 		.main-contents{position:relative; top:220px;}
-		
 </style>
-<script>
 
-=======
-		.main-contents{position:relative; top:154px;}
-		
-</style>
 <script>
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
 	$(function() {
 		var scroll = function() {
 
@@ -417,11 +373,9 @@ crossorigin="anonymous">
 
 			var initEvent = function() {
 				$("html ,body").scrollTop(0);
-<<<<<<< HEAD
-				winResize();
-=======
+
 				winResize();	
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
+
 				$(window).resize(function() {
 					winResize();
 				});
@@ -554,7 +508,6 @@ crossorigin="anonymous">
                 <input type="radio" name="mainpos" id="mainpos3">
                 <ul class="main-contents">
                 	<li>
-<<<<<<< HEAD
                 		<img src="cat2.jpg">
                 	</li>
                     <li>
@@ -562,7 +515,6 @@ crossorigin="anonymous">
                 	</li>
                 	<li>
                 		<img src="fashion4.jpg">
-=======
                 		<img src="fashion3.jpg" width="900px">
                 	</li>
                     <li>
@@ -570,7 +522,6 @@ crossorigin="anonymous">
                 	</li>
                 	<li>
                 		<img src="sports.jpg" width="900px">
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
                 	</li>
                 </ul>
                 
@@ -595,13 +546,8 @@ crossorigin="anonymous">
 
 		<div class="cnt02">
 			<div class="imgs">
-<<<<<<< HEAD
 				<img src="fashion.jpg" width="600px" id="f1"> 
 				<img src="fashion2.jpg" width="600px" id="f2">
-=======
-				<img src="fashion.jpg" width="600px" id="f1"> <img
-					src="fashion2.jpg" width="600px" id="f2">
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
 			</div>
 			<div class="col-sm-6 somewhere">
 				<div class="card-body" id="cnts1">
@@ -626,20 +572,16 @@ crossorigin="anonymous">
 			</div>
 			<div class="imgs">
 				<img src="ani1.jpg" width="550px" id="a1"> 
-<<<<<<< HEAD
-				<img src="ani2.jpg" width="500px" id="a2"> 
-=======
-				<img src="ani2.jpg"	width="500px" id="a2"> 
->>>>>>> dfdd1bf2a1bc2c74bd242c26dad96b699e31f939
+				<img src="ani2.jpg" width="500px" id="a2">  
 				<img src="bugu.jpg" width="400px" id="a3">
 			</div>
 		</div>
 
 		<div class="cnt04">
 			<div class="imgs">
-				<img src="spo1.jpg" width="600px" id="s1"> <img src="spo2.jpg"
-					width="550px" id="s2"> <img src="spo3.jpg" width="700px"
-					id="s3">
+				<img src="spo1.jpg" width="600px" id="s1"> 
+				<img src="spo2.jpg" width="550px" id="s2"> 
+				<img src="spo3.jpg" width="700px" id="s3">
 			</div>
 			<div class="col-sm-6 somewhere">
 				<div class="card-body" id="cnts3">
@@ -652,6 +594,5 @@ crossorigin="anonymous">
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
