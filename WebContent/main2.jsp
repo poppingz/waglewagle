@@ -516,13 +516,13 @@ crossorigin="anonymous">
                 <input type="radio" name="mainpos" id="mainpos3">
                 <ul class="main-contents">
                 	<li>
-                		<img src="fashion3.jpg" width="900px">
+                		<img src="main.jpg" width="900px">
                 	</li>
                     <li>
-                		<img src="animal.jpg">
+                		<img src="main2.jpg">
                 	</li>
                 	<li>
-                		<img src="sports.jpg" width="900px">
+                		<img src="main3.jpg" width="900px">
                 	</li>
                 </ul>
                 
